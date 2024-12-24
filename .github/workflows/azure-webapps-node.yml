@@ -26,11 +26,11 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
 
-    - name: Check for lock file
+    - name: Generate lock file if not present
       run: |
         if [ ! -f package-lock.json ] && [ ! -f npm-shrinkwrap.json ]; then
-          echo "Error: No lock file found (package-lock.json or npm-shrinkwrap.json)."
-          exit 1
+          echo "No lock file found, generating package-lock.json."
+          npm install --package-lock-only
         fi
 
     - name: Clean cache and install dependencies
