@@ -19,7 +19,9 @@ app.use((req, res, next) => {
 	res.locals.path = req.path;
 	next();
 });
-
+app.get("/", (req, res) => {
+    res.send("Welcome to the API! Use the /api/cruds endpoint to interact with CRUD operations.");
+});
 // routes
 app.use("/api/cruds", crudRoutes);
 
