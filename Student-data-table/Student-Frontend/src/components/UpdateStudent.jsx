@@ -7,7 +7,10 @@ const UpdateStudent = () => {
     const [student, setStudent] = useState({ name: '', age: '', email: '', major: '' });
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/cruds/${id}`)
+        axios.get(
+            `http://localhost:5000/api/cruds/${id}`
+            // `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`    
+        )
             .then(response => setStudent(response.data))
             .catch(error => console.error('Error fetching student:', error));
     }, [id]);
@@ -18,7 +21,10 @@ const UpdateStudent = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.patch(`http://localhost:5000/api/cruds/${id}`, student)
+        axios.patch(
+            `http://localhost:5000/api/cruds/${id}`
+            // `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`
+            , student)
             .then(response => {
                 console.log('Student updated:', response.data);
                 setStudent({ name: '', age: '', email: '', major: '' }); // Clear form
@@ -28,7 +34,7 @@ const UpdateStudent = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container2">
             <h2 className="heading">Update Student</h2>
             <form onSubmit={handleSubmit} className="form">
                 <input

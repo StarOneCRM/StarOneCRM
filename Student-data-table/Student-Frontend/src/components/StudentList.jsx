@@ -14,7 +14,10 @@ const StudentList = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/cruds/');
+      const response = await axios.get(
+        'http://localhost:5000/api/cruds/'
+        // 'http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/'  
+      );
       setStudents(response.data);
     } catch (error) {
       console.error('Error fetching students:', error);
@@ -23,7 +26,10 @@ const StudentList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/cruds/${id}`);
+      await axios.delete(
+        `http://localhost:5000/api/cruds/${id}`
+        // `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`  
+      );
       fetchStudents();
     } catch (error) {
       console.error('Error deleting student:', error);
@@ -87,21 +93,7 @@ const StudentList = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2 style={{ marginBottom: '20px' }}>Student List</h2>
-      <button
-        onClick={() => navigate('/add')}
-        style={{
-          marginBottom: '10px',
-          padding: '10px 20px',
-          backgroundColor: 'green',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-        }}
-      >
-        Add Student
-      </button>
+      <h2 style={{ marginBottom: '20px', textAlign: 'center' }}>Student List</h2>
       <TextField
         variant="outlined"
         placeholder="Search..."

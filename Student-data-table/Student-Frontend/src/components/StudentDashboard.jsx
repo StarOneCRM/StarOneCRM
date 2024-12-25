@@ -7,7 +7,7 @@ import UpdateStudent from './UpdateStudent';
 
 const StudentDashboard = () => {
   return (
-    <div className="container">
+    <div className="container" style={{ textAlign: 'center' }}>
       <h1>Student Dashboard</h1>
 
       <Router>

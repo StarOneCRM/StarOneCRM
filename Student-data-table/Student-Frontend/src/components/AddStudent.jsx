@@ -19,7 +19,10 @@ const AddStudent = () => {
     event.preventDefault(); // Prevent default form submission behavior
 
     try {
-        const response = await axios.post(`http://localhost:5000/api/cruds/`, {
+        const response = await axios.post(
+          `http://localhost:5000/api/cruds/`, 
+          // `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/`,
+          {
             ...formData,
             // id: studentId
         });
@@ -42,7 +45,7 @@ const AddStudent = () => {
 };
 
   return (
-    <div className="container">
+    <div className="container2">
       <h2 className="heading">Add Student</h2>
       <form onSubmit={handleSubmit} className="form">
         <input
