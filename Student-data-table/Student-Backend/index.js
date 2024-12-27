@@ -16,10 +16,10 @@ app.use(express.json());
 
 // CORS configuration
 app.use(cors({
-  origin: 'https://polite-field-09918cc00.4.azurestaticapps.net/', // Replace with your allowed domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
-  credentials: true // If your API requires credentials
+	origin: '*', // Allow all origins
+	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+	allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+	credentials: true // If your API requires credentials
 }));
 
 app.use((req, res, next) => {
