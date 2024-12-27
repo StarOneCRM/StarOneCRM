@@ -61,19 +61,25 @@ const StudentList = () => {
       name: 'Name',
       selector: (row) => row.name,
       sortable: true,
+      sortFunction: (a, b) => a.name.localeCompare(b.name),
     },
     {
       name: 'Age',
       selector: (row) => row.age,
       sortable: true,
+      sortFunction: (a, b) => a.age - b.age,
     },
     {
       name: 'Email',
       selector: (row) => row.email,
+      sortable: true,
+      sortFunction: (a, b) => a.email.localeCompare(b.email),
     },
     {
       name: 'Major',
       selector: (row) => row.major,
+      sortable: true,
+      sortFunction: (a, b) => a.major.localeCompare(b.major),
     },
     {
       name: 'Actions',
