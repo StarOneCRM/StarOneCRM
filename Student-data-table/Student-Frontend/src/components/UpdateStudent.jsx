@@ -8,8 +8,8 @@ const UpdateStudent = () => {
 
     useEffect(() => {
         axios.get(
-            `http://localhost:5000/api/cruds/${id}`
-            // `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`    
+            // `http://localhost:5000/api/cruds/${id}`
+            `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`    
         )
             .then(response => setStudent(response.data))
             .catch(error => console.error('Error fetching student:', error));
@@ -22,8 +22,8 @@ const UpdateStudent = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.patch(
-            `http://localhost:5000/api/cruds/${id}`
-            // `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`
+            // `http://localhost:5000/api/cruds/${id}`
+            `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`
             , student)
             .then(response => {
                 console.log('Student updated:', response.data);

@@ -15,8 +15,8 @@ const StudentList = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5000/api/cruds/'
-        // 'http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/'  
+        // 'http://localhost:5000/api/cruds/'
+        'http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/'  
       );
       setStudents(response.data);
     } catch (error) {
@@ -27,8 +27,8 @@ const StudentList = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/cruds/${id}`
-        // `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`  
+        // `http://localhost:5000/api/cruds/${id}`
+        `http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`  
       );
       fetchStudents();
     } catch (error) {
