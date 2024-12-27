@@ -13,15 +13,24 @@ connection();
 // middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+
+// CORS configuration
+app.use(cors({
+  origin: 'https://polite-field-09918cc00.4.azurestaticapps.net/', // Replace with your allowed domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+  credentials: true // If your API requires credentials
+}));
 
 app.use((req, res, next) => {
-	res.locals.path = req.path;
-	next();
+  res.locals.path = req.path;
+  next();
 });
+
 app.get("/", (req, res) => {
     res.send("Welcome to the API! Use the /api/cruds endpoint to interact with CRUD operations.");
 });
+
 // routes
 app.use("/api/cruds", crudRoutes);
 
