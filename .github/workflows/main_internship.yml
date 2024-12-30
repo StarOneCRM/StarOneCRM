@@ -20,24 +20,24 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cd Student-data-table/Student-Backend
+          cd Backend-validation/Student-Backend
           npm install
           npm run build --if-present
           # npm run test --if-present
 
       - name: Zip artifact for deployment
         run: |
-          cd Student-data-table/Student-Backend
+          cd Backend-validation/Student-Backend
           zip -r ../release.zip ./
 
       - name: Verify artifact upload
-        run: ls -al Student-data-table/release.zip
+        run: ls -al Backend-validation/release.zip
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: Student-data-table/release.zip
+          path: Backend-validation/release.zip
 
   deploy:
     runs-on: ubuntu-latest
