@@ -20,7 +20,7 @@ const handleSubmit = async (event) => {
 
   try {
       const response = await axios.post(
-          `http://localhost:5000/api/cruds/`,
+          `https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/`,
           {
               ...formData,
               age: Number(formData.age),

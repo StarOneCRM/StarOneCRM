@@ -9,7 +9,8 @@ const UpdateStudent = () => {
     const [student, setStudent] = useState({ name: '', age: '', email: '', major: '' });
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/cruds/${id}`)
+        axios.get(`https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`)
+
             .then(response => {
                 setStudent(response.data.data);
                 toast.success('Student data loaded successfully');
@@ -28,7 +29,7 @@ const UpdateStudent = () => {
         e.preventDefault();
         try {
             const response = await axios.patch(
-                `http://localhost:5000/api/cruds/${id}`,
+                `https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`,
                 { ...student, age: Number(student.age) }
             );
             const { message, data } = response.data;

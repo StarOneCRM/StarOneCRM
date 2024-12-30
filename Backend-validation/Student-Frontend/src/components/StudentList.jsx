@@ -16,7 +16,7 @@ const StudentList = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/cruds/');
+      const response = await axios.get('https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/');
       // setStudents(response.data);
       setStudents(response.data.data);
       toast.success('Students fetched successfully');
@@ -28,7 +28,7 @@ const StudentList = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/cruds/${id}`);
+      const response = await axios.delete(`https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`);
       if (response.data.error === null) {
         setStudents((prevStudents) => prevStudents.filter((student) => student._id !== id));
         toast.success('Student deleted successfully');
