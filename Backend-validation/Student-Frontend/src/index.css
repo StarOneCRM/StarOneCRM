@@ -41,14 +41,14 @@ body {
     padding: 10px 15px;
     font-size: 1rem;
     color: white;
-    background-color: #646cff;
+    background-color: #1976d2;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .submit-button:hover {
-    background-color: #4a53c9;
+    background-color: #1267bb;
   }
   
   /* Data table */
@@ -153,3 +153,33 @@ body {
     }
   }
   
+
+
+
+
+
+
+
+
+
+  
+
+  /* App.css or a dedicated CSS file */
+.Toastify__toast-container {
+  display: flex;
+  justify-content: center;
+  color: #1976d2; /* Custom text color */
+}
+
+.Toastify__toast {
+  /* background-color: #1976d2 !important; Custom background color */
+  color: white; /* Custom text color */
+  font-weight: bold;
+  /* border: 1px solid #1976d2; Custom border color */
+}
+.Toastify__progress-bar--success {
+  background: #1976d2 !important;
+}
+.Toastify__progress-bar--error {
+  background: #1976d2 !important;
+}
