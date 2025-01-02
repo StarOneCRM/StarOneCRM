@@ -64,7 +64,7 @@ Enhanced the frontend UI using `react-toastify` to display success and error mes
 
 <details>
 <summary>Day 11 (02-01-25)</summary>
-Deployed the application again using GitHub YAML files to Azure. Tested the `react-toastify` notifications and backend validation. Demonstrated the project to the team lead and asked for feedback.
+Deployed the application again using GitHub YML files to Azure. Tested the `react-toastify` notifications and backend validation. Demonstrated the project to the team lead and asked for feedback.
 </details>
 
 <details>
