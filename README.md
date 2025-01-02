@@ -69,7 +69,6 @@ Deployed the application again using GitHub YAML files to Azure. Tested the `rea
 
 <details>
 <summary>Day 12 (03-01-25)</summary>
-(Fill this in as you complete the day's tasks.)
 </details>
 
 <details>
@@ -150,14 +149,11 @@ Deployed the application again using GitHub YAML files to Azure. Tested the `rea
 
 </details>
 
-# Internship Log  
-
 <details>
 <summary>February 2025</summary>
 
 <details>
 <summary>Day 32 (01-02-25)</summary>
-(Fill this in as you complete the day's tasks.)
 </details>
 
 <details>
@@ -275,7 +271,6 @@ Deployed the application again using GitHub YAML files to Azure. Tested the `rea
 
 <details>
 <summary>Day 60 (01-03-25)</summary>
-(Fill this in as you complete the day's tasks.)
 </details>
 
 <details>
@@ -405,7 +400,6 @@ Deployed the application again using GitHub YAML files to Azure. Tested the `rea
 
 <details>
 <summary>Day 91 (01-04-25)</summary>
-(Fill this in as you complete the day's tasks.)
 </details>
 
 <details>
