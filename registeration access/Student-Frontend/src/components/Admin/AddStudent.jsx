@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import axiosInstance from '../../utils/axios';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   TextField,
   Button,
@@ -10,63 +9,60 @@ import {
   Box,
   Typography,
   InputAdornment,
-} from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import SchoolIcon from '@mui/icons-material/School';
-import SaveIcon from '@mui/icons-material/Save';
+} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import SchoolIcon from "@mui/icons-material/School";
+import SaveIcon from "@mui/icons-material/Save";
 
-const UpdateStudent = () => {
-  const { id } = useParams();
-  const [student, setStudent] = useState({ name: '', age: '', email: '', major: '' });
-
-  useEffect(() => {
-    // axios.get(`https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`)
-    axios.get(`http://localhost:5000/api/cruds/${id}`)
-      .then(response => {
-        setStudent(response.data.data);
-        toast.success('Student data loaded successfully');
-      })
-      .catch(error => {
-        console.error('Error fetching student:', error);
-        toast.error('Failed to load student data');
-      });
-  }, [id]);
+const AddStudent = ({ token, setUser, logout }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+    email: "",
+    major: "",
+  });
 
   const handleChange = (e) => {
-    setStudent({ ...student, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const response = await axios.patch(
-        `https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api/cruds/${id}`,
-        { ...student, age: Number(student.age) }
-      );
+      const response = await axiosInstance.post(
+        `/admin/`,
+        {
+          ...formData,
+          age: Number(formData.age),
+        });
+
       const { message, data } = response.data;
+
       if (data) {
         toast.success(`${message}, you will be redirected shortly`);
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.href = "/";
         }, 5000);
       }
     } catch (error) {
-      console.error('Error updating student:', error);
+      console.error("Error adding student:", error);
 
       if (error.response && error.response.data) {
         const { error: backendError, message } = error.response.data;
 
-        if (backendError && backendError.includes('duplicate key error')) {
+        if (backendError && backendError.includes("duplicate key error")) {
           const emailMatch = backendError.match(/email: "(.*?)"/);
-          const duplicateEmail = emailMatch ? emailMatch[1] : 'this email';
-          toast.error(`The email ${duplicateEmail} is already associated with another student.`);
+          const duplicateEmail = emailMatch ? emailMatch[1] : "this email";
+          toast.error(
+            `The email ${duplicateEmail} is already associated with another student.`
+          );
         } else {
-          toast.error(message || backendError || 'An unexpected error occurred.');
+          toast.error(message || backendError || "An unexpected error occurred.");
         }
       } else {
-        toast.error('Failed to update student. Please try again later.');
+        toast.error("Failed to add student. Please try again later.");
       }
     }
   };
@@ -75,14 +71,16 @@ const UpdateStudent = () => {
     <Paper
       elevation={3}
       style={{
-        padding: '30px',
-        margin: '20px auto',
-        maxWidth: '500px',
-        textAlign: 'center',
+        padding: "30px",
+        margin: "20px auto",
+        maxWidth: "500px",
+        textAlign: "center",
       }}
     >
       <ToastContainer />
-
+      {/* <Typography variant="h4" gutterBottom>
+        Add Student
+      </Typography> */}
       <form onSubmit={handleSubmit}>
         <Box mb={2}>
           <TextField
@@ -90,7 +88,7 @@ const UpdateStudent = () => {
             variant="outlined"
             label="Name"
             name="name"
-            value={student.name}
+            value={formData.name}
             onChange={handleChange}
             required
             InputProps={{
@@ -109,7 +107,7 @@ const UpdateStudent = () => {
             label="Age"
             name="age"
             type="number"
-            value={student.age}
+            value={formData.age}
             onChange={handleChange}
             required
             InputProps={{
@@ -128,7 +126,7 @@ const UpdateStudent = () => {
             label="Email"
             name="email"
             type="email"
-            value={student.email}
+            value={formData.email}
             onChange={handleChange}
             required
             InputProps={{
@@ -146,7 +144,7 @@ const UpdateStudent = () => {
             variant="outlined"
             label="Major"
             name="major"
-            value={student.major}
+            value={formData.major}
             onChange={handleChange}
             required
             InputProps={{
@@ -165,11 +163,11 @@ const UpdateStudent = () => {
           startIcon={<SaveIcon />}
           fullWidth
         >
-          Update Student
+          Add Student
         </Button>
       </form>
     </Paper>
   );
 };
 
-export default UpdateStudent;
+export default AddStudent;

@@ -40,7 +40,7 @@ const Footer = () => (
   </Box>
 );
 
-const StudentDashboard = ({token}) => {
+const StudentDashboard = ({ token, setUser, logout }) => {
   return (
     <ThemeProvider theme={theme}>
       {/* <Router> */}
@@ -79,10 +79,10 @@ const StudentDashboard = ({token}) => {
           {/* Main Content */}
           <Container sx={{ my: 4 }}>
             <Routes>
-              <Route path="/" element={<StudentList token={token}/>} />
-              <Route path="/add" element={<AddStudent />} />
-              <Route path="/update/:id" element={<UpdateStudent />} />
-              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="/" element={<StudentList logout={logout} token={token} setUser={setUser} />} />
+              <Route path="/add" element={<AddStudent logout={logout} token={token} setUser={setUser} />} />
+              <Route path="/update/:id" element={<UpdateStudent logout={logout} token={token} setUser={setUser} />} />
+              <Route path="*" element={<Navigate to="/" logout={logout} token={token} setUser={setUser} />} />
             </Routes>
           </Container>
 

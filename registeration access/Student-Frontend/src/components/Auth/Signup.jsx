@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
-function Signup({ onSignup }) {
+function Signup({ handleSignup }) {
   const [formData, setFormData] = useState({ name: '', email: '', age: '', major: '', isAdmin: false });
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ function Signup({ onSignup }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSignup(formData);
+    handleSignup(formData);
     toast.success('Signup successful');
     navigate('/login');
   };

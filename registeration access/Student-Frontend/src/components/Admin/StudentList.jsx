@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from '../../utils/axios';
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import { IconButton, Menu, MenuItem, TextField, Button } from "@mui/material";
@@ -8,7 +8,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const StudentList = ({token}) => {
+const StudentList = ({ token, setUser, logout }) => {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -17,9 +17,9 @@ const StudentList = ({token}) => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/cruds/"
-      );
+      const response = await axiosInstance.get("/admin/", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setStudents(response.data.data);
       toast.success("Students fetched successfully");
     } catch (error) {
@@ -30,9 +30,9 @@ const StudentList = ({token}) => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:5000/api/cruds/${id}`
-      );
+      const response = await axiosInstance.delete(`/admin/${id}`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (response.data.error === null) {
         setStudents((prevStudents) =>
           prevStudents.filter((student) => student._id !== id)
@@ -49,8 +49,7 @@ const StudentList = ({token}) => {
 
   const handleVerify = async (id) => {
     try {
-      const response = await axios.patch(
-        `http://localhost:5000/api/admin/verify/${id}`,{},{
+      const response = await axiosInstance.patch(`/admin/verify/${id}`,{},{
           headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.data.error) {

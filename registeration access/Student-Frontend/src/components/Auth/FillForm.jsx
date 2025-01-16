@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Button, TextField, Paper, Box, Typography } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axiosInstance from '../../utils/axios';
 
-function FillForm({ token, onFormSubmit, logout }) {
+function FillForm({ token, setUser, logout }) {
   const [formData, setFormData] = useState({ additionalInfo: '' });
 
   const handleChange = (e) => {
@@ -14,7 +14,8 @@ function FillForm({ token, onFormSubmit, logout }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/fill-form', formData, {
+      console.log(token)
+      const response = await axiosInstance.post('/fill-form', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -24,7 +25,7 @@ function FillForm({ token, onFormSubmit, logout }) {
         storedUser.isFormFilled = true;
         localStorage.setItem('user', JSON.stringify(storedUser));
       }
-      onFormSubmit(response.data.student);
+      setUser(response.data.student);
       toast.success('Profile updated successfully');
     } catch (error) {
       console.error(error.response?.data?.message || error.message);

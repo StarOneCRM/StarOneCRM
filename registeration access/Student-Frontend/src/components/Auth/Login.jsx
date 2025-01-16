@@ -5,14 +5,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
-function Login({ onLogin }) {
+function Login({ handleLogin }) {
   const [email, setEmail] = useState('');
   const navigate = useNavigate(); // Hook to navigate
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin({ email });
-    toast.success('Login successful');
+    handleLogin({ email });
+    if(response.message === "Student not found"){
+      toast.success('Login successful');
+    }
   };
 
   const handleSwitchToSignUp = () => {

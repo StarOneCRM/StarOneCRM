@@ -1,17 +1,9 @@
 // Controller
-const { Student } = require("../models/crudModel");  // Assuming export is using destructuring
-
-// Utility function for sending structured responses
-const sendResponse = (res, status, message, data = null, error = null) => {
-    res.status(status).json({ 
-        message, 
-        data, 
-        error 
-    });
-};
+const { Student } = require("../models/user.model");
+const sendResponse = require("../utils/sendResponse");
 
 // Display All Students
-const student_index = async (req, res) => {
+exports.student_index = async (req, res) => {
     try {
         const students = await Student.find();
         sendResponse(res, 200, "Students retrieved successfully", students);
@@ -21,7 +13,7 @@ const student_index = async (req, res) => {
 };
 
 // Create New Student
-const student_create_post = async (req, res) => {
+exports.student_create_post = async (req, res) => {
     const { name, age, email, major } = req.body;
 
     if (!name || !age || !email || !major) {
@@ -61,7 +53,7 @@ const student_create_post = async (req, res) => {
 };
 
 // Show a particular Student Detail by Id
-const student_details = async (req, res) => {
+exports.student_details = async (req, res) => {
     try {
         const student = await Student.findById(req.params.id);
         if (!student) {
@@ -75,7 +67,7 @@ const student_details = async (req, res) => {
 };
 
 // Update Student Detail by Id
-const student_update = async (req, res) => {
+exports.student_update = async (req, res) => {
     const { name, age, email, major } = req.body;
 
     if (!name && !age && !email && !major) {
@@ -119,7 +111,7 @@ const student_update = async (req, res) => {
 };
 
 // Delete Student Detail by Id
-const student_delete = async (req, res) => {
+exports.student_delete = async (req, res) => {
     try {
         const deletedStudent = await Student.findByIdAndDelete(req.params.id);
         if (!deletedStudent) {
@@ -132,10 +124,21 @@ const student_delete = async (req, res) => {
     }
 };
 
-module.exports = {
-    student_index,
-    student_create_post,
-    student_details,
-    student_update,
-    student_delete,
+exports.verifyStudent = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedStudent = await Student.findByIdAndUpdate(
+            id,
+            { isFormVerified: true },
+            { new: true }
+        );
+
+        if (updatedStudent) {
+            sendResponse(res, 200, "Student updated successfully", updatedStudent);
+        } else {
+            sendResponse(res, 404, "Student not found");
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 };
