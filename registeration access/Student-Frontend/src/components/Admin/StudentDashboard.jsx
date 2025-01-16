@@ -4,9 +4,11 @@ import { AppBar, Toolbar, Typography, IconButton, Box, Container } from "@mui/ma
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ListIcon from "@mui/icons-material/List";
+import PersonIcon from "@mui/icons-material/Person"; // New icon for Profile
 import StudentList from "./StudentList";
 import AddStudent from "./AddStudent";
 import UpdateStudent from "./UpdateStudent";
+import Profile from "../Profile/profile";
 
 const theme = createTheme({
   palette: {
@@ -43,53 +45,60 @@ const Footer = () => (
 const StudentDashboard = ({ token, setUser, logout }) => {
   return (
     <ThemeProvider theme={theme}>
-      {/* <Router> */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            minHeight: "100vh",
-          }}
-        >
-          {/* Navbar */}
-          <AppBar position="static">
-            <Toolbar>
-              <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                Student Dashboard
-              </Typography>
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/add"
-                title="Add Student"
-              >
-                <PersonAddIcon />
-              </IconButton>
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/"
-                title="Student List"
-              >
-                <ListIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
+        {/* Navbar */}
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              Student Dashboard
+            </Typography>
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/add"
+              title="Add Student"
+            >
+              <PersonAddIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/"
+              title="Student List"
+            >
+              <ListIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/profile"
+              title="Profile"
+            >
+              <PersonIcon /> {/* Profile Icon */}
+            </IconButton>
+          </Toolbar>
+        </AppBar>
 
-          {/* Main Content */}
-          <Container sx={{ my: 4 }}>
-            <Routes>
-              <Route path="/" element={<StudentList logout={logout} token={token} setUser={setUser} />} />
-              <Route path="/add" element={<AddStudent logout={logout} token={token} setUser={setUser} />} />
-              <Route path="/update/:id" element={<UpdateStudent logout={logout} token={token} setUser={setUser} />} />
-              <Route path="*" element={<Navigate to="/" logout={logout} token={token} setUser={setUser} />} />
-            </Routes>
-          </Container>
+        {/* Main Content */}
+        <Container sx={{ my: 4 }}>
+          <Routes>
+            <Route path="/" element={<StudentList logout={logout} token={token} setUser={setUser} />} />
+            <Route path="/add" element={<AddStudent logout={logout} token={token} setUser={setUser} />} />
+            <Route path="/update/:id" element={<UpdateStudent logout={logout} token={token} setUser={setUser} />} />
+            <Route path="/profile" element={<Profile logout={logout} token={token} setUser={setUser} />} />
+            <Route path="*" element={<Navigate to="/" logout={logout} token={token} setUser={setUser} />} />
+          </Routes>
+        </Container>
 
-          {/* Footer */}
-          <Footer />
-        </Box>
-      {/* </Router> */}
+        {/* Footer */}
+        <Footer />
+      </Box>
     </ThemeProvider>
   );
 };

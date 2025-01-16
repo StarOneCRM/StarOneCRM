@@ -5,6 +5,7 @@ const cors = require("cors");
 const connection = require("./db");
 const adminRoutes = require("./routes/admin.routes");
 const userRoutes = require("./routes/user.routes");
+const profileRoutes = require("./routes/profile.routes")
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/admin", adminRoutes);
 app.use("/api", userRoutes);
+app.use("/api/profile", profileRoutes);
 
 // Start server
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

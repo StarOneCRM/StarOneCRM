@@ -7,6 +7,7 @@ import StudentDashboard from './components/Admin/StudentDashboard';
 import FillForm from './components/Auth/FillForm';
 import NotVerified from './components/Auth/NotVerified';
 import UpdateStudent from './components/Admin/UpdateStudent';
+import Profile from './components/Profile/profile';
 
 const AppRoutes = () => {
     const { token, user, setUser, logout, handleLogin, handleSignup } = useGlobalContext();
@@ -42,8 +43,10 @@ const AppRoutes = () => {
     if (user && !user.isAdmin) {
         return (
             <Routes>
-                <Route path="/update/:id" element={<UpdateStudent logout={logout} token={token} setUser={setUser} />} />
-                <Route path="*" element={<Navigate to={`/update/${user._id}`} />} />
+                {/* <Route path="/profile/:id" element={<Profile logout={logout} token={token} setUser={setUser} />} />
+                <Route path="*" element={<Navigate to={`/profile/${user._id}`} />} /> */}
+                <Route path="/profile" element={<Profile logout={logout} token={token} setUser={setUser} />} />
+                <Route path="*" element={<Navigate to={`/profile`} />} />
             </Routes>
         );
     }
