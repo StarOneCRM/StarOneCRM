@@ -1,40 +1,5 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-// import StudentList from './StudentList';
-// import AddStudent from './AddStudent';
-// import UpdateStudent from './UpdateStudent';
-
-
-// const StudentDashboard = () => {
-//   return (
-//     <div className="container" style={{ textAlign: 'center' }}>
-//       <h1>Student Dashboard</h1>
-
-//       <Router>
-//         <nav className="route-list">
-//           <Link className="route-link" to="/">Student List</Link>
-//           <Link className="route-link" to="/add">Add Student</Link>
-//           {/* <Link className="route-link" to="/update/">Update Student</Link> */}
-//         </nav>
-
-//         <Routes>
-//           <Route path="/" element={<StudentList />} />
-//           <Route path="/add" element={<AddStudent />} />
-//           <Route path="/update/:id" element={<UpdateStudent />} />
-//         </Routes>
-//       </Router>
-//     </div>
-//   );
-// };
-
-// export default StudentDashboard;
-
-
-
-
-
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom";
 import { AppBar, Toolbar, Typography, IconButton, Box, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -75,10 +40,10 @@ const Footer = () => (
   </Box>
 );
 
-const StudentDashboard = () => {
+const StudentDashboard = ({token}) => {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      {/* <Router> */}
         <Box
           sx={{
             display: "flex",
@@ -114,16 +79,17 @@ const StudentDashboard = () => {
           {/* Main Content */}
           <Container sx={{ my: 4 }}>
             <Routes>
-              <Route path="/" element={<StudentList />} />
+              <Route path="/" element={<StudentList token={token}/>} />
               <Route path="/add" element={<AddStudent />} />
               <Route path="/update/:id" element={<UpdateStudent />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </Container>
 
           {/* Footer */}
           <Footer />
         </Box>
-      </Router>
+      {/* </Router> */}
     </ThemeProvider>
   );
 };

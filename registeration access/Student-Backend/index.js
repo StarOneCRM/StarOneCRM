@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connection = require("./db");
 const crudRoutes = require("./routes/crudRoutes");
-
+const authRoutes = require("./routes/authRoutes");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
 
 // routes
 app.use("/api/cruds", crudRoutes);
+app.use("/api", authRoutes);
 
 // listening on port
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
