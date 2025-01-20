@@ -20,24 +20,24 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cd registration-access/Student-Backend
+          cd Backend-validation/Student-Backend
           npm install
           npm run build --if-present
           # npm run test --if-present
 
       - name: Zip artifact for deployment
         run: |
-          cd registration-access/Student-Backend
+          cd Backend-validation/Student-Backend
           zip -r ../release.zip ./
 
       - name: Verify artifact upload
-        run: ls -al registration-access/release.zip
+        run: ls -al Backend-validation/release.zip
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: registration-access/release.zip
+          path: Backend-validation/release.zip
 
   deploy:
     runs-on: ubuntu-latest
