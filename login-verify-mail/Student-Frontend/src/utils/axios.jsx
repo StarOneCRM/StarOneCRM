@@ -4,7 +4,7 @@ import axios from 'axios';
 // Create an Axios instance
 const axiosInstance = axios.create({
   // baseURL: 'http://localhost:5000/api'
-  baseURL: 'https://polite-field-09918cc00.4.azurestaticapps.net/api'
+  baseURL: 'http://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api'
 //   timeout: 5000, // Timeout for requests
 });
 
