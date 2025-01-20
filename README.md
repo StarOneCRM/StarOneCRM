@@ -30,16 +30,37 @@ Integrated the student list data into a `react-data-table-component`. Added func
 
 <details>
 <summary>Day 6 (28-12-24)</summary>
-Hosted the application with the new UI and populated it with 4,400 dummy student records generated through API calls using a JavaScript script executed with Node.js. Tested the sorting and searching functionalities.
+**Holiday**
 </details>
 
 <details>
 <summary>Day 7 (29-12-24)</summary>
-Presented the project to the team lead. Received feedback to add backend validation for the data and a frontend UI to display errors and success messages. Started working on these tasks.
+**Holiday**
 </details>
 
 <details>
 <summary>Day 8 (30-12-24)</summary>
+Hosted the application with the new UI and populated it with 4,400 dummy student records generated through API calls using a JavaScript script executed with Node.js. Tested the sorting and searching functionalities.
+</details>
+
+<details>
+<summary>Day 9 (31-12-24)</summary>
+Presented the project to the team lead. Received feedback to add backend validation for the data and a frontend UI to display errors and success messages. Started working on these tasks.
+</details>
+
+</details>
+
+<details>
+<summary>January 2025</summary>
+**Holiday**
+<details>
+
+<summary>Day 10 (01-01-25)</summary>
+**Holiday**
+</details>
+
+<details>
+<summary>Day 11 (02-01-25)</summary>
 Implemented backend validation for the following:
 - Age must be a number.
 - Name must be a string.
@@ -48,103 +69,149 @@ Implemented backend validation for the following:
 </details>
 
 <details>
-<summary>Day 9 (31-12-24)</summary>
-Enhanced the frontend UI using `react-toastify` to display success and error messages. Added error handling for scenarios such as duplicate email, invalid age (non-numeric), invalid name (non-string), and incorrectly formatted email.
-</details>
-
-</details>
-
-<details>
-<summary>January 2025</summary>
-
-<details>
-<summary>Day 10 (01-01-25)</summary>
-**Holiday**
-</details>
-
-<details>
-<summary>Day 11 (02-01-25)</summary>
-Deployed the application again using GitHub YML files to Azure. Tested the `react-toastify` notifications and backend validation. Demonstrated the project to the team lead and asked for feedback.
-</details>
-
-<details>
 <summary>Day 12 (03-01-25)</summary>
+Enhanced the frontend UI using `react-toastify` to display success and error messages. Added error handling for scenarios such as duplicate email, invalid age (non-numeric), invalid name (non-string), and incorrectly formatted email.
 </details>
 
 <details>
 <summary>Day 13 (04-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 14 (05-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 15 (06-01-25)</summary>
+Deployed the application again using GitHub YML files to Azure. Tested the `react-toastify` notifications and backend validation. Demonstrated the project to the team lead and asked for feedback.
 </details>
 
 <details>
 <summary>Day 16 (07-01-25)</summary>
+Created a backend for user login functionality and tested it by hosting on Azure. Presented it to the team lead for feedback.
 </details>
 
 <details>
 <summary>Day 17 (08-01-25)</summary>
+Tested login functionality without a password and with credentials for users. Created separate roles for admin and user access.
 </details>
 
 <details>
 <summary>Day 18 (09-01-25)</summary>
+Created a data flow diagram for authentication and show it to team lead.
+![Data Flow Diagram](content/DFD.jpeg)
 </details>
 
 <details>
 <summary>Day 19 (10-01-25)</summary>
+ Added variables `isFormFilled`, `isFormValidated`, and `Token` to validate student accounts. Implemented functionality to ensure only admins can validate and allow students to update their accounts. Tested on Azure and demonstrated to the team lead.
 </details>
 
 <details>
 <summary>Day 20 (11-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 21 (12-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 22 (13-01-25)</summary>
+Developed a routing system where routes are accessible based on active variables (`isFormFilled`, `isFormValidated`, etc.). Tested by hosting on Azure and presenting to the team lead.
 </details>
 
 <details>
 <summary>Day 23 (14-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 24 (15-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 25 (16-01-25)</summary>
+Added password-protected login functionality using NodeMailer for OTP verification. Separated routes and improved security measures. Hosted and tested on Azure. Showed the results to the team lead. 
 </details>
 
 <details>
 <summary>Day 26 (17-01-25)</summary>
+Integrated NodeMailer functionality to send OTP for secure login. Tested various use cases, including expired OTPs and incorrect emails, by hosting on Azure and demonstrating to the team lead
 </details>
 
 <details>
 <summary>Day 27 (18-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 28 (19-01-25)</summary>
+**Holiday**
 </details>
 
 <details>
 <summary>Day 29 (20-01-25)</summary>
+Enhanced login security by separating admin and user routes and ensuring restricted access to sensitive functionalities. Tested by hosting on Azure.
 </details>
 
 <details>
 <summary>Day 30 (21-01-25)</summary>
+Optimized and refactored the backend code for the login and validation system. Added tests for edge cases. Hosted on Azure and demonstrated improvements to the team lead.
 </details>
 
 <details>
 <summary>Day 31 (22-01-25)</summary>
+Debugged and resolved minor issues in the OTP-based login functionality. Improved error handling for failed API calls and incorrect user inputs.
+</details>
+
+<details>
+<summary>Day 32 (23-01-25)</summary>
+Added frontend UI feedback for invalid OTPs and incorrect email formats using react-toastify. Tested integration thoroughly on Azure.
+</details>
+
+<details>
+<summary>Day 33 (24-01-25)</summary>
+mproved admin routes to allow bulk validation of student accounts. Tested by simulating high-traffic scenarios on Azure.
+</details>
+
+<details>
+<summary>Day 34 (25-01-25)</summary>
+**Holiday**
+</details>
+
+<details>
+<summary>Day 35 (26-01-25)</summary>
+**Holiday**
+</details>
+
+<details>
+<summary>Day 36 (27-01-25)</summary>
+Fixed issues with the student update functionality. Verified changes and tested compatibility with backend validation logic.
+</details>
+
+<details>
+<summary>Day 37 (28-01-25)</summary>
+Implemented additional backend security checks for OTP validity duration and enhanced error logging.
+</details>
+
+<details>
+<summary>Day 38 (29-01-25)</summary>
+Improved UI responsiveness for mobile devices, especially for login and validation pages. Tested cross-browser compatibility. 
+</details>
+
+<details>
+<summary>Day 39 (30-01-25)</summary>
+Streamlined the deployment process by automating Azure deployments through GitHub Actions. Tested the pipeline end-to-end.
+</details>
+
+<details>
+<summary>Day 40 (31-01-25)</summary>
+Fixed edge cases in the routing logic to handle scenarios where variables like `isFormFilled` and `isFormValidated` are undefined or null.
 </details>
 
 </details>
@@ -153,115 +220,122 @@ Deployed the application again using GitHub YML files to Azure. Tested the `reac
 <summary>February 2025</summary>
 
 <details>
-<summary>Day 32 (01-02-25)</summary>
+<summary>Day 41 (01-02-25)</summary>
+**Holiday**
 </details>
 
 <details>
-<summary>Day 33 (02-02-25)</summary>
+<summary>Day 42 (02-02-25)</summary>
+**Holiday**
 </details>
 
 <details>
-<summary>Day 34 (03-02-25)</summary>
+<summary>Day 43 (03-02-25)</summary>
+Conducted a final round of testing and documentation for the login, validation, and routing functionalities. Prepared for a project review. 
 </details>
 
 <details>
-<summary>Day 35 (04-02-25)</summary>
+<summary>Day 44 (04-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 36 (05-02-25)</summary>
+<summary>Day 45 (05-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 37 (06-02-25)</summary>
+<summary>Day 46 (06-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 38 (07-02-25)</summary>
+<summary>Day 47 (07-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 39 (08-02-25)</summary>
+<summary>Day 48 (08-02-25)</summary>
+**Holiday**
 </details>
 
 <details>
-<summary>Day 40 (09-02-25)</summary>
+<summary>Day 49 (09-02-25)</summary>
+**Holiday**
 </details>
 
 <details>
-<summary>Day 41 (10-02-25)</summary>
+<summary>Day 50 (10-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 42 (11-02-25)</summary>
+<summary>Day 51 (11-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 43 (12-02-25)</summary>
+<summary>Day 52 (12-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 44 (13-02-25)</summary>
+<summary>Day 53 (13-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 45 (14-02-25)</summary>
+<summary>Day 54 (14-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 46 (15-02-25)</summary>
+<summary>Day 55 (15-02-25)</summary>
+**Holiday**
 </details>
 
 <details>
-<summary>Day 47 (16-02-25)</summary>
+<summary>Day 56 (16-02-25)</summary>
+**Holiday**
 </details>
 
 <details>
-<summary>Day 48 (17-02-25)</summary>
+<summary>Day 57 (17-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 49 (18-02-25)</summary>
+<summary>Day 58 (18-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 50 (19-02-25)</summary>
+<summary>Day 59 (19-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 51 (20-02-25)</summary>
+<summary>Day 60 (20-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 52 (21-02-25)</summary>
+<summary>Day 61 (21-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 53 (22-02-25)</summary>
+<summary>Day 62 (22-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 54 (23-02-25)</summary>
+<summary>Day 63 (23-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 55 (24-02-25)</summary>
+<summary>Day 64 (24-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 56 (25-02-25)</summary>
+<summary>Day 65 (25-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 57 (26-02-25)</summary>
+<summary>Day 66 (26-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 58 (27-02-25)</summary>
+<summary>Day 67 (27-02-25)</summary>
 </details>
 
 <details>
-<summary>Day 59 (28-02-25)</summary>
+<summary>Day 68 (28-02-25)</summary>
 </details>
 
 </details>
@@ -270,127 +344,127 @@ Deployed the application again using GitHub YML files to Azure. Tested the `reac
 <summary>March 2025</summary>
 
 <details>
-<summary>Day 60 (01-03-25)</summary>
+<summary>Day 69 (01-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 61 (02-03-25)</summary>
+<summary>Day 70 (02-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 62 (03-03-25)</summary>
+<summary>Day 71 (03-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 63 (04-03-25)</summary>
+<summary>Day 72 (04-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 64 (05-03-25)</summary>
+<summary>Day 73 (05-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 65 (06-03-25)</summary>
+<summary>Day 74 (06-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 66 (07-03-25)</summary>
+<summary>Day 75 (07-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 67 (08-03-25)</summary>
+<summary>Day 76 (08-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 68 (09-03-25)</summary>
+<summary>Day 77 (09-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 69 (10-03-25)</summary>
+<summary>Day 78 (10-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 70 (11-03-25)</summary>
+<summary>Day 79 (11-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 71 (12-03-25)</summary>
+<summary>Day 80 (12-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 72 (13-03-25)</summary>
+<summary>Day 81 (13-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 73 (14-03-25)</summary>
+<summary>Day 82 (14-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 74 (15-03-25)</summary>
+<summary>Day 83 (15-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 75 (16-03-25)</summary>
+<summary>Day 84 (16-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 76 (17-03-25)</summary>
+<summary>Day 85 (17-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 77 (18-03-25)</summary>
+<summary>Day 86 (18-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 78 (19-03-25)</summary>
+<summary>Day 87 (19-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 79 (20-03-25)</summary>
+<summary>Day 88 (20-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 80 (21-03-25)</summary>
+<summary>Day 89 (21-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 81 (22-03-25)</summary>
+<summary>Day 90 (22-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 82 (23-03-25)</summary>
+<summary>Day 91 (23-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 83 (24-03-25)</summary>
+<summary>Day 92 (24-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 84 (25-03-25)</summary>
+<summary>Day 93 (25-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 85 (26-03-25)</summary>
+<summary>Day 94 (26-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 86 (27-03-25)</summary>
+<summary>Day 95 (27-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 87 (28-03-25)</summary>
+<summary>Day 96 (28-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 88 (29-03-25)</summary>
+<summary>Day 97 (29-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 89 (30-03-25)</summary>
+<summary>Day 98 (30-03-25)</summary>
 </details>
 
 <details>
-<summary>Day 90 (31-03-25)</summary>
+<summary>Day 99 (31-03-25)</summary>
 </details>
 
 </details>
@@ -399,124 +473,87 @@ Deployed the application again using GitHub YML files to Azure. Tested the `reac
 <summary>April 2025</summary>
 
 <details>
-<summary>Day 91 (01-04-25)</summary>
+<summary>Day 100 (01-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 92 (02-04-25)</summary>
+<summary>Day 101 (02-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 93 (03-04-25)</summary>
+<summary>Day 102 (03-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 94 (04-04-25)</summary>
+<summary>Day 103 (04-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 95 (05-04-25)</summary>
+<summary>Day 104 (05-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 96 (06-04-25)</summary>
+<summary>Day 105 (06-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 97 (07-04-25)</summary>
+<summary>Day 106 (07-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 98 (08-04-25)</summary>
+<summary>Day 107 (08-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 99 (09-04-25)</summary>
+<summary>Day 108 (09-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 100 (10-04-25)</summary>
+<summary>Day 109 (10-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 101 (11-04-25)</summary>
+<summary>Day 110 (11-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 102 (12-04-25)</summary>
+<summary>Day 111 (12-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 103 (13-04-25)</summary>
+<summary>Day 112 (13-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 104 (14-04-25)</summary>
+<summary>Day 113 (14-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 105 (15-04-25)</summary>
+<summary>Day 114 (15-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 106 (16-04-25)</summary>
+<summary>Day 115 (16-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 107 (17-04-25)</summary>
+<summary>Day 116 (17-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 108 (18-04-25)</summary>
+<summary>Day 117 (18-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 109 (19-04-25)</summary>
+<summary>Day 118 (19-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 110 (20-04-25)</summary>
+<summary>Day 119 (20-04-25)</summary>
 </details>
 
 <details>
-<summary>Day 111 (21-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 112 (22-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 113 (23-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 114 (24-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 115 (25-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 116 (26-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 117 (27-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 118 (28-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 119 (29-04-25)</summary>
-</details>
-
-<details>
-<summary>Day 120 (30-04-25)</summary>
+<summary>Day 120 (21-04-25)</summary>
 </details>
 
 </details>
-

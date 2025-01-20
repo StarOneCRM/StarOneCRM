@@ -3,7 +3,8 @@ import axios from 'axios';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api' // Base URL for your API
+  // baseURL: 'http://localhost:5000/api'
+  baseURL: 'https://polite-field-09918cc00.4.azurestaticapps.net/api'
 //   timeout: 5000, // Timeout for requests
 });
 
