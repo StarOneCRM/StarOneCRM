@@ -199,7 +199,7 @@ const StudentDashboard = ({ token, setUserMethod, logout }) => {
 
         {/* Main Content */}
         <Container sx={{ my: 4 }}>
-          <Router>
+          {/* <Router> */}
             <Routes>
               <Route path="/" element={<StudentList logout={logout} token={token} setUserMethod={setUserMethod} />} />
               <Route path="/add" element={<AddStudent logout={logout} token={token} setUserMethod={setUserMethod} />} />
@@ -207,7 +207,7 @@ const StudentDashboard = ({ token, setUserMethod, logout }) => {
               <Route path="/profile" element={<Profile logout={logout} token={token} setUserMethod={setUserMethod} />} />
               <Route path="*" element={<Navigate to="/" logout={logout} token={token} setUserMethod={setUserMethod} />} />
             </Routes>
-          </Router>
+          {/* </Router> */}
         </Container>
 
         {/* Footer */}
