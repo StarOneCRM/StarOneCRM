@@ -32,7 +32,7 @@
 //     }
 // };
 
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const { Student } = require("../models/user.model");
 const { OTP } = require("../models/otp.model");
 const { sendEmail } = require("../utils/email");
@@ -93,10 +93,10 @@ exports.register = async (req, res) => {
 
         // Hash the password before saving
         console.log(typeof(password))
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, 10);
         console.log(password)
         console.log(hashedPassword)
-        const isMatch = await bcrypt.compare(password, hashedPassword);
+        const isMatch = await bcryptjs.compare(password, hashedPassword);
         console.log(isMatch)
 
         // Register the student with the hashed password
@@ -137,7 +137,7 @@ exports.login = async (req, res) => {
 
         // Compare the provided password with the hashed password stored in the database
         console.log(typeof(password), typeof(student.password))
-        const isMatch = await bcrypt.compare(password, student.password);
+        const isMatch = await bcryptjs.compare(password, student.password);
         console.log(isMatch)
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid email or password" });

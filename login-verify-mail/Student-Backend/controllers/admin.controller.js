@@ -1,7 +1,7 @@
 // Controller
 const { Student } = require("../models/user.model");
 const sendResponse = require("../utils/sendResponse");
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 // Display All Students
 exports.student_index = async (req, res) => {
@@ -16,7 +16,7 @@ exports.student_index = async (req, res) => {
 // Create New Student
 exports.student_create_post = async (req, res) => {
     const { name, age, email, major, password } = req.body;
-    const hashedpassword = await bcrypt.hash(password, 10);
+    const hashedpassword = await bcryptjs.hash(password, 10);
     if (!name || !age || !email || !major) {
         return sendResponse(res, 400, "All fields are required");
     }
