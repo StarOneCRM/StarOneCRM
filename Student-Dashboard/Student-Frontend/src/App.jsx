@@ -84,6 +84,8 @@ import FillForm from './components/Auth/FillForm';
 import NotVerified from './components/Auth/NotVerified';
 import UpdateStudent from './components/Admin/UpdateStudent';
 import Profile from './components/Profile/profile';
+import theme from './utils/theme';
+import { ThemeProvider } from '@mui/material/styles';
 
 const AppRoutes = () => {
     const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
@@ -128,7 +130,7 @@ const AppRoutes = () => {
     if (user && user.isAdmin) {
         return (
             <Routes>
-                <Route path="*" element={<StudentDashboard logout={logout} token={token} setUserMethod={setUserMethod} />} />
+                <Route path="*" element={<StudentDashboard logout={logout} token={token} setUserMethod={setUserMethod} theme={theme} />} />
             </Routes>
         );
     }
@@ -137,9 +139,11 @@ const AppRoutes = () => {
 const App = () => {
     return (
         <GlobalProvider>
-            <Router>
-                <AppRoutes />
-            </Router>
+            <ThemeProvider theme={theme}>
+                <Router>
+                    <AppRoutes />
+                </Router>
+            </ThemeProvider>
         </GlobalProvider>
     );
 };

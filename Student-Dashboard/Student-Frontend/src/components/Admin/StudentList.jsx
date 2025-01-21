@@ -2005,7 +2005,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
     },
     {
       name: <span style={{ fontWeight: '400', fontSize: '16px' }}>Email</span>,
-      selector: (row) => <span style={{ fontWeight: '400', fontSize: '14px', color: '#0d47a1', textDecoration: "underline" }}>{row.email}</span>,
+      selector: (row) => <span style={{ fontWeight: '400', fontSize: '14px', color: '#2A8A6E', textDecoration: "underline" }}>{row.email}</span>,
       sortable: true,
       sortFunction: (a, b) => a.email.localeCompare(b.email),
     },
@@ -2050,7 +2050,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={(e) => handleMenuOpen(e, row)}
-            style={{ color: '#1976d2' }}
+            style={{ color: '#2A8A6E' }}
           >
             <MoreVertIcon />
           </IconButton>
@@ -2114,6 +2114,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
           color="secondary"
           onClick={handleDelete}
           disabled={selectedStudents.length === 0}
+          style={{ marginRight: "10px" }}
         >
           Delete Selected
         </Button>

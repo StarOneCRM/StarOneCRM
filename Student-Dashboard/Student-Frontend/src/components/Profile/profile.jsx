@@ -111,7 +111,7 @@ const Profile = ({ logout, setUserMethod, token }) => {
               <Button onClick={() => setIsEditing(true)} variant="contained" color="primary" fullWidth>
                 Edit Profile
               </Button>
-              <Button onClick={handleDelete} variant="contained" color="secondary" fullWidth style={{ marginTop: 10 }}>
+              <Button onClick={handleDelete} variant="outlined" color="secondary" fullWidth style={{ marginTop: 10 }}>
                 Delete Profile
               </Button>
               <Button onClick={logout} variant="contained" color="primary" fullWidth style={{ marginTop: 10 }}>

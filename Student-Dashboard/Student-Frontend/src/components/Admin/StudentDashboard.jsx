@@ -154,7 +154,7 @@ const Footer = () => (
   </Box>
 );
 
-const StudentDashboard = ({ token, setUserMethod, logout }) => {
+const StudentDashboard = ({ token, setUserMethod, logout, theme }) => {
   return (
     <ThemeProvider theme={theme}>
       <Box

@@ -391,6 +391,7 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
             rows={4}
           />
         </Box>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
         <Box mb={2}>
           <FormControlLabel
             control={
@@ -430,6 +431,7 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
             label="Admin"
           />
         </Box>
+        </div>
         <Button
           type="submit"
           variant="contained"
