@@ -122,20 +122,20 @@ import AddStudent from "./AddStudent";
 import UpdateStudent from "./UpdateStudent";
 import Profile from "../Profile/profile";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1976d2",
-    },
-    secondary: {
-      main: "#ff5722",
-    },
-  },
-  typography: {
-    fontFamily: "Arial, sans-serif",
-    fontSize: 14,
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#1976d2",
+//     },
+//     secondary: {
+//       main: "#ff5722",
+//     },
+//   },
+//   typography: {
+//     fontFamily: "Arial, sans-serif",
+//     fontSize: 14,
+//   },
+// });
 
 const Footer = () => (
   <Box

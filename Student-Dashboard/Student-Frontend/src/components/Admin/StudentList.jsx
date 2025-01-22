@@ -1845,8 +1845,6 @@
 
 
 
-
-
 import React, { useEffect, useState } from "react";
 import axiosInstance from '../../utils/axios';
 import DataTable from "react-data-table-component";
@@ -1862,9 +1860,9 @@ const StudentList = ({ token, setUserMethod, logout }) => {
   const [search, setSearch] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [filterVerified, setFilterVerified] = useState(0); // 0: No filter, 1: Verified, 2: Not Verified
-  const [filterAdmin, setFilterAdmin] = useState(0); // 0: No filter, 1: Admin, 2: Not Admin
-  const [selectedStudents, setSelectedStudents] = useState([]); // Track selected students for mass actions
+  const [filterVerified, setFilterVerified] = useState(0); 
+  const [filterAdmin, setFilterAdmin] = useState(0); 
+  const [selectedStudents, setSelectedStudents] = useState([]); 
   const navigate = useNavigate();
 
   const fetchStudents = async () => {
@@ -2005,7 +2003,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
     },
     {
       name: <span style={{ fontWeight: '400', fontSize: '16px' }}>Email</span>,
-      selector: (row) => <span style={{ fontWeight: '400', fontSize: '14px', color: '#2A8A6E', textDecoration: "underline" }}>{row.email}</span>,
+      selector: (row) => <span style={{ fontWeight: '400', fontSize: '14px', color: 'var(--email-color)', textDecoration: "underline" }}>{row.email}</span>,
       sortable: true,
       sortFunction: (a, b) => a.email.localeCompare(b.email),
     },
@@ -2021,7 +2019,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
         <div>
           <span
             style={{
-              color: row.isFormVerified ? 'green' : 'red',
+              color: row.isFormVerified ? 'var(--verified-color)' : 'var(--not-verified-color)',
               fontWeight: '400',
               fontSize: '14px',
             }}
@@ -2031,7 +2029,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
           <br />
           <span
             style={{
-              color: row.isAdmin ? '#f57c00' : '#1976d2',
+              color: row.isAdmin ? 'var(--admin-color)' : 'var(--not-admin-color)',
               fontWeight: '400',
               fontSize: '14px',
             }}
@@ -2050,7 +2048,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={(e) => handleMenuOpen(e, row)}
-            style={{ color: '#2A8A6E' }}
+            style={{ color: 'var(--icon-color)' }}
           >
             <MoreVertIcon />
           </IconButton>
@@ -2063,10 +2061,10 @@ const StudentList = ({ token, setUserMethod, logout }) => {
     rows: {
       style: {
         "&:nth-of-type(odd)": {
-          backgroundColor: "#ffffff",
+          backgroundColor: "var(--table-backgroud-light)",
         },
         "&:nth-of-type(even)": {
-          backgroundColor: "#f0f7ff",
+          backgroundColor: "var(--table-backgroud-dark)",
         },
       },
     },
@@ -2094,18 +2092,25 @@ const StudentList = ({ token, setUserMethod, logout }) => {
         <div style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
 
         <Button
-          variant={filterVerified === 1 ? "contained" : "outlined"}
+          variant={filterVerified !== 0 ? "contained" : "outlined"}
           color="success"
           onClick={() => setFilterVerified((prev) => (prev + 1) % 3)} // Cycle through 0, 1, 2
-          style={{ marginRight: "10px" }}
+          style={{
+            marginRight: "10px",
+            backgroundColor: filterVerified === 1 ? "green" : filterVerified === 2 ? "red" : "",
+            color: filterVerified !== 0 ? "white" : "",
+          }}
         >
           Verified
         </Button>
         <Button
-          variant={filterAdmin === 1 ? "contained" : "outlined"}
+          variant={filterAdmin !== 0 ? "contained" : "outlined"}
           color="warning"
           onClick={() => setFilterAdmin((prev) => (prev + 1) % 3)} // Cycle through 0, 1, 2
-          style={{ marginRight: "10px" }}
+          style={{ marginRight: "10px", 
+            backgroundColor: filterAdmin === 1 ? "#f57c00" : filterAdmin === 2 ? "#1976d2" : "",
+            color: filterAdmin !== 0 ? "white" : "",
+          }}
         >
           Admin
         </Button>
@@ -2131,7 +2136,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
         columns={columns}
         data={filteredStudents}
         pagination
-        highlightOnHover
+        // highlightOnHover
         striped
         responsive
         customStyles={customStyles}
@@ -2159,14 +2164,14 @@ const StudentList = ({ token, setUserMethod, logout }) => {
         >
           Delete
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           onClick={() => {
             handleVerify(selectedStudent._id);
             handleMenuClose();
           }}
         >
           Verify
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </div>
   );

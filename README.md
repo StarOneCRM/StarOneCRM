@@ -52,7 +52,6 @@ Presented the project to the team lead. Received feedback to add backend validat
 
 <details>
 <summary>January 2025</summary>
-**Holiday**
 <details>
 
 <summary>Day 10 (01-01-25)</summary>
