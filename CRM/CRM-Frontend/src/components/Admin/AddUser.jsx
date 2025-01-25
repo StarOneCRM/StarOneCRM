@@ -16,7 +16,7 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import SchoolIcon from "@mui/icons-material/School";
 import SaveIcon from "@mui/icons-material/Save";
 import LockIcon from "@mui/icons-material/Lock"; 
-const Addstudent = ({ token, setstudentMethod, logout }) => {
+const Adduser = ({ token, setuserMethod, logout }) => {
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -48,7 +48,7 @@ const Addstudent = ({ token, setstudentMethod, logout }) => {
         }, 5000);
       }
     } catch (error) {
-      console.error("Error adding student:", error);
+      console.error("Error adding user:", error);
 
       if (error.response && error.response.data) {
         const { error: backendError, message } = error.response.data;
@@ -57,13 +57,13 @@ const Addstudent = ({ token, setstudentMethod, logout }) => {
           const emailMatch = backendError.match(/email: "(.*?)"/);
           const duplicateEmail = emailMatch ? emailMatch[1] : "this email";
           toast.error(
-            `The email ${duplicateEmail} is already associated with another student.`
+            `The email ${duplicateEmail} is already associated with another user.`
           );
         } else {
           toast.error(message || backendError || "An unexpected error occurred.");
         }
       } else {
-        toast.error("Failed to add student. Please try again later.");
+        toast.error("Failed to add user. Please try again later.");
       }
     }
   };
@@ -180,11 +180,11 @@ const Addstudent = ({ token, setstudentMethod, logout }) => {
           startIcon={<SaveIcon />}
           fullWidth
         >
-          Add student
+          Add user
         </Button>
       </form>
     </Paper>
   );
 };
 
-export default Addstudent;
+export default Adduser;

@@ -1,20 +1,20 @@
 // Controller
-const { student } = require("../models/student.model");
+const { User } = require("../models/user.model");
 const sendResponse = require("../utils/sendResponse");
 const bcryptjs = require('bcryptjs');
 
-// Display All students
-exports.student_index = async (req, res) => {
+// Display All users
+exports.user_index = async (req, res) => {
     try {
-        const students = await student.find();
-        sendResponse(res, 200, "students retrieved successfully", students);
+        const users = await User.find();
+        sendResponse(res, 200, "users retrieved successfully", users);
     } catch (err) {
-        sendResponse(res, 500, "Error retrieving students", null, err.message);
+        sendResponse(res, 500, "Error retrieving users", null, err.message);
     }
 };
 
-// Create New student
-exports.student_create_post = async (req, res) => {
+// Create New user
+exports.user_create_post = async (req, res) => {
     const { name, age, email, major, password } = req.body;
     const hashedpassword = await bcryptjs.hash(password, 10);
     if (!name || !age || !email || !major) {
@@ -41,34 +41,34 @@ exports.student_create_post = async (req, res) => {
     }
 
     try {
-        const student = new student({ name, age, email, major, password:hashedpassword });
-        const savedstudent = await student.save();
-        sendResponse(res, 201, "student created successfully", savedstudent);
+        const user = new User({ name, age, email, major, password:hashedpassword });
+        const saveduser = await User.save();
+        sendResponse(res, 201, "user created successfully", saveduser);
     } catch (err) {
         if (err.code === 11000 && err.keyValue.email) {
             sendResponse(res, 422, `Email ${err.keyValue.email} is already in use`, null, err.message);
         } else {
-            sendResponse(res, 500, "Error creating student", null, err.message);
+            sendResponse(res, 500, "Error creating user", null, err.message);
         }
     }
 };
 
-// Show a particular student Detail by Id
-exports.student_details = async (req, res) => {
+// Show a particular user Detail by Id
+exports.user_details = async (req, res) => {
     try {
-        const student = await student.findById(req.params.id);
-        if (!student) {
-            sendResponse(res, 404, "student not found");
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            sendResponse(res, 404, "user not found");
         } else {
-            sendResponse(res, 200, "student retrieved successfully", student);
+            sendResponse(res, 200, "user retrieved successfully", user);
         }
     } catch (err) {
-        sendResponse(res, 400, "Error retrieving student", null, err.message);
+        sendResponse(res, 400, "Error retrieving user", null, err.message);
     }
 };
 
-// Update student Detail by Id
-exports.student_update = async (req, res) => {
+// Update user Detail by Id
+exports.user_update = async (req, res) => {
     const { name, age, email, major } = req.body;
 
     if (!name && !age && !email && !major) {
@@ -92,52 +92,52 @@ exports.student_update = async (req, res) => {
     }
 
     try {
-        const updatedstudent = await student.findByIdAndUpdate(
+        const updateduser = await User.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
         );
-        if (!updatedstudent) {
-            sendResponse(res, 404, "student not found");
+        if (!updateduser) {
+            sendResponse(res, 404, "user not found");
         } else {
-            sendResponse(res, 200, "student updated successfully", updatedstudent);
+            sendResponse(res, 200, "user updated successfully", updateduser);
         }
     } catch (err) {
         if (err.code === 11000 && err.keyValue.email) {
             sendResponse(res, 422, `Email ${err.keyValue.email} is already in use`, null, err.message);
         } else {
-            sendResponse(res, 500, "Error updating student", null, err.message);
+            sendResponse(res, 500, "Error updating user", null, err.message);
         }
     }
 };
 
-// Delete student Detail by Id
-exports.student_delete = async (req, res) => {
+// Delete user Detail by Id
+exports.user_delete = async (req, res) => {
     try {
-        const deletedstudent = await student.findByIdAndDelete(req.params.id);
-        if (!deletedstudent) {
-            sendResponse(res, 404, "student not found");
+        const deleteduser = await User.findByIdAndDelete(req.params.id);
+        if (!deleteduser) {
+            sendResponse(res, 404, "user not found");
         } else {
-            sendResponse(res, 200, "student deleted successfully");
+            sendResponse(res, 200, "user deleted successfully");
         }
     } catch (err) {
-        sendResponse(res, 500, "Error deleting student", null, err.message);
+        sendResponse(res, 500, "Error deleting user", null, err.message);
     }
 };
 
-exports.verifystudent = async (req, res) => {
+exports.verifyuser = async (req, res) => {
     try {
         const { id } = req.params;
-        const updatedstudent = await student.findByIdAndUpdate(
+        const updateduser = await User.findByIdAndUpdate(
             id,
             { isFormVerified: true },
             { new: true }
         );
 
-        if (updatedstudent) {
-            sendResponse(res, 200, "student updated successfully", updatedstudent);
+        if (updateduser) {
+            sendResponse(res, 200, "user updated successfully", updateduser);
         } else {
-            sendResponse(res, 404, "student not found");
+            sendResponse(res, 404, "user not found");
         }
     } catch (error) {
         res.status(400).json({ message: error.message });

@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Container, Card, CardContent } from "@mu
 import axiosInstance from "../../utils/axios"; // Import the axiosInstance
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 
-const Profile = ({ logout, setstudentMethod, token }) => {
+const Profile = ({ logout, setuserMethod, token }) => {
   const [profile, setProfile] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,7 +29,7 @@ const Profile = ({ logout, setstudentMethod, token }) => {
         });
       } catch (error) {
         console.error("Error fetching profile:", error);
-        setstudentMethod(null);
+        setuserMethod(null);
         logout();
         navigate("/login");
       }

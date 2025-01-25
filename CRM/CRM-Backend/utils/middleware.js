@@ -6,13 +6,13 @@ exports.verifyJWT = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(403).json({ message: "Token invalid" });
-        req.student = decoded;
+        req.user = decoded;
         next();
     });
 };
 
 exports.isAdmin = (req, res, next) => {
     
-    if (!req.student.isAdmin) return res.status(403).json({ message: "Access denied" });
+    if (!req.user.isAdmin) return res.status(403).json({ message: "Access denied" });
     next();
 };

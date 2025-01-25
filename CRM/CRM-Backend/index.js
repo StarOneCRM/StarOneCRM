@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const connection = require("./db");
 const adminRoutes = require("./routes/admin.routes");
-const studentRoutes = require("./routes/student.routes");
+const userRoutes = require("./routes/user.routes");
 const profileRoutes = require("./routes/profile.routes")
 
 const app = express();
@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/api/admin", adminRoutes);
-app.use("/api", studentRoutes);
+app.use("/api", userRoutes);
 app.use("/api/profile", profileRoutes);
 
 // Start server

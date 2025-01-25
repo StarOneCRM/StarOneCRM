@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axiosInstance from '../../utils/axios';
 
-function FillForm({ token, setstudentMethod, logout }) {
+function FillForm({ token, setuserMethod, logout }) {
   const [formData, setFormData] = useState({ tasks: '' });
 
   const handleChange = (e) => {
@@ -20,12 +20,12 @@ function FillForm({ token, setstudentMethod, logout }) {
       });
 
       if (response) {
-        // Update student form status in localStorage
-        const storedstudent = JSON.parse(localStorage.getItem('student'));
-        storedstudent.isFormFilled = true;
-        localStorage.setItem('student', JSON.stringify(storedstudent));
+        // Update user form status in localStorage
+        const storeduser = JSON.parse(localStorage.getItem('user'));
+        storeduser.isFormFilled = true;
+        localStorage.setItem('user', JSON.stringify(storeduser));
       }
-      setstudentMethod(response.data.student);
+      setuserMethod(response.data.user);
       toast.success('Profile updated successfully');
     } catch (error) {
       console.error(error.response?.data?.message || error.message);
