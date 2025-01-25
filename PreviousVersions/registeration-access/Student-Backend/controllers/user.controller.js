@@ -47,11 +47,11 @@ exports.checkForm = async (req, res) => {
 };
 
 exports.fillForm = async (req, res) => {
-    const { additionalInfo } = req.body;
+    const { Task } = req.body;
     try {
         const student = await Student.findByIdAndUpdate(
             req.user.id,
-            { additionalInfo, isFormFilled: true },
+            { Task, isFormFilled: true },
             { new: true }
         );
 

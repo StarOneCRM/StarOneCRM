@@ -21,7 +21,7 @@ const AddStudent = ({ token, setUserMethod, logout }) => {
     name: "",
     age: "",
     email: "",
-    major: "",
+    role: "",
     password: "",
   });
 
@@ -140,9 +140,9 @@ const AddStudent = ({ token, setUserMethod, logout }) => {
           <TextField
             fullWidth
             variant="outlined"
-            label="Major"
-            name="major"
-            value={formData.major}
+            label="Role"
+            name="role"
+            value={formData.role}
             onChange={handleChange}
             required
             InputProps={{

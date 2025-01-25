@@ -24,9 +24,10 @@ const userSchema = new mongoose.Schema(
             lowercase: true,
             unique: [true, "Email already exists"],
         },
-        major: {
+        role: {
             type: String,
-            required: [true, "Major is required"],
+            required: [true, "Role is required"],
+            enum: ["customer", "employee"], // Only allow 'customer' or 'employee'
         },
         isFormFilled: {
             type: Boolean,
@@ -40,7 +41,7 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        additionalInfo: {
+        Task: {
             type: String,  // Add any fields that you want the user to fill
             required: false,
             default: '',
@@ -55,8 +56,6 @@ const userSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
-
-
 
 // User Model
 module.exports = {

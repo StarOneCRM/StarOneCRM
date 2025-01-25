@@ -40,7 +40,7 @@ const studentSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        additionalInfo: {
+        Task: {
             type: String,  // Add any fields that you want the student to fill
             required: false,
             default: '',

@@ -15,7 +15,7 @@ Worked on the Student CRUD task. Added API calls to `/crud/` for creating a stud
 Hosted the frontend and backend separately on Azure using Azure Function App and Azure Static Web App. Configured the API calls with CORS settings. Faced issues with the backend not allowing PATCH requests, which caused problems with update calls.  
 
 **Day 5 (27-12-24):**  
-Integrated the student list data into a `react-data-table-component`. Added functionality for searching and sorting the data by name, major, age, and email. Updated the UI for the student data table using the selected color palette.  
+Integrated the student list data into a `react-data-table-component`. Added functionality for searching and sorting the data by name, role, age, and email. Updated the UI for the student data table using the selected color palette.  
 
 **Day 6 (28-12-24):**  
 Hosted the application with the new UI and populated it with 4,400 dummy student records generated through API calls using a JavaScript script executed with Node.js. Tested the sorting and searching functionalities.  
@@ -27,7 +27,7 @@ Presented the project to the team lead. Received feedback to add backend validat
 Implemented backend validation for the following:  
 - Age must be a number.  
 - Name must be a string.  
-- Major must be a string.  
+- Role must be a string.  
 - Email must match a specific format using regular expressions.  
 
 **Day 9 (31-12-24):**  

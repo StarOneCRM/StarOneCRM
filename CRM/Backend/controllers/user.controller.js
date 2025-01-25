@@ -1,37 +1,3 @@
-// // Controllers: authController.js
-// const jwt = require("jsonwebtoken");
-// const { User } = require("../models/user.model");
-// const sendResponse = require("../utils/sendResponse");
-// const { sendEmail } = require("../utils/email");
-
-// exports.register = async (req, res) => {
-//     try {
-//         const { name, age, email, major, isAdmin } = req.body;
-//         const newUser = new User({ name, age, email, major, isAdmin });
-//         await newUser.save();
-//         res.status(201).json({ message: "User registered. Verification email sent." });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// };
-
-// exports.login = async (req, res) => {
-//     const { email } = req.body;
-//     try {
-//         const user = await User.findOne({ email });
-//         if (!user) return res.status(404).json({ message: "User not found" });
-
-//         const token = jwt.sign(
-//             { id: user._id, isAdmin: user.isAdmin },
-//             process.env.JWT_SECRET,
-//             { expiresIn: "1h" }
-//         );
-//         res.json({ token, user });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// };
-
 const bcryptjs = require('bcryptjs');
 const { User } = require("../models/user.model");
 const { OTP } = require("../models/otp.model");
@@ -80,7 +46,7 @@ exports.sendOtp = async (req, res) => {
 
 // Verify OTP and create user with hashed password
 exports.register = async (req, res) => {
-    const { name, email, age, major, password, otp } = req.body;
+    const { name, email, age, role, password, otp } = req.body;
 
     try {
         const otpRecord = await OTP.findOne({ email });
@@ -92,15 +58,13 @@ exports.register = async (req, res) => {
         await OTP.deleteOne({ email });
 
         // Hash the password before saving
-        console.log(typeof(password))
         const hashedPassword = await bcryptjs.hash(password, 10);
-        console.log(password)
-        console.log(hashedPassword)
-        const isMatch = await bcryptjs.compare(password, hashedPassword);
-        console.log(isMatch)
+
+        // Set isFormFilled to true if the role is employee
+        const isFormFilled = role === 'employee';
 
         // Register the user with the hashed password
-        const newUser = new User({ name, email, age, major, password: hashedPassword });
+        const newUser = new User({ name, email, age, role, password: hashedPassword, isFormFilled });
         await newUser.save();
 
         res.status(201).json({ message: "User registered successfully" });
@@ -175,11 +139,11 @@ exports.checkForm = async (req, res) => {
 };
 
 exports.fillForm = async (req, res) => {
-    const { additionalInfo } = req.body;
+    const { Task } = req.body;
     try {
         const user = await User.findByIdAndUpdate(
             req.user.id,
-            { additionalInfo, isFormFilled: true },
+            { Task, isFormFilled: true },
             { new: true }
         );
 

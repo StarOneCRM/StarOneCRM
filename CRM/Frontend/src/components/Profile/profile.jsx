@@ -11,7 +11,7 @@ const Profile = ({ logout, setUserMethod, token }) => {
     name: "",
     age: "",
     email: "",
-    major: "",
+    role: "",
   });
   const navigate = useNavigate(); // Initialize useNavigate hook
 
@@ -25,7 +25,7 @@ const Profile = ({ logout, setUserMethod, token }) => {
           name: response.data.data.name,
           age: response.data.data.age,
           email: response.data.data.email,
-          major: response.data.data.major,
+          role: response.data.data.role,
         });
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -97,9 +97,9 @@ const Profile = ({ logout, setUserMethod, token }) => {
             margin="normal"
           />
           <TextField
-            label="Major"
-            name="major"
-            value={formData.major}
+            label="Role"
+            name="role"
+            value={formData.role}
             onChange={handleChange}
             fullWidth
             disabled={!isEditing}

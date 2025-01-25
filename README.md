@@ -25,7 +25,7 @@ Hosted the frontend and backend separately on Azure using Azure Function App and
 
 <details>
 <summary>Day 5 (27-12-24)</summary>
-Integrated the student list data into a `react-data-table-component`. Added functionality for searching and sorting the data by name, major, age, and email. Updated the UI for the student data table using the selected color palette.
+Integrated the student list data into a `react-data-table-component`. Added functionality for searching and sorting the data by name, role, age, and email. Updated the UI for the student data table using the selected color palette.
 </details>
 
 <details>
@@ -63,7 +63,7 @@ Presented the project to the team lead. Received feedback to add backend validat
 Implemented backend validation for the following:
 - Age must be a number.
 - Name must be a string.
-- Major must be a string.
+- Role must be a string.
 - Email must match a specific format using regular expressions.
 </details>
 

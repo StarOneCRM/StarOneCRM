@@ -16,10 +16,10 @@ exports.getProfile = async (req, res) => {
 };
 
 exports.updateProfile = async (req, res) => {
-    const { name, age, email, major } = req.body;
+    const { name, age, email, role } = req.body;
 
     // Ensure that the fields to be updated are valid
-    if (!name && !age && !email && !major) {
+    if (!name && !age && !email && !role) {
         return sendResponse(res, 400, "At least one field is required for update");
     }
 
@@ -27,7 +27,7 @@ exports.updateProfile = async (req, res) => {
         // Update the profile of the logged-in user
         const updatedUser = await User.findByIdAndUpdate(
             req.user.id,
-            { name, age, email, major },
+            { name, age, email, role },
             { new: true, runValidators: true }
         );
 

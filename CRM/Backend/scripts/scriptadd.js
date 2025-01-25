@@ -12,7 +12,7 @@ const createuserData = (index) => {
     name: randomName,
     age: Math.floor(Math.random() * 5) + 18, // Random age between 18 and 22
     email: `user${index + 1}@example.com`, // Unique email for each user
-    major: randomMajor
+    r: randomMajor
   };
 };
 

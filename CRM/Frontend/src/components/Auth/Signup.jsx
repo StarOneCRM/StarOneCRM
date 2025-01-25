@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, Paper, Box, Typography, InputAdornment } from '@mui/material';
+import { Button, TextField, Paper, Box, Typography, InputAdornment, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../context/GlobalContext';
 
 function Signup() {
-    const [formData, setFormData] = useState({ name: '', email: '', age: '', major: '', password: '', otp: '' });
+    const [formData, setFormData] = useState({ name: '', email: '', age: '', role: '', password: '', otp: '' });
     const [otpSent, setOtpSent] = useState(false);
     const [timer, setTimer] = useState(0);
     const [isSendingOtp, setIsSendingOtp] = useState(false); // Tracks API call for sending OTP
@@ -33,8 +33,8 @@ function Signup() {
     };
 
     const isFormValid = () => {
-        const { name, email, age, major, password } = formData;
-        return name && email && age && major && password;
+        const { name, email, age, role, password } = formData;
+        return name && email && age && role && password;
     };
 
     const handleOtpRequest = async () => {
@@ -128,16 +128,18 @@ function Signup() {
                     />
                 </Box>
                 <Box mb={2}>
-                    <TextField
-                        fullWidth
-                        variant="outlined"
-                        label="Major"
-                        name="major"
-                        value={formData.major}
-                        onChange={handleChange}
-                        required={!otpSent}
-                        disabled={otpSent}
-                    />
+                    <FormControl fullWidth variant="outlined" required={!otpSent} disabled={otpSent}>
+                        <InputLabel>Role</InputLabel>
+                        <Select
+                            label="Role"
+                            name="role"
+                            value={formData.role}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value="customer">Customer</MenuItem>
+                            <MenuItem value="employee">Employee</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Box>
                 <Box mb={2}>
                     <TextField

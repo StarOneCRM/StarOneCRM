@@ -120,7 +120,7 @@ const UserList = ({ token, setUserMethod, logout }) => {
     return (
       user.name.toLowerCase().includes(search.toLowerCase()) ||
       user.email.toLowerCase().includes(search.toLowerCase()) ||
-      user.major.toLowerCase().includes(search.toLowerCase())
+      user.role.toLowerCase().includes(search.toLowerCase())
     );
   });
 
@@ -161,10 +161,10 @@ const UserList = ({ token, setUserMethod, logout }) => {
       sortFunction: (a, b) => a.email.localeCompare(b.email),
     },
     {
-      name: <span style={{ fontWeight: '400', fontSize: '16px' }}>Major</span>,
-      selector: (row) => row.major,
+      name: <span style={{ fontWeight: '400', fontSize: '16px' }}>Roles</span>,
+      selector: (row) => row.role,
       sortable: true,
-      sortFunction: (a, b) => a.major.localeCompare(b.major),
+      sortFunction: (a, b) => a.role.localeCompare(b.role),
     },
     {
       name: <span style={{ fontWeight: '400', fontSize: '16px' }}>Status</span>,

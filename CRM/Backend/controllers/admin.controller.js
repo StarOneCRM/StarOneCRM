@@ -15,9 +15,9 @@ exports.user_index = async (req, res) => {
 
 // Create New User
 exports.user_create_post = async (req, res) => {
-    const { name, age, email, major, password } = req.body;
+    const { name, age, email, role, password } = req.body;
     const hashedpassword = await bcryptjs.hash(password, 10);
-    if (!name || !age || !email || !major) {
+    if (!name || !age || !email || !role) {
         return sendResponse(res, 400, "All fields are required");
     }
 
@@ -35,13 +35,13 @@ exports.user_create_post = async (req, res) => {
         return sendResponse(res, 400, "Name must contain only letters and spaces");
     }
 
-    const majorRegex = /^[A-Za-z\s]+$/;
-    if (!majorRegex.test(major)) {
-        return sendResponse(res, 400, "Major must contain only letters and spaces");
+    const roleRegex = /^[A-Za-z\s]+$/;
+    if (!roleRegex.test(role)) {
+        return sendResponse(res, 400, "role must contain only letters and spaces");
     }
 
     try {
-        const user = new User({ name, age, email, major, password:hashedpassword });
+        const user = new User({ name, age, email, role, password:hashedpassword });
         const savedUser = await user.save();
         sendResponse(res, 201, "User created successfully", savedUser);
     } catch (err) {
@@ -69,9 +69,9 @@ exports.user_details = async (req, res) => {
 
 // Update User Detail by Id
 exports.user_update = async (req, res) => {
-    const { name, age, email, major } = req.body;
+    const { name, age, email, role } = req.body;
 
-    if (!name && !age && !email && !major) {
+    if (!name && !age && !email && !role) {
         return sendResponse(res, 400, "At least one field is required for update");
     }
 
@@ -87,8 +87,8 @@ exports.user_update = async (req, res) => {
         return sendResponse(res, 400, "Invalid email format");
     }
 
-    if (major && !/^[A-Za-z\s]+$/.test(major)) {
-        return sendResponse(res, 400, "Major must contain only letters and spaces");
+    if (role && !/^[A-Za-z\s]+$/.test(role)) {
+        return sendResponse(res, 400, "role must contain only letters and spaces");
     }
 
     try {

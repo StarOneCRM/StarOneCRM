@@ -218,7 +218,7 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
     isFormFilled: false,
     isFormVerified: false,
     isAdmin: false,
-    additionalInfo: '',
+    Task: '',
   });
 
   useEffect(() => {
@@ -383,9 +383,9 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
           <TextField
             fullWidth
             variant="outlined"
-            label="Additional Info"
-            name="additionalInfo"
-            value={student.additionalInfo}
+            label="Task"
+            name="Task"
+            value={student.Task}
             onChange={handleChange}
             multiline
             rows={4}
