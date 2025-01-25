@@ -7,7 +7,7 @@ const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token') || null);
-    const [user, setuser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+    const [student, setstudent] = useState(JSON.parse(localStorage.getItem('student')) || null);
 
     useEffect(() => {
         const checkTokenValidity = async () => {
@@ -16,14 +16,14 @@ export const GlobalProvider = ({ children }) => {
                     const response = await axiosInstance.get('/check-status', {
                         headers: { Authorization: `Bearer ${token}` },
                     });
-                    setuser({ ...response.data.status.user, token });
-                    localStorage.setItem('user', JSON.stringify(response.data.status.user));
+                    setstudent({ ...response.data.status.student, token });
+                    localStorage.setItem('student', JSON.stringify(response.data.status.student));
                 } catch (error) {
                     console.error("Token expired or invalid", error?.response?.data?.message);
                     localStorage.removeItem('token');
-                    localStorage.removeItem('user');
+                    localStorage.removeItem('student');
                     setToken(null);
-                    setuser(null);
+                    setstudent(null);
                 }
             }
         };
@@ -31,23 +31,23 @@ export const GlobalProvider = ({ children }) => {
         checkTokenValidity();
     }, [token]);
 
-    const setuserMethod = (newuser) => {
+    const setstudentMethod = (newstudent) => {
         // Update the state
-        setuser(newuser);
+        setstudent(newstudent);
       
-        // Save to localStorage to persist the user data
-        localStorage.setItem('user', JSON.stringify(newuser));
+        // Save to localStorage to persist the student data
+        localStorage.setItem('student', JSON.stringify(newstudent));
       };
     // Handle Login
     const handleLogin = async (credentials) => {
         try {
           const response = await axiosInstance.post('/login', credentials);
           localStorage.setItem('token', response.data.token);
-          localStorage.setItem('user', JSON.stringify(response.data.user));
+          localStorage.setItem('student', JSON.stringify(response.data.student));
           
-          // Assuming `setToken` and `setuser` update the global state or context
+          // Assuming `setToken` and `setstudent` update the global state or context
           setToken(response.data.token);
-          setuser({ ...response.data.user, token: response.data.token });
+          setstudent({ ...response.data.student, token: response.data.token });
       
           return true; // Success
         } catch (error) {
@@ -63,9 +63,9 @@ export const GlobalProvider = ({ children }) => {
     //     try {
     //         const response = await axiosInstance.post('/login', credentials);
     //         localStorage.setItem('token', response.data.token);
-    //         localStorage.setItem('user', JSON.stringify(response.data.user));
+    //         localStorage.setItem('student', JSON.stringify(response.data.student));
     //         setToken(response.data.token);
-    //         setuser({ ...response.data.user, token: response.data.token });
+    //         setstudent({ ...response.data.student, token: response.data.token });
     //     } catch (error) {
     //         console.error("Login error:", error?.response?.data?.message);
     //     }
@@ -94,13 +94,13 @@ export const GlobalProvider = ({ children }) => {
     // Handle Logout
     const logout = () => {
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        localStorage.removeItem('student');
         setToken(null);
-        setuser(null);
+        setstudent(null);
     };
 
     return (
-        <GlobalContext.Provider value={{ token, user, handleLogin, handleSignup, logout, setuserMethod }}>
+        <GlobalContext.Provider value={{ token, student, handleLogin, handleSignup, logout, setstudentMethod }}>
             {children}
         </GlobalContext.Provider>
     );

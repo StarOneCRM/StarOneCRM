@@ -1,15 +1,15 @@
 // Routes: authRoutes.js
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/user.controller");
+const studentController = require("../controllers/student.controller");
 const { verifyJWT, isAdmin } = require("../utils/middleware");
 
 // Auth Routes
-router.post("/register", userController.register);
-router.post("/login", userController.login);
-router.get("/check-form", verifyJWT, userController.checkForm);
-router.post("/fill-form", verifyJWT, userController.fillForm);
-router.get("/check-status", verifyJWT, userController.checkStatus);
-router.post("/send-otp", userController.sendOtp);
+router.post("/register", studentController.register);
+router.post("/login", studentController.login);
+router.get("/check-form", verifyJWT, studentController.checkForm);
+router.post("/fill-form", verifyJWT, studentController.fillForm);
+router.get("/check-status", verifyJWT, studentController.checkStatus);
+router.post("/send-otp", studentController.sendOtp);
 
 module.exports = router;

@@ -5,9 +5,9 @@
 // import PersonAddIcon from "@mui/icons-material/PersonAdd";
 // import ListIcon from "@mui/icons-material/List";
 // import PersonIcon from "@mui/icons-material/Person"; // New icon for Profile
-// import userList from "./userList";
-// import Adduser from "./Adduser";
-// import Updateuser from "./Updateuser";
+// import studentList from "./studentList";
+// import Addstudent from "./Addstudent";
+// import Updatestudent from "./Updatestudent";
 // import Profile from "../Profile/profile";
 
 // const theme = createTheme({
@@ -37,12 +37,12 @@
 //     }}
 //   >
 //     <Typography variant="body2">
-//       © {new Date().getFullYear()} user Dashboard.
+//       © {new Date().getFullYear()} student Dashboard.
 //     </Typography>
 //   </Box>
 // );
 
-// const userDashboard = ({ token, setuserMethod, logout }) => {
+// const studentDashboard = ({ token, setstudentMethod, logout }) => {
 //   return (
 //     <ThemeProvider theme={theme}>
 //       <Box
@@ -56,13 +56,13 @@
 //         <AppBar position="static">
 //           <Toolbar>
 //             <Typography variant="h6" sx={{ flexGrow: 1 }}>
-//               user Dashboard
+//               student Dashboard
 //             </Typography>
 //             <IconButton
 //               color="inherit"
 //               component={Link}
 //               to="/add"
-//               title="Add user"
+//               title="Add student"
 //             >
 //               <PersonAddIcon />
 //             </IconButton>
@@ -70,7 +70,7 @@
 //               color="inherit"
 //               component={Link}
 //               to="/"
-//               title="user List"
+//               title="student List"
 //             >
 //               <ListIcon />
 //             </IconButton>
@@ -88,11 +88,11 @@
 //         {/* Main Content */}
 //         <Container sx={{ my: 4 }}>
 //           <Routes>
-//             <Route path="/" element={<userList logout={logout} token={token} setuserMethod={setuserMethod} />} />
-//             <Route path="/add" element={<Adduser logout={logout} token={token} setuserMethod={setuserMethod} />} />
-//             <Route path="/update/:id" element={<Updateuser logout={logout} token={token} setuserMethod={setuserMethod} />} />
-//             <Route path="/profile" element={<Profile logout={logout} token={token} setuserMethod={setuserMethod} />} />
-//             <Route path="*" element={<Navigate to="/" logout={logout} token={token} setuserMethod={setuserMethod} />} />
+//             <Route path="/" element={<studentList logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+//             <Route path="/add" element={<Addstudent logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+//             <Route path="/update/:id" element={<Updatestudent logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+//             <Route path="/profile" element={<Profile logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+//             <Route path="*" element={<Navigate to="/" logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
 //           </Routes>
 //         </Container>
 
@@ -103,7 +103,7 @@
 //   );
 // };
 
-// export default userDashboard;
+// export default studentDashboard;
 
 
 
@@ -117,9 +117,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ListIcon from "@mui/icons-material/List";
 import PersonIcon from "@mui/icons-material/Person"; // New icon for Profile
-import userList from "./userList";
-import Adduser from "./Adduser";
-import Updateuser from "./Updateuser";
+import studentList from "./studentList";
+import Addstudent from "./Addstudent";
+import Updatestudent from "./Updatestudent";
 import Profile from "../Profile/profile";
 
 // const theme = createTheme({
@@ -149,12 +149,12 @@ const Footer = () => (
     }}
   >
     <Typography variant="body2">
-      © {new Date().getFullYear()} user Dashboard.
+      © {new Date().getFullYear()} student Dashboard.
     </Typography>
   </Box>
 );
 
-const userDashboard = ({ token, setuserMethod, logout, theme }) => {
+const studentDashboard = ({ token, setstudentMethod, logout, theme }) => {
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -168,13 +168,13 @@ const userDashboard = ({ token, setuserMethod, logout, theme }) => {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              user Dashboard
+              student Dashboard
             </Typography>
             <IconButton
               color="inherit"
               component={Link}
               to="/add"
-              title="Add user"
+              title="Add student"
             >
               <PersonAddIcon />
             </IconButton>
@@ -182,7 +182,7 @@ const userDashboard = ({ token, setuserMethod, logout, theme }) => {
               color="inherit"
               component={Link}
               to="/"
-              title="user List"
+              title="student List"
             >
               <ListIcon />
             </IconButton>
@@ -201,11 +201,11 @@ const userDashboard = ({ token, setuserMethod, logout, theme }) => {
         <Container sx={{ my: 4 }}>
           {/* <Router> */}
             <Routes>
-              <Route path="/" element={<userList logout={logout} token={token} setuserMethod={setuserMethod} />} />
-              <Route path="/add" element={<Adduser logout={logout} token={token} setuserMethod={setuserMethod} />} />
-              <Route path="/update/:id" element={<Updateuser logout={logout} token={token} setuserMethod={setuserMethod} />} />
-              <Route path="/profile" element={<Profile logout={logout} token={token} setuserMethod={setuserMethod} />} />
-              <Route path="*" element={<Navigate to="/" logout={logout} token={token} setuserMethod={setuserMethod} />} />
+              <Route path="/" element={<studentList logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+              <Route path="/add" element={<Addstudent logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+              <Route path="/update/:id" element={<Updatestudent logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+              <Route path="/profile" element={<Profile logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+              <Route path="*" element={<Navigate to="/" logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
             </Routes>
           {/* </Router> */}
         </Container>
@@ -217,4 +217,4 @@ const userDashboard = ({ token, setuserMethod, logout, theme }) => {
   );
 };
 
-export default userDashboard;
+export default studentDashboard;

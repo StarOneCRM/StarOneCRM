@@ -1,15 +1,15 @@
-// Controllers: user.controller.js
-const { User } = require("../models/user.model");
+// Controllers: student.controller.js
+const { student } = require("../models/student.model");
 const sendResponse = require("../utils/sendResponse");
 
 exports.getProfile = async (req, res) => {
     try {
-        // Get the authenticated user's profile based on their ID from the JWT token
-        const user = await User.findById(req.user.id);
-        if (!user) {
-            return sendResponse(res, 404, "user not found");
+        // Get the authenticated student's profile based on their ID from the JWT token
+        const student = await student.findById(req.student.id);
+        if (!student) {
+            return sendResponse(res, 404, "student not found");
         }
-        sendResponse(res, 200, "Profile retrieved successfully", user);
+        sendResponse(res, 200, "Profile retrieved successfully", student);
     } catch (error) {
         sendResponse(res, 500, "Error retrieving profile", null, error.message);
     }
@@ -24,18 +24,18 @@ exports.updateProfile = async (req, res) => {
     }
 
     try {
-        // Update the profile of the logged-in user
-        const updateduser = await User.findByIdAndUpdate(
-            req.user.id,
+        // Update the profile of the logged-in student
+        const updatedstudent = await student.findByIdAndUpdate(
+            req.student.id,
             { name, age, email, major },
             { new: true, runValidators: true }
         );
 
-        if (!updateduser) {
-            return sendResponse(res, 404, "user not found");
+        if (!updatedstudent) {
+            return sendResponse(res, 404, "student not found");
         }
 
-        sendResponse(res, 200, "Profile updated successfully", updateduser);
+        sendResponse(res, 200, "Profile updated successfully", updatedstudent);
     } catch (err) {
         sendResponse(res, 500, "Error updating profile", null, err.message);
     }
@@ -43,10 +43,10 @@ exports.updateProfile = async (req, res) => {
 
 exports.deleteProfile = async (req, res) => {
     try {
-        // Delete the profile of the logged-in user
-        const deleteduser = await User.findByIdAndDelete(req.user.id);
-        if (!deleteduser) {
-            return sendResponse(res, 404, "user not found");
+        // Delete the profile of the logged-in student
+        const deletedstudent = await student.findByIdAndDelete(req.student.id);
+        if (!deletedstudent) {
+            return sendResponse(res, 404, "student not found");
         }
 
         sendResponse(res, 200, "Profile deleted successfully");

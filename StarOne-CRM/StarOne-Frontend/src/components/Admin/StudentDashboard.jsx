@@ -117,9 +117,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ListIcon from "@mui/icons-material/List";
 import PersonIcon from "@mui/icons-material/Person"; // New icon for Profile
-import StudentList from "./StudentList";
-import AddStudent from "./AddStudent";
-import UpdateStudent from "./UpdateStudent";
+import studentList from "./studentList";
+import Addstudent from "./Addstudent";
+import Updatestudent from "./Updatestudent";
 import Profile from "../Profile/profile";
 
 // const theme = createTheme({

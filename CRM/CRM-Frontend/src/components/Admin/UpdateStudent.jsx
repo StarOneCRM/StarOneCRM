@@ -17,26 +17,26 @@
 // import SchoolIcon from '@mui/icons-material/School';
 // import SaveIcon from '@mui/icons-material/Save';
 
-// const Updateuser = ({ token, setuser, logout }) => {
+// const Updatestudent = ({ token, setstudent, logout }) => {
 //   const { id } = useParams();
-//   const [user, setuser] = useState({ name: '', age: '', email: '', major: '' });
+//   const [student, setstudent] = useState({ name: '', age: '', email: '', major: '' });
 
 //   useEffect(() => {
 //     axiosInstance.get(`/admin/${id}`, {
 //       headers: { Authorization: `Bearer ${token}` },
 //     })
 //       .then(response => {
-//         setuser(response.data.data);
-//         toast.success('user data loaded successfully');
+//         setstudent(response.data.data);
+//         toast.success('student data loaded successfully');
 //       })
 //       .catch(error => {
-//         console.error('Error fetching user:', error);
-//         toast.error('Failed to load user data');
+//         console.error('Error fetching student:', error);
+//         toast.error('Failed to load student data');
 //       });
 //   }, [id]);
 
 //   const handleChange = (e) => {
-//     setuser({ ...user, [e.target.name]: e.target.value });
+//     setstudent({ ...student, [e.target.name]: e.target.value });
 //   };
 
 //   const handleSubmit = async (e) => {
@@ -44,7 +44,7 @@
 //     try {
 //       const response = await axiosInstance.patch(
 //         `/admin/${id}`,
-//         { ...user, age: Number(user.age) } ,{
+//         { ...student, age: Number(student.age) } ,{
 //           headers: { Authorization: `Bearer ${token}` },
 //         });
 //       const { message, data } = response.data;
@@ -55,7 +55,7 @@
 //         }, 5000);
 //       }
 //     } catch (error) {
-//       console.error('Error updating user:', error);
+//       console.error('Error updating student:', error);
 
 //       if (error.response && error.response.data) {
 //         const { error: backendError, message } = error.response.data;
@@ -63,12 +63,12 @@
 //         if (backendError && backendError.includes('duplicate key error')) {
 //           const emailMatch = backendError.match(/email: "(.*?)"/);
 //           const duplicateEmail = emailMatch ? emailMatch[1] : 'this email';
-//           toast.error(`The email ${duplicateEmail} is already associated with another user.`);
+//           toast.error(`The email ${duplicateEmail} is already associated with another student.`);
 //         } else {
 //           toast.error(message || backendError || 'An unexpected error occurred.');
 //         }
 //       } else {
-//         toast.error('Failed to update user. Please try again later.');
+//         toast.error('Failed to update student. Please try again later.');
 //       }
 //     }
 //   };
@@ -92,7 +92,7 @@
 //             variant="outlined"
 //             label="Name"
 //             name="name"
-//             value={user.name}
+//             value={student.name}
 //             onChange={handleChange}
 //             required
 //             InputProps={{
@@ -111,7 +111,7 @@
 //             label="Age"
 //             name="age"
 //             type="number"
-//             value={user.age}
+//             value={student.age}
 //             onChange={handleChange}
 //             required
 //             InputProps={{
@@ -130,7 +130,7 @@
 //             label="Email"
 //             name="email"
 //             type="email"
-//             value={user.email}
+//             value={student.email}
 //             onChange={handleChange}
 //             required
 //             InputProps={{
@@ -148,7 +148,7 @@
 //             variant="outlined"
 //             label="Major"
 //             name="major"
-//             value={user.major}
+//             value={student.major}
 //             onChange={handleChange}
 //             required
 //             InputProps={{
@@ -167,14 +167,14 @@
 //           startIcon={<SaveIcon />}
 //           fullWidth
 //         >
-//           Update user
+//           Update student
 //         </Button>
 //       </form>
 //     </Paper>
 //   );
 // };
 
-// export default Updateuser;
+// export default Updatestudent;
 
 
 
@@ -208,9 +208,9 @@ import SchoolIcon from '@mui/icons-material/School';
 import SaveIcon from '@mui/icons-material/Save';
 import CheckIcon from '@mui/icons-material/Check';
 
-const Updateuser = ({ token, setuserMethod, logout }) => {
+const Updatestudent = ({ token, setstudentMethod, logout }) => {
   const { id } = useParams();
-  const [user, setuser] = useState({
+  const [student, setstudent] = useState({
     name: '',
     age: '',
     email: '',
@@ -226,18 +226,18 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
-        setuser(response.data.data);
-        toast.success('user data loaded successfully');
+        setstudent(response.data.data);
+        toast.success('student data loaded successfully');
       })
       .catch(error => {
-        console.error('Error fetching user:', error);
-        toast.error('Failed to load user data');
+        console.error('Error fetching student:', error);
+        toast.error('Failed to load student data');
       });
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setuser({ ...user, [name]: type === 'checkbox' ? checked : value });
+    setstudent({ ...student, [name]: type === 'checkbox' ? checked : value });
   };
 
   const handleSubmit = async (e) => {
@@ -245,7 +245,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
     try {
       const response = await axiosInstance.patch(
         `/admin/${id}`,
-        { ...user, age: Number(user.age) }, {
+        { ...student, age: Number(student.age) }, {
           headers: { Authorization: `Bearer ${token}` },
         });
       const { message, data } = response.data;
@@ -256,7 +256,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
         }, 5000);
       }
     } catch (error) {
-      console.error('Error updating user:', error);
+      console.error('Error updating student:', error);
 
       if (error.response && error.response.data) {
         const { error: backendError, message } = error.response.data;
@@ -264,12 +264,12 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
         if (backendError && backendError.includes('duplicate key error')) {
           const emailMatch = backendError.match(/email: "(.*?)"/);
           const duplicateEmail = emailMatch ? emailMatch[1] : 'this email';
-          toast.error(`The email ${duplicateEmail} is already associated with another user.`);
+          toast.error(`The email ${duplicateEmail} is already associated with another student.`);
         } else {
           toast.error(message || backendError || 'An unexpected error occurred.');
         }
       } else {
-        toast.error('Failed to update user. Please try again later.');
+        toast.error('Failed to update student. Please try again later.');
       }
     }
   };
@@ -280,15 +280,15 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.success) {
-        setuser((prevuser) => ({
-          ...prevuser,
+        setstudent((prevstudent) => ({
+          ...prevstudent,
           isFormVerified: true,
         }));
-        toast.success("user verified successfully");
+        toast.success("student verified successfully");
       }
     } catch (error) {
-      console.error("Error verifying user:", error);
-      toast.error("Error verifying user");
+      console.error("Error verifying student:", error);
+      toast.error("Error verifying student");
     }
   };
 
@@ -311,7 +311,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
             variant="outlined"
             label="Name"
             name="name"
-            value={user.name}
+            value={student.name}
             onChange={handleChange}
             required
             InputProps={{
@@ -330,7 +330,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
             label="Age"
             name="age"
             type="number"
-            value={user.age}
+            value={student.age}
             onChange={handleChange}
             required
             InputProps={{
@@ -349,7 +349,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
             label="Email"
             name="email"
             type="email"
-            value={user.email}
+            value={student.email}
             onChange={handleChange}
             required
             InputProps={{
@@ -367,7 +367,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
             variant="outlined"
             label="Major"
             name="major"
-            value={user.major}
+            value={student.major}
             onChange={handleChange}
             required
             InputProps={{
@@ -385,7 +385,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
             variant="outlined"
             label="Additional Info"
             name="additionalInfo"
-            value={user.additionalInfo}
+            value={student.additionalInfo}
             onChange={handleChange}
             multiline
             rows={4}
@@ -396,7 +396,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
           <FormControlLabel
             control={
               <Switch
-                checked={user.isFormFilled}
+                checked={student.isFormFilled}
                 onChange={handleChange}
                 name="isFormFilled"
                 color="primary"
@@ -409,7 +409,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
           <FormControlLabel
             control={
               <Switch
-                checked={user.isFormVerified}
+                checked={student.isFormVerified}
                 onChange={handleChange}
                 name="isFormVerified"
                 color="primary"
@@ -422,7 +422,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
           <FormControlLabel
             control={
               <Switch
-                checked={user.isAdmin}
+                checked={student.isAdmin}
                 onChange={handleChange}
                 name="isAdmin"
                 color="primary"
@@ -439,11 +439,11 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
           startIcon={<SaveIcon />}
           fullWidth
         >
-          Update user
+          Update student
         </Button>
 
         {/* Verify Button */}
-        {!user.isFormVerified && (
+        {!student.isFormVerified && (
           <Button
             variant="contained"
             color="success"
@@ -452,7 +452,7 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
             fullWidth
             style={{ marginTop: '20px' }}
           >
-            Verify user
+            Verify student
           </Button>
         )}
       </form>
@@ -460,4 +460,4 @@ const Updateuser = ({ token, setuserMethod, logout }) => {
   );
 };
 
-export default Updateuser;
+export default Updatestudent;

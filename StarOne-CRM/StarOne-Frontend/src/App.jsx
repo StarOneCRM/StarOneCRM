@@ -79,10 +79,10 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import StudentDashboard from './components/Admin/StudentDashboard';
+import studentDashboard from './components/Admin/studentDashboard';
 import FillForm from './components/Auth/FillForm';
 import NotVerified from './components/Auth/NotVerified';
-import UpdateStudent from './components/Admin/UpdateStudent';
+import Updatestudent from './components/Admin/Updatestudent';
 import Profile from './components/Profile/profile';
 import theme from './utils/theme';
 import { ThemeProvider } from '@mui/material/styles';
@@ -130,7 +130,7 @@ const AppRoutes = () => {
     if (student && student.isAdmin) {
         return (
             <Routes>
-                <Route path="*" element={<StudentDashboard logout={logout} token={token} setstudentMethod={setstudentMethod} theme={theme} />} />
+                <Route path="*" element={<studentDashboard logout={logout} token={token} setstudentMethod={setstudentMethod} theme={theme} />} />
             </Routes>
         );
     }

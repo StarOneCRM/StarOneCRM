@@ -1,15 +1,15 @@
 // // Controllers: authController.js
 // const jwt = require("jsonwebtoken");
-// const { user } = require("../models/user.model");
+// const { student } = require("../models/student.model");
 // const sendResponse = require("../utils/sendResponse");
 // const { sendEmail } = require("../utils/email");
 
 // exports.register = async (req, res) => {
 //     try {
 //         const { name, age, email, major, isAdmin } = req.body;
-//         const newuser = new user({ name, age, email, major, isAdmin });
-//         await newuser.save();
-//         res.status(201).json({ message: "user registered. Verification email sent." });
+//         const newstudent = new student({ name, age, email, major, isAdmin });
+//         await newstudent.save();
+//         res.status(201).json({ message: "student registered. Verification email sent." });
 //     } catch (error) {
 //         res.status(400).json({ message: error.message });
 //     }
@@ -18,22 +18,22 @@
 // exports.login = async (req, res) => {
 //     const { email } = req.body;
 //     try {
-//         const user = await user.findOne({ email });
-//         if (!user) return res.status(404).json({ message: "user not found" });
+//         const student = await student.findOne({ email });
+//         if (!student) return res.status(404).json({ message: "student not found" });
 
 //         const token = jwt.sign(
-//             { id: user._id, isAdmin: user.isAdmin },
+//             { id: student._id, isAdmin: student.isAdmin },
 //             process.env.JWT_SECRET,
 //             { expiresIn: "1h" }
 //         );
-//         res.json({ token, user });
+//         res.json({ token, student });
 //     } catch (error) {
 //         res.status(400).json({ message: error.message });
 //     }
 // };
 
 const bcryptjs = require('bcryptjs');
-const { User } = require("../models/user.model");
+const { student } = require("../models/student.model");
 const { OTP } = require("../models/otp.model");
 const { sendEmail } = require("../utils/email");
 const jwt = require("jsonwebtoken");
@@ -47,8 +47,8 @@ exports.sendOtp = async (req, res) => {
 
     try {
         // Check if the email is already registered
-        const existinguser = await User.findOne({ email });
-        if (existinguser) {
+        const existingstudent = await student.findOne({ email });
+        if (existingstudent) {
             return res.status(400).json({ message: "Email already registered" });
         }
 
@@ -78,7 +78,7 @@ exports.sendOtp = async (req, res) => {
     }
 };
 
-// Verify OTP and create user with hashed password
+// Verify OTP and create student with hashed password
 exports.register = async (req, res) => {
     const { name, email, age, major, password, otp } = req.body;
 
@@ -99,16 +99,16 @@ exports.register = async (req, res) => {
         const isMatch = await bcryptjs.compare(password, hashedPassword);
         console.log(isMatch)
 
-        // Register the user with the hashed password
+        // Register the student with the hashed password
         const role = req.body.role;
         if (role === "Employee") {
             isFormFilled = true;
         }
 
-        const newuser = new User({ name, email, age, major, role, password: hashedPassword, isFormFilled });
-        await newuser.save();
+        const newstudent = new student({ name, email, age, major, role, password: hashedPassword, isFormFilled });
+        await newstudent.save();
 
-        res.status(201).json({ message: "user registered successfully" });
+        res.status(201).json({ message: "student registered successfully" });
     } catch (error) {
         console.error("Error during registration:", error.message);
         res.status(500).json({ message: "Registration failed" });
@@ -125,24 +125,24 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: "Email and password are required" });
         }
 
-        // Find user by email
-        const user = await User.findOne({ email });
-        if (!user) {
+        // Find student by email
+        const student = await student.findOne({ email });
+        if (!student) {
             return res.status(400).json({ message: "Invalid email or password" });
         }
 
         // Ensure the password exists in the database and compare with the hashed password
-        if (!user.password) {
-            return res.status(500).json({ message: "No password found in the database for this user" });
+        if (!student.password) {
+            return res.status(500).json({ message: "No password found in the database for this student" });
         }
 
         // Log both password and hashed password for debugging
         console.log('Received password:', password);
-        console.log('Stored hashed password:', user.password);
+        console.log('Stored hashed password:', student.password);
 
         // Compare the provided password with the hashed password stored in the database
-        console.log(typeof(password), typeof(user.password))
-        const isMatch = await bcryptjs.compare(password, user.password);
+        console.log(typeof(password), typeof(student.password))
+        const isMatch = await bcryptjs.compare(password, student.password);
         console.log(isMatch)
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid email or password" });
@@ -150,12 +150,12 @@ exports.login = async (req, res) => {
 
         // Generate JWT token
         const token = jwt.sign(
-            { id: user._id, isAdmin: user.isAdmin },
+            { id: student._id, isAdmin: student.isAdmin },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
 
-        res.json({ token, user });
+        res.json({ token, student });
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).json({ message: "Server error" });
@@ -166,10 +166,10 @@ exports.login = async (req, res) => {
 
 exports.checkForm = async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
-        if (!user) return res.status(404).json({ message: "user not found" });
+        const student = await student.findById(req.student.id);
+        if (!student) return res.status(404).json({ message: "student not found" });
 
-        if (!user.isFormFilled) {
+        if (!student.isFormFilled) {
             return res.status(403).json({ message: "Complete your form to access other APIs" });
         }
 
@@ -182,15 +182,15 @@ exports.checkForm = async (req, res) => {
 exports.fillForm = async (req, res) => {
     const { tasks } = req.body;
     try {
-        const user = await User.findByIdAndUpdate(
-            req.user.id,
+        const student = await student.findByIdAndUpdate(
+            req.student.id,
             { tasks, isFormFilled: true },
             { new: true }
         );
 
-        if (!user) return res.status(404).json({ message: "user not found" });
+        if (!student) return res.status(404).json({ message: "student not found" });
 
-        res.json({ message: "Form successfully filled", user });
+        res.json({ message: "Form successfully filled", student });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -198,10 +198,10 @@ exports.fillForm = async (req, res) => {
 
 exports.checkStatus = async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
-        if (!user) return res.status(404).json({ message: "user not found" });
+        const student = await student.findById(req.student.id);
+        if (!student) return res.status(404).json({ message: "student not found" });
 
-        const status = { user: user };
+        const status = { student: student };
         res.json({ status });
     } catch (error) {
         res.status(400).json({ message: error.message });

@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-// user Schema
-const UserSchema = new mongoose.Schema(
+// student Schema
+const studentSchema = new mongoose.Schema(
     {
-        userId: {
+        studentId: {
             type: mongoose.Schema.Types.ObjectId,  // Use MongoDB's ObjectId
             unique: true, // Ensure uniqueness
             required: true,  // Make it required
@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema(
             default: false,
         },
         additionalInfo: {
-            type: String,  // Add any fields that you want the user to fill
+            type: String,  // Add any fields that you want the student to fill
             required: false,
             default: '',
         },
@@ -58,7 +58,7 @@ const UserSchema = new mongoose.Schema(
 
 
 
-// user Model
+// student Model
 module.exports = {
-    User: mongoose.model("user", UserSchema, "users"),
+    student: mongoose.model("student", studentSchema, "students"),
 };
