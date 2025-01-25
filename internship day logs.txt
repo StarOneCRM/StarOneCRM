@@ -6,7 +6,7 @@
 Met the employees and got to know the team leads and their respective tasks. There wasn’t much work for me on the first day. I familiarized myself with the projects they were working on and discussed my strengths with the team. They assessed which team or project I might be suitable for. I was assigned a task to implement API CRUD operations for a student management system.  
 
 **Day 2 (24-12-24):**  
-Worked on the Student CRUD task. Added API calls to `/crud/` for creating a student, deleting a student, updating student data, and reading a list of students with all their details.  
+Worked on the student CRUD task. Added API calls to `/crud/` for creating a student, deleting a student, updating student data, and reading a list of students with all their details.  
 
 **Day 3 (25-12-24):**  
 **Holiday**  

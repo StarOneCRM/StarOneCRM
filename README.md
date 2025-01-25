@@ -10,7 +10,7 @@ Met the employees and got to know the team leads and their respective tasks. The
 
 <details>
 <summary>Day 2 (24-12-24)</summary>
-Worked on the Student CRUD task. Added API calls to `/crud/` for creating a student, deleting a student, updating student data, and reading a list of students with all their details.
+Worked on the student CRUD task. Added API calls to `/crud/` for creating a student, deleting a student, updating student data, and reading a list of students with all their details.
 </details>
 
 <details>
@@ -89,12 +89,12 @@ Deployed the application again using GitHub YML files to Azure. Tested the `reac
 
 <details>
 <summary>Day 16 (07-01-25)</summary>
-Created a backend for user login functionality and tested it by hosting on Azure. Presented it to the team lead for feedback.
+Created a backend for student login functionality and tested it by hosting on Azure. Presented it to the team lead for feedback.
 </details>
 
 <details>
 <summary>Day 17 (08-01-25)</summary>
-Tested login functionality without a password and with credentials for users. Created separate roles for admin and user access.
+Tested login functionality without a password and with credentials for students. Created separate roles for admin and student access.
 </details>
 
 <details>
@@ -155,7 +155,7 @@ Integrated NodeMailer functionality to send OTP for secure login. Tested various
 
 <details>
 <summary>Day 29 (20-01-25)</summary>
-Enhanced login security by separating admin and user routes and ensuring restricted access to sensitive functionalities. Tested by hosting on Azure.
+Enhanced login security by separating admin and student routes and ensuring restricted access to sensitive functionalities. Tested by hosting on Azure.
 </details>
 
 <details>
@@ -165,7 +165,7 @@ Optimized and refactored the backend code for the login and validation system. A
 
 <details>
 <summary>Day 31 (22-01-25)</summary>
-Debugged and resolved minor issues in the OTP-based login functionality. Improved error handling for failed API calls and incorrect user inputs.
+Debugged and resolved minor issues in the OTP-based login functionality. Improved error handling for failed API calls and incorrect student inputs.
 </details>
 
 <details>

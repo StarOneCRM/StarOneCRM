@@ -13,7 +13,7 @@ const counterSchema = new mongoose.Schema({
     }
 });
 
-// Student Schema with Auto-Generated Student ID
+// student Schema with Auto-Generated student ID
 const studentSchema = new mongoose.Schema({
     studentId: {
         type: String,
@@ -58,10 +58,10 @@ studentSchema.pre('save', async function (next) {
     next();
 });
 
-module.exports = mongoose.model("Student", studentSchema, "Students");
+module.exports = mongoose.model("student", studentSchema, "students");
 
 
-const Student = require("../models/crudModel");
+const student = require("../models/crudModel");
 
 // Structure
 const sendResponse = (res, status, message, data = null, error = null) => {
@@ -72,18 +72,18 @@ const sendResponse = (res, status, message, data = null, error = null) => {
     });
 };
 
-// Display All Students
+// Display All students
 const student_index = (req, res) => {
-    Student.find()
+    student.find()
         .then((students) => {
-            sendResponse(res, 200, "Students retrieved successfully", students);
+            sendResponse(res, 200, "students retrieved successfully", students);
         })
         .catch((err) => {
             sendResponse(res, 500, "Error retrieving students", null, err.message);
         });
 };
 
-// Create New Student
+// Create New student
 const student_create_post = (req, res) => {
     const { name, age, email, major } = req.body;
 
@@ -108,25 +108,25 @@ const student_create_post = (req, res) => {
     if (typeof major !== "string" || major.trim().length === 0 || !majorRegex.test(major)) {
         return sendResponse(res, 400, "Major must be a non-empty string with no numbers or special characters");
     }
-    const student = new Student({ name, age, email, major });
+    const student = new student({ name, age, email, major });
     student
         .save()
-        .then((savedStudent) => {
-            sendResponse(res, 201, "Student created successfully", savedStudent);
+        .then((savedstudent) => {
+            sendResponse(res, 201, "student created successfully", savedstudent);
         })
         .catch((err) => {
             sendResponse(res, 422, "Failed to add student", null, err.message);
         });
 };
 
-// Show a particular Student Detail by Id
+// Show a particular student Detail by Id
 const student_details = (req, res) => {
-    Student.findById(req.params.id)
+    student.findById(req.params.id)
         .then((student) => {
             if (!student) {
-                sendResponse(res, 404, "Student not found");
+                sendResponse(res, 404, "student not found");
             } else {
-                sendResponse(res, 200, "Student retrieved successfully", student);
+                sendResponse(res, 200, "student retrieved successfully", student);
             }
         })
         .catch((err) => {
@@ -134,7 +134,7 @@ const student_details = (req, res) => {
         });
 };
 
-// Update Student Detail by Id
+// Update student Detail by Id
 const student_update = (req, res) => {
     const { name, age, email, major } = req.body;
 
@@ -170,12 +170,12 @@ const student_update = (req, res) => {
         }
     }
 
-    Student.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
-        .then((updatedStudent) => {
-            if (!updatedStudent) {
-                sendResponse(res, 404, "Student not found");
+    student.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        .then((updatedstudent) => {
+            if (!updatedstudent) {
+                sendResponse(res, 404, "student not found");
             } else {
-                sendResponse(res, 200, "Student updated successfully", updatedStudent);
+                sendResponse(res, 200, "student updated successfully", updatedstudent);
             }
         })
         .catch((err) => {
@@ -190,14 +190,14 @@ const student_update = (req, res) => {
 };
 
 
-// Delete Student Detail by Id
+// Delete student Detail by Id
 const student_delete = (req, res) => {
-    Student.findByIdAndDelete(req.params.id)
-        .then((deletedStudent) => {
-            if (!deletedStudent) {
-                sendResponse(res, 404, "Student not found");
+    student.findByIdAndDelete(req.params.id)
+        .then((deletedstudent) => {
+            if (!deletedstudent) {
+                sendResponse(res, 404, "student not found");
             } else {
-                sendResponse(res, 200, "Student deleted successfully");
+                sendResponse(res, 200, "student deleted successfully");
             }
         })
         .catch((err) => {

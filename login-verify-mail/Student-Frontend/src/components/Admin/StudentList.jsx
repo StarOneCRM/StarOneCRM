@@ -8,20 +8,20 @@
 // import { toast, ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
-// const StudentList = ({ token, setUser, logout }) => {
-//   const [students, setStudents] = useState([]);
+// const studentList = ({ token, setstudent, logout }) => {
+//   const [students, setstudents] = useState([]);
 //   const [search, setSearch] = useState("");
 //   const [anchorEl, setAnchorEl] = useState(null);
-//   const [selectedStudent, setSelectedStudent] = useState(null);
+//   const [selectedstudent, setSelectedstudent] = useState(null);
 //   const navigate = useNavigate();
 
-//   const fetchStudents = async () => {
+//   const fetchstudents = async () => {
 //     try {
 //       const response = await axiosInstance.get("/admin/", {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
-//       setStudents(response.data.data);
-//       toast.success("Students fetched successfully");
+//       setstudents(response.data.data);
+//       toast.success("students fetched successfully");
 //     } catch (error) {
 //       console.error("Error fetching students:", error);
 //       toast.error("Failed to fetch students");
@@ -34,10 +34,10 @@
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 //       if (response.data.error === null) {
-//         setStudents((prevStudents) =>
-//           prevStudents.filter((student) => student._id !== id)
+//         setstudents((prevstudents) =>
+//           prevstudents.filter((student) => student._id !== id)
 //         );
-//         toast.success("Student deleted successfully");
+//         toast.success("student deleted successfully");
 //       } else {
 //         toast.error("Failed to delete student");
 //       }
@@ -53,12 +53,12 @@
 //           headers: { Authorization: `Bearer ${token}` },
 //       });
 //       if (!response.data.error) {
-//         setStudents((prevStudents) =>
-//           prevStudents.map((student) =>
+//         setstudents((prevstudents) =>
+//           prevstudents.map((student) =>
 //             student._id === id ? { ...student, isVerified: true } : student
 //           )
 //         );
-//         toast.success("Student verified successfully");
+//         toast.success("student verified successfully");
 //       } else {
 //         toast.error("Failed to verify student");
 //       }
@@ -69,20 +69,20 @@
 //   };
 
 //   useEffect(() => {
-//     fetchStudents();
+//     fetchstudents();
 //   }, []);
 
 //   const handleMenuOpen = (event, student) => {
 //     setAnchorEl(event.currentTarget);
-//     setSelectedStudent(student);
+//     setSelectedstudent(student);
 //   };
 
 //   const handleMenuClose = () => {
 //     setAnchorEl(null);
-//     setSelectedStudent(null);
+//     setSelectedstudent(null);
 //   };
 
-//   const filteredStudents = students.filter(
+//   const filteredstudents = students.filter(
 //     (student) =>
 //       student.name.toLowerCase().includes(search.toLowerCase()) ||
 //       student.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -220,14 +220,14 @@
 //         <IconButton
 //           color="primary"
 //           onClick={() => navigate("/add")}
-//           aria-label="Add Student"
+//           aria-label="Add student"
 //         >
 //           <PersonAddIcon />
 //         </IconButton>
 //       </div>
 //       <DataTable
 //         columns={columns}
-//         data={filteredStudents}
+//         data={filteredstudents}
 //         pagination
 //         highlightOnHover
 //         striped
@@ -243,7 +243,7 @@
 //       >
 //         <MenuItem
 //           onClick={() => {
-//             navigate(`/update/${selectedStudent._id}`);
+//             navigate(`/update/${selectedstudent._id}`);
 //             handleMenuClose();
 //           }}
 //         >
@@ -251,7 +251,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleDelete(selectedStudent._id);
+//             handleDelete(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -259,7 +259,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleVerify(selectedStudent._id);
+//             handleVerify(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -270,7 +270,7 @@
 //   );
 // };
 
-// export default StudentList;
+// export default studentList;
 
 
 
@@ -292,21 +292,21 @@
 // import { toast, ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
-// const StudentList = ({ token, setUser, logout }) => {
-//   const [students, setStudents] = useState([]);
+// const studentList = ({ token, setstudent, logout }) => {
+//   const [students, setstudents] = useState([]);
 //   const [search, setSearch] = useState("");
-//   const [selectedStudents, setSelectedStudents] = useState([]);
+//   const [selectedstudents, setSelectedstudents] = useState([]);
 //   const [anchorEl, setAnchorEl] = useState(null);
-//   const [selectedStudent, setSelectedStudent] = useState(null);
+//   const [selectedstudent, setSelectedstudent] = useState(null);
 //   const navigate = useNavigate();
 
-//   const fetchStudents = async () => {
+//   const fetchstudents = async () => {
 //     try {
 //       const response = await axiosInstance.get("/admin/", {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
-//       setStudents(response.data.data);
-//       toast.success("Students fetched successfully");
+//       setstudents(response.data.data);
+//       toast.success("students fetched successfully");
 //     } catch (error) {
 //       console.error("Error fetching students:", error);
 //       toast.error("Failed to fetch students");
@@ -319,10 +319,10 @@
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 //       if (response.data.error === null) {
-//         setStudents((prevStudents) =>
-//           prevStudents.filter((student) => student._id !== id)
+//         setstudents((prevstudents) =>
+//           prevstudents.filter((student) => student._id !== id)
 //         );
-//         toast.success("Student deleted successfully");
+//         toast.success("student deleted successfully");
 //       } else {
 //         toast.error("Failed to delete student");
 //       }
@@ -338,12 +338,12 @@
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 //       if (!response.data.error) {
-//         setStudents((prevStudents) =>
-//           prevStudents.map((student) =>
+//         setstudents((prevstudents) =>
+//           prevstudents.map((student) =>
 //             student._id === id ? { ...student, isVerified: true } : student
 //           )
 //         );
-//         toast.success("Student verified successfully");
+//         toast.success("student verified successfully");
 //       } else {
 //         toast.error("Failed to verify student");
 //       }
@@ -355,7 +355,7 @@
 
 //   const handleBulkAction = async (action) => {
 //     try {
-//       const actionPromises = selectedStudents.map(async (id) => {
+//       const actionPromises = selectedstudents.map(async (id) => {
 //         if (action === "delete") {
 //           return await axiosInstance.delete(`/admin/${id}`, {}, {
 //             headers: { Authorization: `Bearer ${token}` },
@@ -368,14 +368,14 @@
 //       });
 //       await Promise.all(actionPromises);
 //       if (action === "delete") {
-//         setStudents((prevStudents) =>
-//           prevStudents.filter((student) => !selectedStudents.includes(student._id))
+//         setstudents((prevstudents) =>
+//           prevstudents.filter((student) => !selectedstudents.includes(student._id))
 //         );
 //         toast.success("Selected students deleted successfully");
 //       } else if (action === "verify") {
-//         setStudents((prevStudents) =>
-//           prevStudents.map((student) =>
-//             selectedStudents.includes(student._id) ? { ...student, isVerified: true } : student
+//         setstudents((prevstudents) =>
+//           prevstudents.map((student) =>
+//             selectedstudents.includes(student._id) ? { ...student, isVerified: true } : student
 //           )
 //         );
 //         toast.success("Selected students verified successfully");
@@ -387,20 +387,20 @@
 //   };
 
 //   useEffect(() => {
-//     fetchStudents();
+//     fetchstudents();
 //   }, []);
 
 //   const handleMenuOpen = (event, student) => {
 //     setAnchorEl(event.currentTarget);
-//     setSelectedStudent(student);
+//     setSelectedstudent(student);
 //   };
 
 //   const handleMenuClose = () => {
 //     setAnchorEl(null);
-//     setSelectedStudent(null);
+//     setSelectedstudent(null);
 //   };
 
-//   const filteredStudents = students.filter(
+//   const filteredstudents = students.filter(
 //     (student) =>
 //       student.name.toLowerCase().includes(search.toLowerCase()) ||
 //       student.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -408,7 +408,7 @@
 //   );
 
 //   const handleSelect = (studentId) => {
-//     setSelectedStudents((prevSelected) =>
+//     setSelectedstudents((prevSelected) =>
 //       prevSelected.includes(studentId)
 //         ? prevSelected.filter((id) => id !== studentId)
 //         : [...prevSelected, studentId]
@@ -420,7 +420,7 @@
 //       name: <span style={{ fontWeight: "400", fontSize: "16px" }}>Select</span>,
 //       cell: (row) => (
 //         <Checkbox
-//           checked={selectedStudents.includes(row._id)}
+//           checked={selectedstudents.includes(row._id)}
 //           onChange={() => handleSelect(row._id)}
 //         />
 //       ),
@@ -496,7 +496,7 @@
 //         <IconButton
 //           color="primary"
 //           onClick={() => navigate("/add")}
-//           aria-label="Add Student"
+//           aria-label="Add student"
 //         >
 //           <PersonAddIcon />
 //         </IconButton>
@@ -506,7 +506,7 @@
 //           variant="contained"
 //           color="primary"
 //           onClick={() => handleBulkAction("verify")}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //         >
 //           Verify Selected
 //         </Button>
@@ -514,7 +514,7 @@
 //           variant="contained"
 //           color="secondary"
 //           onClick={() => handleBulkAction("delete")}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //           style={{ marginLeft: "10px" }}
 //         >
 //           Delete Selected
@@ -522,7 +522,7 @@
 //       </div>
 //       <DataTable
 //         columns={columns}
-//         data={filteredStudents}
+//         data={filteredstudents}
 //         pagination
 //         highlightOnHover
 //         striped
@@ -538,7 +538,7 @@
 //       >
 //         <MenuItem
 //           onClick={() => {
-//             navigate(`/update/${selectedStudent._id}`);
+//             navigate(`/update/${selectedstudent._id}`);
 //             handleMenuClose();
 //           }}
 //         >
@@ -546,7 +546,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleDelete(selectedStudent._id);
+//             handleDelete(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -554,7 +554,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleVerify(selectedStudent._id);
+//             handleVerify(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -565,7 +565,7 @@
 //   );
 // };
 
-// export default StudentList;
+// export default studentList;
 
 
 
@@ -585,22 +585,22 @@
 // import { toast, ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
-// const StudentList = ({ token, setUser, logout }) => {
-//   const [students, setStudents] = useState([]);
+// const studentList = ({ token, setstudent, logout }) => {
+//   const [students, setstudents] = useState([]);
 //   const [search, setSearch] = useState("");
 //   const [anchorEl, setAnchorEl] = useState(null);
-//   const [selectedStudent, setSelectedStudent] = useState(null);
+//   const [selectedstudent, setSelectedstudent] = useState(null);
 //   const [filterVerified, setFilterVerified] = useState(""); // Filter by verified status
 //   const [filterAdmin, setFilterAdmin] = useState(""); // Filter by admin status
 //   const navigate = useNavigate();
 
-//   const fetchStudents = async () => {
+//   const fetchstudents = async () => {
 //     try {
 //       const response = await axiosInstance.get("/admin/", {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
-//       setStudents(response.data.data);
-//       toast.success("Students fetched successfully");
+//       setstudents(response.data.data);
+//       toast.success("students fetched successfully");
 //     } catch (error) {
 //       console.error("Error fetching students:", error);
 //       toast.error("Failed to fetch students");
@@ -613,10 +613,10 @@
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 //       if (response.data.error === null) {
-//         setStudents((prevStudents) =>
-//           prevStudents.filter((student) => student._id !== id)
+//         setstudents((prevstudents) =>
+//           prevstudents.filter((student) => student._id !== id)
 //         );
-//         toast.success("Student deleted successfully");
+//         toast.success("student deleted successfully");
 //       } else {
 //         toast.error("Failed to delete student");
 //       }
@@ -632,12 +632,12 @@
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 //       if (!response.data.error) {
-//         setStudents((prevStudents) =>
-//           prevStudents.map((student) =>
+//         setstudents((prevstudents) =>
+//           prevstudents.map((student) =>
 //             student._id === id ? { ...student, isVerified: true } : student
 //           )
 //         );
-//         toast.success("Student verified successfully");
+//         toast.success("student verified successfully");
 //       } else {
 //         toast.error("Failed to verify student");
 //       }
@@ -648,20 +648,20 @@
 //   };
 
 //   useEffect(() => {
-//     fetchStudents();
+//     fetchstudents();
 //   }, []);
 
 //   const handleMenuOpen = (event, student) => {
 //     setAnchorEl(event.currentTarget);
-//     setSelectedStudent(student);
+//     setSelectedstudent(student);
 //   };
 
 //   const handleMenuClose = () => {
 //     setAnchorEl(null);
-//     setSelectedStudent(null);
+//     setSelectedstudent(null);
 //   };
 
-//   const filteredStudents = students.filter(
+//   const filteredstudents = students.filter(
 //     (student) =>
 //       (student.name.toLowerCase().includes(search.toLowerCase()) ||
 //         student.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -791,14 +791,14 @@
 //         <IconButton
 //           color="primary"
 //           onClick={() => navigate("/add")}
-//           aria-label="Add Student"
+//           aria-label="Add student"
 //         >
 //           <PersonAddIcon />
 //         </IconButton>
 //       </div>
 //       <DataTable
 //         columns={columns}
-//         data={filteredStudents}
+//         data={filteredstudents}
 //         pagination
 //         highlightOnHover
 //         striped
@@ -814,7 +814,7 @@
 //       >
 //         <MenuItem
 //           onClick={() => {
-//             navigate(`/update/${selectedStudent._id}`);
+//             navigate(`/update/${selectedstudent._id}`);
 //             handleMenuClose();
 //           }}
 //         >
@@ -822,7 +822,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleDelete(selectedStudent._id);
+//             handleDelete(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -830,7 +830,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleVerify(selectedStudent._id);
+//             handleVerify(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -841,7 +841,7 @@
 //   );
 // };
 
-// export default StudentList;
+// export default studentList;
 
 
 
@@ -861,23 +861,23 @@
 // import { toast, ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
-// const StudentList = ({ token, setUser, logout }) => {
-//   const [students, setStudents] = useState([]);
+// const studentList = ({ token, setstudent, logout }) => {
+//   const [students, setstudents] = useState([]);
 //   const [search, setSearch] = useState("");
 //   const [anchorEl, setAnchorEl] = useState(null);
-//   const [selectedStudent, setSelectedStudent] = useState(null);
+//   const [selectedstudent, setSelectedstudent] = useState(null);
 //   const [filterVerified, setFilterVerified] = useState(false); // Filter by isFormVerified status
 //   const [filterAdmin, setFilterAdmin] = useState(false); // Filter by admin status
-//   const [selectedStudents, setSelectedStudents] = useState([]); // Track selected students for mass actions
+//   const [selectedstudents, setSelectedstudents] = useState([]); // Track selected students for mass actions
 //   const navigate = useNavigate();
 
-//   const fetchStudents = async () => {
+//   const fetchstudents = async () => {
 //     try {
 //       const response = await axiosInstance.get("/admin/", {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
-//       setStudents(response.data.data);
-//       toast.success("Students fetched successfully");
+//       setstudents(response.data.data);
+//       toast.success("students fetched successfully");
 //     } catch (error) {
 //       console.error("Error fetching students:", error);
 //       toast.error("Failed to fetch students");
@@ -887,16 +887,16 @@
 //   const handleDelete = async () => {
 //     try {
 //       await Promise.all(
-//         selectedStudents.map(async (id) => {
+//         selectedstudents.map(async (id) => {
 //           await axiosInstance.delete(`/admin/${id}`, {}, {
 //             headers: { Authorization: `Bearer ${token}` },
 //           });
 //         })
 //       );
-//       setStudents((prevStudents) =>
-//         prevStudents.filter((student) => !selectedStudents.includes(student._id))
+//       setstudents((prevstudents) =>
+//         prevstudents.filter((student) => !selectedstudents.includes(student._id))
 //       );
-//       setSelectedStudents([]);
+//       setSelectedstudents([]);
 //       toast.success("Selected students deleted successfully");
 //     } catch (error) {
 //       console.error("Error deleting students:", error);
@@ -907,20 +907,20 @@
 //   const handleVerify = async () => {
 //     try {
 //       await Promise.all(
-//         selectedStudents.map(async (id) => {
+//         selectedstudents.map(async (id) => {
 //           await axiosInstance.patch(`/admin/verify/${id}`, {}, {
 //             headers: { Authorization: `Bearer ${token}` },
 //           });
 //         })
 //       );
-//       setStudents((prevStudents) =>
-//         prevStudents.map((student) =>
-//           selectedStudents.includes(student._id)
+//       setstudents((prevstudents) =>
+//         prevstudents.map((student) =>
+//           selectedstudents.includes(student._id)
 //             ? { ...student, isFormVerified: true }
 //             : student
 //         )
 //       );
-//       setSelectedStudents([]);
+//       setSelectedstudents([]);
 //       toast.success("Selected students verified successfully");
 //     } catch (error) {
 //       console.error("Error verifying students:", error);
@@ -928,8 +928,8 @@
 //     }
 //   };
 
-//   const handleSelectStudent = (studentId) => {
-//     setSelectedStudents((prevSelected) =>
+//   const handleSelectstudent = (studentId) => {
+//     setSelectedstudents((prevSelected) =>
 //       prevSelected.includes(studentId)
 //         ? prevSelected.filter((id) => id !== studentId)
 //         : [...prevSelected, studentId]
@@ -937,28 +937,28 @@
 //   };
 
 //   const handleSelectAll = () => {
-//     if (selectedStudents.length === students.length) {
-//       setSelectedStudents([]); // Deselect all
+//     if (selectedstudents.length === students.length) {
+//       setSelectedstudents([]); // Deselect all
 //     } else {
-//       setSelectedStudents(students.map((student) => student._id)); // Select all
+//       setSelectedstudents(students.map((student) => student._id)); // Select all
 //     }
 //   };
 
 //   const handleMenuOpen = (event, student) => {
 //     setAnchorEl(event.currentTarget);
-//     setSelectedStudent(student);
+//     setSelectedstudent(student);
 //   };
 
 //   const handleMenuClose = () => {
 //     setAnchorEl(null);
-//     setSelectedStudent(null);
+//     setSelectedstudent(null);
 //   };
 
 //   useEffect(() => {
-//     fetchStudents();
+//     fetchstudents();
 //   }, []);
 
-//   const filteredStudents = students.filter(
+//   const filteredstudents = students.filter(
 //     (student) =>
 //       (student.name.toLowerCase().includes(search.toLowerCase()) ||
 //         student.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -972,15 +972,15 @@
 //       name: (
 //         <input
 //           type="checkbox"
-//           checked={selectedStudents.length === students.length}
+//           checked={selectedstudents.length === students.length}
 //           onChange={handleSelectAll}
 //         />
 //       ),
 //       cell: (row) => (
 //         <input
 //           type="checkbox"
-//           checked={selectedStudents.includes(row._id)}
-//           onChange={() => handleSelectStudent(row._id)}
+//           checked={selectedstudents.includes(row._id)}
+//           onChange={() => handleSelectstudent(row._id)}
 //         />
 //       ),
 //       width: "5%",
@@ -1099,7 +1099,7 @@
 //         <IconButton
 //           color="primary"
 //           onClick={() => navigate("/add")}
-//           aria-label="Add Student"
+//           aria-label="Add student"
 //         >
 //           <PersonAddIcon />
 //         </IconButton>
@@ -1107,7 +1107,7 @@
 //           variant="contained"
 //           color="secondary"
 //           onClick={handleDelete}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //         >
 //           Delete Selected
 //         </Button>
@@ -1115,14 +1115,14 @@
 //           variant="contained"
 //           color="primary"
 //           onClick={handleVerify}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //         >
 //           Verify Selected
 //         </Button>
 //       </div>
 //       <DataTable
 //         columns={columns}
-//         data={filteredStudents}
+//         data={filteredstudents}
 //         pagination
 //         highlightOnHover
 //         striped
@@ -1138,7 +1138,7 @@
 //       >
 //         <MenuItem
 //           onClick={() => {
-//             navigate(`/update/${selectedStudent._id}`);
+//             navigate(`/update/${selectedstudent._id}`);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1146,7 +1146,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleDelete(selectedStudent._id);
+//             handleDelete(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1154,7 +1154,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleVerify(selectedStudent._id);
+//             handleVerify(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1165,7 +1165,7 @@
 //   );
 // };
 
-// export default StudentList;
+// export default studentList;
 
 
 
@@ -1188,23 +1188,23 @@
 // import { toast, ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
-// const StudentList = ({ token, setUser, logout }) => {
-//   const [students, setStudents] = useState([]);
+// const studentList = ({ token, setstudent, logout }) => {
+//   const [students, setstudents] = useState([]);
 //   const [search, setSearch] = useState("");
 //   const [anchorEl, setAnchorEl] = useState(null);
-//   const [selectedStudent, setSelectedStudent] = useState(null);
+//   const [selectedstudent, setSelectedstudent] = useState(null);
 //   const [filterVerified, setFilterVerified] = useState(0); // 0: No filter, 1: Verified, 2: Not Verified
 //   const [filterAdmin, setFilterAdmin] = useState(0); // 0: No filter, 1: Admin, 2: Not Admin
-//   const [selectedStudents, setSelectedStudents] = useState([]); // Track selected students for mass actions
+//   const [selectedstudents, setSelectedstudents] = useState([]); // Track selected students for mass actions
 //   const navigate = useNavigate();
 
-//   const fetchStudents = async () => {
+//   const fetchstudents = async () => {
 //     try {
 //       const response = await axiosInstance.get("/admin/", {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
-//       setStudents(response.data.data);
-//       toast.success("Students fetched successfully");
+//       setstudents(response.data.data);
+//       toast.success("students fetched successfully");
 //     } catch (error) {
 //       console.error("Error fetching students:", error);
 //       toast.error("Failed to fetch students");
@@ -1214,16 +1214,16 @@
 //   const handleDelete = async () => {
 //     try {
 //       await Promise.all(
-//         selectedStudents.map(async (id) => {
+//         selectedstudents.map(async (id) => {
 //           await axiosInstance.delete(`/admin/${id}`, {}, {
 //             headers: { Authorization: `Bearer ${token}` },
 //           });
 //         })
 //       );
-//       setStudents((prevStudents) =>
-//         prevStudents.filter((student) => !selectedStudents.includes(student._id))
+//       setstudents((prevstudents) =>
+//         prevstudents.filter((student) => !selectedstudents.includes(student._id))
 //       );
-//       setSelectedStudents([]);
+//       setSelectedstudents([]);
 //       toast.success("Selected students deleted successfully");
 //     } catch (error) {
 //       console.error("Error deleting students:", error);
@@ -1234,20 +1234,20 @@
 //   const handleVerify = async () => {
 //     try {
 //       await Promise.all(
-//         selectedStudents.map(async (id) => {
+//         selectedstudents.map(async (id) => {
 //           await axiosInstance.patch(`/admin/verify/${id}`, {}, {
 //             headers: { Authorization: `Bearer ${token}` },
 //           });
 //         })
 //       );
-//       setStudents((prevStudents) =>
-//         prevStudents.map((student) =>
-//           selectedStudents.includes(student._id)
+//       setstudents((prevstudents) =>
+//         prevstudents.map((student) =>
+//           selectedstudents.includes(student._id)
 //             ? { ...student, isFormVerified: true }
 //             : student
 //         )
 //       );
-//       setSelectedStudents([]);
+//       setSelectedstudents([]);
 //       toast.success("Selected students verified successfully");
 //     } catch (error) {
 //       console.error("Error verifying students:", error);
@@ -1255,8 +1255,8 @@
 //     }
 //   };
 
-//   const handleSelectStudent = (studentId) => {
-//     setSelectedStudents((prevSelected) =>
+//   const handleSelectstudent = (studentId) => {
+//     setSelectedstudents((prevSelected) =>
 //       prevSelected.includes(studentId)
 //         ? prevSelected.filter((id) => id !== studentId)
 //         : [...prevSelected, studentId]
@@ -1264,28 +1264,28 @@
 //   };
 
 //   const handleSelectAll = () => {
-//     if (selectedStudents.length === students.length) {
-//       setSelectedStudents([]); // Deselect all
+//     if (selectedstudents.length === students.length) {
+//       setSelectedstudents([]); // Deselect all
 //     } else {
-//       setSelectedStudents(students.map((student) => student._id)); // Select all
+//       setSelectedstudents(students.map((student) => student._id)); // Select all
 //     }
 //   };
 
 //   const handleMenuOpen = (event, student) => {
 //     setAnchorEl(event.currentTarget);
-//     setSelectedStudent(student);
+//     setSelectedstudent(student);
 //   };
 
 //   const handleMenuClose = () => {
 //     setAnchorEl(null);
-//     setSelectedStudent(null);
+//     setSelectedstudent(null);
 //   };
 
 //   useEffect(() => {
-//     fetchStudents();
+//     fetchstudents();
 //   }, []);
 
-//   const filteredStudents = students.filter((student) => {
+//   const filteredstudents = students.filter((student) => {
 //     // Apply Verified filter
 //     if (filterVerified === 1 && !student.isFormVerified) return false; // Only verified
 //     if (filterVerified === 2 && student.isFormVerified) return false; // Only not verified
@@ -1306,15 +1306,15 @@
 //       name: (
 //         <input
 //           type="checkbox"
-//           checked={selectedStudents.length === students.length}
+//           checked={selectedstudents.length === students.length}
 //           onChange={handleSelectAll}
 //         />
 //       ),
 //       cell: (row) => (
 //         <input
 //           type="checkbox"
-//           checked={selectedStudents.includes(row._id)}
-//           onChange={() => handleSelectStudent(row._id)}
+//           checked={selectedstudents.includes(row._id)}
+//           onChange={() => handleSelectstudent(row._id)}
 //         />
 //       ),
 //       width: "5%",
@@ -1433,7 +1433,7 @@
 //         <IconButton
 //           color="primary"
 //           onClick={() => navigate("/add")}
-//           aria-label="Add Student"
+//           aria-label="Add student"
 //         >
 //           <PersonAddIcon />
 //         </IconButton>
@@ -1441,7 +1441,7 @@
 //           variant="contained"
 //           color="secondary"
 //           onClick={handleDelete}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //         >
 //           Delete Selected
 //         </Button>
@@ -1449,14 +1449,14 @@
 //           variant="contained"
 //           color="primary"
 //           onClick={handleVerify}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //         >
 //           Verify Selected
 //         </Button>
 //       </div>
 //       <DataTable
 //         columns={columns}
-//         data={filteredStudents}
+//         data={filteredstudents}
 //         pagination
 //         highlightOnHover
 //         striped
@@ -1472,7 +1472,7 @@
 //       >
 //         <MenuItem
 //           onClick={() => {
-//             navigate(`/update/${selectedStudent._id}`);
+//             navigate(`/update/${selectedstudent._id}`);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1480,7 +1480,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleDelete(selectedStudent._id);
+//             handleDelete(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1488,7 +1488,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleVerify(selectedStudent._id);
+//             handleVerify(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1499,7 +1499,7 @@
 //   );
 // };
 
-// export default StudentList;
+// export default studentList;
 
 
 
@@ -1520,23 +1520,23 @@
 // import { toast, ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
-// const StudentList = ({ token, setUser, logout }) => {
-//   const [students, setStudents] = useState([]);
+// const studentList = ({ token, setstudent, logout }) => {
+//   const [students, setstudents] = useState([]);
 //   const [search, setSearch] = useState("");
 //   const [anchorEl, setAnchorEl] = useState(null);
-//   const [selectedStudent, setSelectedStudent] = useState(null);
+//   const [selectedstudent, setSelectedstudent] = useState(null);
 //   const [filterVerified, setFilterVerified] = useState(0); // 0: No filter, 1: Verified, 2: Not Verified
 //   const [filterAdmin, setFilterAdmin] = useState(0); // 0: No filter, 1: Admin, 2: Not Admin
-//   const [selectedStudents, setSelectedStudents] = useState([]); // Track selected students for mass actions
+//   const [selectedstudents, setSelectedstudents] = useState([]); // Track selected students for mass actions
 //   const navigate = useNavigate();
 
-//   const fetchStudents = async () => {
+//   const fetchstudents = async () => {
 //     try {
 //       const response = await axiosInstance.get("/admin/", {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
-//       setStudents(response.data.data);
-//       toast.success("Students fetched successfully");
+//       setstudents(response.data.data);
+//       toast.success("students fetched successfully");
 //     } catch (error) {
 //       console.error("Error fetching students:", error);
 //       toast.error("Failed to fetch students");
@@ -1546,16 +1546,16 @@
 //   const handleDelete = async () => {
 //     try {
 //       await Promise.all(
-//         selectedStudents.map(async (id) => {
+//         selectedstudents.map(async (id) => {
 //           await axiosInstance.delete(`/admin/${id}`, {}, {
 //             headers: { Authorization: `Bearer ${token}` },
 //           });
 //         })
 //       );
-//       setStudents((prevStudents) =>
-//         prevStudents.filter((student) => !selectedStudents.includes(student._id))
+//       setstudents((prevstudents) =>
+//         prevstudents.filter((student) => !selectedstudents.includes(student._id))
 //       );
-//       setSelectedStudents([]);
+//       setSelectedstudents([]);
 //       toast.success("Selected students deleted successfully");
 //     } catch (error) {
 //       console.error("Error deleting students:", error);
@@ -1566,20 +1566,20 @@
 //   const handleVerify = async () => {
 //     try {
 //       await Promise.all(
-//         selectedStudents.map(async (id) => {
+//         selectedstudents.map(async (id) => {
 //           await axiosInstance.patch(`/admin/verify/${id}`, {}, {
 //             headers: { Authorization: `Bearer ${token}` },
 //           });
 //         })
 //       );
-//       setStudents((prevStudents) =>
-//         prevStudents.map((student) =>
-//           selectedStudents.includes(student._id)
+//       setstudents((prevstudents) =>
+//         prevstudents.map((student) =>
+//           selectedstudents.includes(student._id)
 //             ? { ...student, isFormVerified: true }
 //             : student
 //         )
 //       );
-//       setSelectedStudents([]);
+//       setSelectedstudents([]);
 //       toast.success("Selected students verified successfully");
 //     } catch (error) {
 //       console.error("Error verifying students:", error);
@@ -1587,8 +1587,8 @@
 //     }
 //   };
 
-//   const handleSelectStudent = (studentId) => {
-//     setSelectedStudents((prevSelected) =>
+//   const handleSelectstudent = (studentId) => {
+//     setSelectedstudents((prevSelected) =>
 //       prevSelected.includes(studentId)
 //         ? prevSelected.filter((id) => id !== studentId)
 //         : [...prevSelected, studentId]
@@ -1596,28 +1596,28 @@
 //   };
 
 //   const handleSelectAll = () => {
-//     if (selectedStudents.length === students.length) {
-//       setSelectedStudents([]); // Deselect all
+//     if (selectedstudents.length === students.length) {
+//       setSelectedstudents([]); // Deselect all
 //     } else {
-//       setSelectedStudents(students.map((student) => student._id)); // Select all
+//       setSelectedstudents(students.map((student) => student._id)); // Select all
 //     }
 //   };
 
 //   const handleMenuOpen = (event, student) => {
 //     setAnchorEl(event.currentTarget);
-//     setSelectedStudent(student);
+//     setSelectedstudent(student);
 //   };
 
 //   const handleMenuClose = () => {
 //     setAnchorEl(null);
-//     setSelectedStudent(null);
+//     setSelectedstudent(null);
 //   };
 
 //   useEffect(() => {
-//     fetchStudents();
+//     fetchstudents();
 //   }, []);
 
-//   const filteredStudents = students.filter((student) => {
+//   const filteredstudents = students.filter((student) => {
 //     // Apply Verified filter
 //     if (filterVerified === 1 && !student.isFormVerified) return false; // Only verified
 //     if (filterVerified === 2 && student.isFormVerified) return false; // Only not verified
@@ -1638,15 +1638,15 @@
 //       name: (
 //         <input
 //           type="checkbox"
-//           checked={selectedStudents.length === students.length}
+//           checked={selectedstudents.length === students.length}
 //           onChange={handleSelectAll}
 //         />
 //       ),
 //       cell: (row) => (
 //         <input
 //           type="checkbox"
-//           checked={selectedStudents.includes(row._id)}
-//           onChange={() => handleSelectStudent(row._id)}
+//           checked={selectedstudents.includes(row._id)}
+//           onChange={() => handleSelectstudent(row._id)}
 //         />
 //       ),
 //       width: "5%",
@@ -1759,7 +1759,7 @@
 //         <IconButton
 //           color="primary"
 //           onClick={() => navigate("/add")}
-//           aria-label="Add Student"
+//           aria-label="Add student"
 //         >
 //           <PersonAddIcon />
 //         </IconButton>
@@ -1767,7 +1767,7 @@
 //           variant="contained"
 //           color="secondary"
 //           onClick={handleDelete}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //         >
 //           Delete Selected
 //         </Button>
@@ -1775,14 +1775,14 @@
 //           variant="contained"
 //           color="primary"
 //           onClick={handleVerify}
-//           disabled={selectedStudents.length === 0}
+//           disabled={selectedstudents.length === 0}
 //         >
 //           Verify Selected
 //         </Button>
 //       </div>
 //       <DataTable
 //         columns={columns}
-//         data={filteredStudents}
+//         data={filteredstudents}
 //         pagination
 //         highlightOnHover
 //         striped
@@ -1798,7 +1798,7 @@
 //       >
 //         <MenuItem
 //           onClick={() => {
-//             navigate(`/update/${selectedStudent._id}`);
+//             navigate(`/update/${selectedstudent._id}`);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1806,7 +1806,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleDelete(selectedStudent._id);
+//             handleDelete(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1814,7 +1814,7 @@
 //         </MenuItem>
 //         <MenuItem
 //           onClick={() => {
-//             handleVerify(selectedStudent._id);
+//             handleVerify(selectedstudent._id);
 //             handleMenuClose();
 //           }}
 //         >
@@ -1825,7 +1825,7 @@
 //   );
 // };
 
-// export default StudentList;
+// export default studentList;
 
 
 
@@ -1857,44 +1857,44 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const StudentList = ({ token, setUserMethod, logout }) => {
-  const [students, setStudents] = useState([]);
+const studentList = ({ token, setstudentMethod, logout }) => {
+  const [students, setstudents] = useState([]);
   const [search, setSearch] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedstudent, setSelectedstudent] = useState(null);
   const [filterVerified, setFilterVerified] = useState(0); // 0: No filter, 1: Verified, 2: Not Verified
   const [filterAdmin, setFilterAdmin] = useState(0); // 0: No filter, 1: Admin, 2: Not Admin
-  const [selectedStudents, setSelectedStudents] = useState([]); // Track selected students for mass actions
+  const [selectedstudents, setSelectedstudents] = useState([]); // Track selected students for mass actions
   const navigate = useNavigate();
 
-  const fetchStudents = async () => {
+  const fetchstudents = async () => {
     try {
       const response = await axiosInstance.get("/admin/", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setStudents(response.data.data);
-      toast.success("Students fetched successfully");
+      setstudents(response.data.data);
+      toast.success("students fetched successfully");
     } catch (error) {
       console.error("Error fetching students:", error);
       toast.error("Failed to fetch students");
       setToken(null);
-      setUser(null);
+      setstudent(null);
     }
   };
 
   const handleDelete = async () => {
     try {
       await Promise.all(
-        selectedStudents.map(async (id) => {
+        selectedstudents.map(async (id) => {
           await axiosInstance.delete(`/admin/${id}`, {}, {
             headers: { Authorization: `Bearer ${token}` },
           });
         })
       );
-      setStudents((prevStudents) =>
-        prevStudents.filter((student) => !selectedStudents.includes(student._id))
+      setstudents((prevstudents) =>
+        prevstudents.filter((student) => !selectedstudents.includes(student._id))
       );
-      setSelectedStudents([]);
+      setSelectedstudents([]);
       toast.success("Selected students deleted successfully");
     } catch (error) {
       console.error("Error deleting students:", error);
@@ -1905,20 +1905,20 @@ const StudentList = ({ token, setUserMethod, logout }) => {
   const handleVerify = async () => {
     try {
       await Promise.all(
-        selectedStudents.map(async (id) => {
+        selectedstudents.map(async (id) => {
           await axiosInstance.patch(`/admin/verify/${id}`, {}, {
             headers: { Authorization: `Bearer ${token}` },
           });
         })
       );
-      setStudents((prevStudents) =>
-        prevStudents.map((student) =>
-          selectedStudents.includes(student._id)
+      setstudents((prevstudents) =>
+        prevstudents.map((student) =>
+          selectedstudents.includes(student._id)
             ? { ...student, isFormVerified: true }
             : student
         )
       );
-      setSelectedStudents([]);
+      setSelectedstudents([]);
       toast.success("Selected students verified successfully");
     } catch (error) {
       console.error("Error verifying students:", error);
@@ -1926,8 +1926,8 @@ const StudentList = ({ token, setUserMethod, logout }) => {
     }
   };
 
-  const handleSelectStudent = (studentId) => {
-    setSelectedStudents((prevSelected) =>
+  const handleSelectstudent = (studentId) => {
+    setSelectedstudents((prevSelected) =>
       prevSelected.includes(studentId)
         ? prevSelected.filter((id) => id !== studentId)
         : [...prevSelected, studentId]
@@ -1935,28 +1935,28 @@ const StudentList = ({ token, setUserMethod, logout }) => {
   };
 
   const handleSelectAll = () => {
-    if (selectedStudents.length === students.length) {
-      setSelectedStudents([]); // Deselect all
+    if (selectedstudents.length === students.length) {
+      setSelectedstudents([]); // Deselect all
     } else {
-      setSelectedStudents(students.map((student) => student._id)); // Select all
+      setSelectedstudents(students.map((student) => student._id)); // Select all
     }
   };
 
   const handleMenuOpen = (event, student) => {
     setAnchorEl(event.currentTarget);
-    setSelectedStudent(student);
+    setSelectedstudent(student);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setSelectedStudent(null);
+    setSelectedstudent(null);
   };
 
   useEffect(() => {
-    fetchStudents();
+    fetchstudents();
   }, []);
 
-  const filteredStudents = students.filter((student) => {
+  const filteredstudents = students.filter((student) => {
     // Apply Verified filter
     if (filterVerified === 1 && !student.isFormVerified) return false; // Only verified
     if (filterVerified === 2 && student.isFormVerified) return false; // Only not verified
@@ -1977,15 +1977,15 @@ const StudentList = ({ token, setUserMethod, logout }) => {
       name: (
         <input
           type="checkbox"
-          checked={selectedStudents.length === students.length}
+          checked={selectedstudents.length === students.length}
           onChange={handleSelectAll}
         />
       ),
       cell: (row) => (
         <input
           type="checkbox"
-          checked={selectedStudents.includes(row._id)}
-          onChange={() => handleSelectStudent(row._id)}
+          checked={selectedstudents.includes(row._id)}
+          onChange={() => handleSelectstudent(row._id)}
         />
       ),
       width: "5%",
@@ -2085,7 +2085,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
         <IconButton
           color="primary"
           onClick={() => navigate("/add")}
-          aria-label="Add Student"
+          aria-label="Add student"
         >
           <PersonAddIcon />
         </IconButton>
@@ -2112,7 +2112,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
           variant="contained"
           color="secondary"
           onClick={handleDelete}
-          disabled={selectedStudents.length === 0}
+          disabled={selectedstudents.length === 0}
         >
           Delete Selected
         </Button>
@@ -2120,14 +2120,14 @@ const StudentList = ({ token, setUserMethod, logout }) => {
           variant="contained"
           color="primary"
           onClick={handleVerify}
-          disabled={selectedStudents.length === 0}
+          disabled={selectedstudents.length === 0}
         >
           Verify Selected
         </Button>
       </div>
       <DataTable
         columns={columns}
-        data={filteredStudents}
+        data={filteredstudents}
         pagination
         highlightOnHover
         striped
@@ -2143,7 +2143,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
       >
         <MenuItem
           onClick={() => {
-            navigate(`/update/${selectedStudent._id}`);
+            navigate(`/update/${selectedstudent._id}`);
             handleMenuClose();
           }}
         >
@@ -2151,7 +2151,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            handleDelete(selectedStudent._id);
+            handleDelete(selectedstudent._id);
             handleMenuClose();
           }}
         >
@@ -2159,7 +2159,7 @@ const StudentList = ({ token, setUserMethod, logout }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            handleVerify(selectedStudent._id);
+            handleVerify(selectedstudent._id);
             handleMenuClose();
           }}
         >
@@ -2170,4 +2170,4 @@ const StudentList = ({ token, setUserMethod, logout }) => {
   );
 };
 
-export default StudentList;
+export default studentList;

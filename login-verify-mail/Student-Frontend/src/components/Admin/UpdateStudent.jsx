@@ -17,17 +17,17 @@
 // import SchoolIcon from '@mui/icons-material/School';
 // import SaveIcon from '@mui/icons-material/Save';
 
-// const UpdateStudent = ({ token, setUser, logout }) => {
+// const Updatestudent = ({ token, setstudent, logout }) => {
 //   const { id } = useParams();
-//   const [student, setStudent] = useState({ name: '', age: '', email: '', major: '' });
+//   const [student, setstudent] = useState({ name: '', age: '', email: '', major: '' });
 
 //   useEffect(() => {
 //     axiosInstance.get(`/admin/${id}`, {
 //       headers: { Authorization: `Bearer ${token}` },
 //     })
 //       .then(response => {
-//         setStudent(response.data.data);
-//         toast.success('Student data loaded successfully');
+//         setstudent(response.data.data);
+//         toast.success('student data loaded successfully');
 //       })
 //       .catch(error => {
 //         console.error('Error fetching student:', error);
@@ -36,7 +36,7 @@
 //   }, [id]);
 
 //   const handleChange = (e) => {
-//     setStudent({ ...student, [e.target.name]: e.target.value });
+//     setstudent({ ...student, [e.target.name]: e.target.value });
 //   };
 
 //   const handleSubmit = async (e) => {
@@ -167,14 +167,14 @@
 //           startIcon={<SaveIcon />}
 //           fullWidth
 //         >
-//           Update Student
+//           Update student
 //         </Button>
 //       </form>
 //     </Paper>
 //   );
 // };
 
-// export default UpdateStudent;
+// export default Updatestudent;
 
 
 
@@ -207,17 +207,17 @@ import SchoolIcon from '@mui/icons-material/School';
 import SaveIcon from '@mui/icons-material/Save';
 import CheckIcon from '@mui/icons-material/Check';
 
-const UpdateStudent = ({ token, setUserMethod, logout }) => {
+const Updatestudent = ({ token, setstudentMethod, logout }) => {
   const { id } = useParams();
-  const [student, setStudent] = useState({ name: '', age: '', email: '', major: '', isFormVerified: false });
+  const [student, setstudent] = useState({ name: '', age: '', email: '', major: '', isFormVerified: false });
 
   useEffect(() => {
     axiosInstance.get(`/admin/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
-        setStudent(response.data.data);
-        toast.success('Student data loaded successfully');
+        setstudent(response.data.data);
+        toast.success('student data loaded successfully');
       })
       .catch(error => {
         console.error('Error fetching student:', error);
@@ -226,7 +226,7 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
   }, [id]);
 
   const handleChange = (e) => {
-    setStudent({ ...student, [e.target.name]: e.target.value });
+    setstudent({ ...student, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -269,11 +269,11 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.success) {
-        setStudent((prevStudent) => ({
-          ...prevStudent,
+        setstudent((prevstudent) => ({
+          ...prevstudent,
           isFormVerified: true,
         }));
-        toast.success("Student verified successfully");
+        toast.success("student verified successfully");
       }
     } catch (error) {
       console.error("Error verifying student:", error);
@@ -375,7 +375,7 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
           startIcon={<SaveIcon />}
           fullWidth
         >
-          Update Student
+          Update student
         </Button>
 
         {/* Verify Button */}
@@ -388,7 +388,7 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
             fullWidth
             style={{ marginTop: '20px' }}
           >
-            Verify Student
+            Verify student
           </Button>
         )}
       </form>
@@ -396,4 +396,4 @@ const UpdateStudent = ({ token, setUserMethod, logout }) => {
   );
 };
 
-export default UpdateStudent;
+export default Updatestudent;
