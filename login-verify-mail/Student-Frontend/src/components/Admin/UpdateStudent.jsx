@@ -17,17 +17,17 @@
 // import SchoolIcon from '@mui/icons-material/School';
 // import SaveIcon from '@mui/icons-material/Save';
 
-// const Updatestudent = ({ token, setstudent, logout }) => {
+// const UpdateStudent = ({ token, setUser, logout }) => {
 //   const { id } = useParams();
-//   const [student, setstudent] = useState({ name: '', age: '', email: '', major: '' });
+//   const [student, setStudent] = useState({ name: '', age: '', email: '', major: '' });
 
 //   useEffect(() => {
 //     axiosInstance.get(`/admin/${id}`, {
 //       headers: { Authorization: `Bearer ${token}` },
 //     })
 //       .then(response => {
-//         setstudent(response.data.data);
-//         toast.success('student data loaded successfully');
+//         setStudent(response.data.data);
+//         toast.success('Student data loaded successfully');
 //       })
 //       .catch(error => {
 //         console.error('Error fetching student:', error);
@@ -36,7 +36,7 @@
 //   }, [id]);
 
 //   const handleChange = (e) => {
-//     setstudent({ ...student, [e.target.name]: e.target.value });
+//     setStudent({ ...student, [e.target.name]: e.target.value });
 //   };
 
 //   const handleSubmit = async (e) => {
@@ -167,14 +167,14 @@
 //           startIcon={<SaveIcon />}
 //           fullWidth
 //         >
-//           Update student
+//           Update Student
 //         </Button>
 //       </form>
 //     </Paper>
 //   );
 // };
 
-// export default Updatestudent;
+// export default UpdateStudent;
 
 
 
@@ -207,17 +207,17 @@ import SchoolIcon from '@mui/icons-material/School';
 import SaveIcon from '@mui/icons-material/Save';
 import CheckIcon from '@mui/icons-material/Check';
 
-const Updatestudent = ({ token, setstudentMethod, logout }) => {
+const UpdateStudent = ({ token, setUserMethod, logout }) => {
   const { id } = useParams();
-  const [student, setstudent] = useState({ name: '', age: '', email: '', major: '', isFormVerified: false });
+  const [student, setStudent] = useState({ name: '', age: '', email: '', major: '', isFormVerified: false });
 
   useEffect(() => {
     axiosInstance.get(`/admin/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
-        setstudent(response.data.data);
-        toast.success('student data loaded successfully');
+        setStudent(response.data.data);
+        toast.success('Student data loaded successfully');
       })
       .catch(error => {
         console.error('Error fetching student:', error);
@@ -226,7 +226,7 @@ const Updatestudent = ({ token, setstudentMethod, logout }) => {
   }, [id]);
 
   const handleChange = (e) => {
-    setstudent({ ...student, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -269,11 +269,11 @@ const Updatestudent = ({ token, setstudentMethod, logout }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.success) {
-        setstudent((prevstudent) => ({
-          ...prevstudent,
+        setStudent((prevStudent) => ({
+          ...prevStudent,
           isFormVerified: true,
         }));
-        toast.success("student verified successfully");
+        toast.success("Student verified successfully");
       }
     } catch (error) {
       console.error("Error verifying student:", error);
@@ -375,7 +375,7 @@ const Updatestudent = ({ token, setstudentMethod, logout }) => {
           startIcon={<SaveIcon />}
           fullWidth
         >
-          Update student
+          Update Student
         </Button>
 
         {/* Verify Button */}
@@ -388,7 +388,7 @@ const Updatestudent = ({ token, setstudentMethod, logout }) => {
             fullWidth
             style={{ marginTop: '20px' }}
           >
-            Verify student
+            Verify Student
           </Button>
         )}
       </form>
@@ -396,4 +396,4 @@ const Updatestudent = ({ token, setstudentMethod, logout }) => {
   );
 };
 
-export default Updatestudent;
+export default UpdateStudent;

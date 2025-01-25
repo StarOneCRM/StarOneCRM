@@ -3,14 +3,14 @@
 // import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 // import Login from './components/Auth/Login';
 // import Signup from './components/Auth/Signup';
-// import studentDashboard from './components/Admin/studentDashboard';
+// import StudentDashboard from './components/Admin/StudentDashboard';
 // import FillForm from './components/Auth/FillForm';
 // import NotVerified from './components/Auth/NotVerified';
-// import Updatestudent from './components/Admin/Updatestudent';
+// import UpdateStudent from './components/Admin/UpdateStudent';
 // import Profile from './components/Profile/profile';
 
 // const AppRoutes = () => {
-//     const { token, student, setstudentMethod, logout, handleLogin, handleSignup } = useGlobalContext();
+//     const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
 
 //     if (!token) {
 //         return (
@@ -22,16 +22,16 @@
 //         );
 //     }
 
-//     if (student && !student.isFormFilled) {
+//     if (user && !user.isFormFilled) {
 //         return (
 //             <Routes>
-//                 <Route path="/fill-form" element={<FillForm logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+//                 <Route path="/fill-form" element={<FillForm logout={logout} token={token} setUserMethod={setUserMethod} />} />
 //                 <Route path="*" element={<Navigate to="/fill-form" />} />
 //             </Routes>
 //         );
 //     }
 
-//     if (student && !student.isFormVerified) {
+//     if (user && !user.isFormVerified) {
 //         return (
 //             <Routes>
 //                 <Route path="/verifying" element={<NotVerified logout={logout} />} />
@@ -40,21 +40,21 @@
 //         );
 //     }
 
-//     if (student && !student.isAdmin) {
+//     if (user && !user.isAdmin) {
 //         return (
 //             <Routes>
-//                 {/* <Route path="/profile/:id" element={<Profile logout={logout} token={token} setstudent={setstudent} />} />
-//                 <Route path="*" element={<Navigate to={`/profile/${student._id}`} />} /> */}
-//                 <Route path="/profile" element={<Profile logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+//                 {/* <Route path="/profile/:id" element={<Profile logout={logout} token={token} setUser={setUser} />} />
+//                 <Route path="*" element={<Navigate to={`/profile/${user._id}`} />} /> */}
+//                 <Route path="/profile" element={<Profile logout={logout} token={token} setUserMethod={setUserMethod} />} />
 //                 <Route path="*" element={<Navigate to={`/profile`} />} />
 //             </Routes>
 //         );
 //     }
 
-//     if (student && student.isAdmin) {
+//     if (user && user.isAdmin) {
 //         return (
 //             <Routes>
-//                 <Route path="*" element={<studentDashboard logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+//                 <Route path="*" element={<StudentDashboard logout={logout} token={token} setUserMethod={setUserMethod} />} />
 //             </Routes>
 //         );
 //     }
@@ -79,14 +79,14 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import studentDashboard from './components/Admin/studentDashboard';
+import StudentDashboard from './components/Admin/StudentDashboard';
 import FillForm from './components/Auth/FillForm';
 import NotVerified from './components/Auth/NotVerified';
-import Updatestudent from './components/Admin/Updatestudent';
+import UpdateStudent from './components/Admin/UpdateStudent';
 import Profile from './components/Profile/profile';
 
 const AppRoutes = () => {
-    const { token, student, setstudentMethod, logout, handleLogin, handleSignup } = useGlobalContext();
+    const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
 
     if (!token) {
         return (
@@ -98,16 +98,16 @@ const AppRoutes = () => {
         );
     }
 
-    if (student && !student.isFormFilled) {
+    if (user && !user.isFormFilled) {
         return (
             <Routes>
-                <Route path="/fill-form" element={<FillForm logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+                <Route path="/fill-form" element={<FillForm logout={logout} token={token} setUserMethod={setUserMethod} />} />
                 <Route path="*" element={<Navigate to="/fill-form" />} />
             </Routes>
         );
     }
 
-    if (student && !student.isFormVerified) {
+    if (user && !user.isFormVerified) {
         return (
             <Routes>
                 <Route path="/verifying" element={<NotVerified logout={logout} />} />
@@ -116,19 +116,19 @@ const AppRoutes = () => {
         );
     }
 
-    if (student && !student.isAdmin) {
+    if (user && !user.isAdmin) {
         return (
             <Routes>
-                <Route path="/profile" element={<Profile logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+                <Route path="/profile" element={<Profile logout={logout} token={token} setUserMethod={setUserMethod} />} />
                 <Route path="*" element={<Navigate to={`/profile`} />} />
             </Routes>
         );
     }
 
-    if (student && student.isAdmin) {
+    if (user && user.isAdmin) {
         return (
             <Routes>
-                <Route path="*" element={<studentDashboard logout={logout} token={token} setstudentMethod={setstudentMethod} />} />
+                <Route path="*" element={<StudentDashboard logout={logout} token={token} setUserMethod={setUserMethod} />} />
             </Routes>
         );
     }
