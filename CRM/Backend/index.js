@@ -6,6 +6,7 @@ const connection = require("./db");
 const adminRoutes = require("./routes/admin.routes");
 const userRoutes = require("./routes/user.routes");
 const profileRoutes = require("./routes/profile.routes")
+const chatRoutes = require("./routes/chat.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -38,6 +39,6 @@ app.get("/", (req, res) => {
 app.use("/api/admin", adminRoutes);
 app.use("/api", userRoutes);
 app.use("/api/profile", profileRoutes);
-
+app.use("/api/chat", chatRoutes);
 // Start server
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

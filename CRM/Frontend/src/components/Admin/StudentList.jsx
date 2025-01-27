@@ -15,6 +15,7 @@ const UserList = ({ token, setUserMethod, logout }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterVerified, setFilterVerified] = useState(0); 
   const [filterAdmin, setFilterAdmin] = useState(0); 
+  const [filterRole, setFilterRole] = useState(0); 
   const [selectedUsers, setSelectedUsers] = useState([]); 
   const navigate = useNavigate();
 
@@ -116,6 +117,9 @@ const UserList = ({ token, setUserMethod, logout }) => {
     // Apply Admin filter
     if (filterAdmin === 1 && !user.isAdmin) return false; // Only Admin
     if (filterAdmin === 2 && user.isAdmin) return false; // Only Not Admin
+
+    if (filterRole === 1 && user.role === "employee") return false; // Only Admin
+    if (filterRole === 2 && user.role === "customer") return false; // Only Not Admin
 
     return (
       user.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -266,6 +270,17 @@ const UserList = ({ token, setUserMethod, logout }) => {
           }}
         >
           Admin
+        </Button>
+        <Button
+          variant={filterRole !== 0 ? "contained" : "outlined"}
+          color="warning"
+          onClick={() => setFilterRole((prev) => (prev + 1) % 3)} // Cycle through 0, 1, 2
+          style={{ marginRight: "10px", 
+            backgroundColor: filterRole === 1 ? "#f57c00" : filterRole === 2 ? "#1976d2" : "",
+            color: filterRole !== 0 ? "white" : "",
+          }}
+        >
+          Role
         </Button>
         <Button
           variant="contained"

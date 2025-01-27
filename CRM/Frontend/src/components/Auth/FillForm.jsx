@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axiosInstance from '../../utils/axios';
 
 function FillForm({ token, setUserMethod, logout }) {
-  const [formData, setFormData] = useState({ Task: '' });
+  const [formData, setFormData] = useState({ Taskassigned: '' });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,8 +54,8 @@ function FillForm({ token, setUserMethod, logout }) {
             fullWidth
             variant="outlined"
             label="Task"
-            name="Task"
-            value={formData.Task}
+            name="Taskassigned"
+            value={formData.Taskassigned}
             onChange={handleChange}
             required
             multiline

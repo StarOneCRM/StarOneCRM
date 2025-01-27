@@ -3,6 +3,8 @@ const { User } = require("../models/user.model");
 const { OTP } = require("../models/otp.model");
 const { sendEmail } = require("../utils/email");
 const jwt = require("jsonwebtoken");
+const Task = require("../models/task.model"); // Import Task model
+
 
 // Generate OTP
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
@@ -74,7 +76,6 @@ exports.register = async (req, res) => {
     }
 };
 
-
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -121,8 +122,6 @@ exports.login = async (req, res) => {
     }
 };
 
-        
-
 exports.checkForm = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -138,18 +137,45 @@ exports.checkForm = async (req, res) => {
     }
 };
 
-exports.fillForm = async (req, res) => {
-    const { Task } = req.body;
-    try {
-        const user = await User.findByIdAndUpdate(
-            req.user.id,
-            { Task, isFormFilled: true },
-            { new: true }
-        );
+// exports.fillForm = async (req, res) => {
+//     const { Task } = req.body;
+//     try {
+//         const user = await User.findByIdAndUpdate(
+//             req.user.id,
+//             { Task, isFormFilled: true },
+//             { new: true }
+//         );
 
+//         if (!user) return res.status(404).json({ message: "User not found" });
+
+//         res.json({ message: "Form successfully filled", user });
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// };
+
+
+exports.fillForm = async (req, res) => {
+    const { Taskassigned } = req.body;
+    title = "Welcome Task";
+    try {
+        const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        res.json({ message: "Form successfully filled", user });
+        // Create a new task
+        const task = new Task({
+            title,
+            description : Taskassigned,
+            customer: req.user.id,
+        });
+        await task.save();
+
+        // Update the user's tasksCreated array
+        user.tasksAssigned.push(task._id);
+        user.isFormFilled = true;
+        await user.save();
+
+        res.json({ message: "Form successfully filled and task assigned", user });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
