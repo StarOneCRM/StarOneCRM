@@ -8,6 +8,7 @@ import FillForm from './components/Auth/FillForm';
 import NotVerified from './components/Auth/NotVerified';
 import UpdateStudent from './components/Admin/UpdateStudent';
 import Profile from './components/Profile/profile';
+import UserProfile from './components/Profile/UserProfile';
 import theme from './utils/theme';
 import { ThemeProvider } from '@mui/material/styles';
 
@@ -45,8 +46,9 @@ const AppRoutes = () => {
     if (user && !user.isAdmin) {
         return (
             <Routes>
-                <Route path="/profile" element={<Profile logout={logout} token={token} setUserMethod={setUserMethod} />} />
-                <Route path="*" element={<Navigate to={`/profile`} />} />
+                <Route path="*" element={<UserProfile logout={logout} token={token} setUserMethod={setUserMethod} theme={theme} />} />
+                {/* <Route path="/profile" element={<UserProfile logout={logout} token={token} setUserMethod={setUserMethod} />} />
+                <Route path="*" element={<Navigate to={`/profile`} />} /> */}
             </Routes>
         );
     }

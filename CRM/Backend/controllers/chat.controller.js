@@ -218,7 +218,7 @@ exports.assignCustomerToEmployee = async (req, res) => {
         employee.assignedPeople.push(customerId);
         customer.assignedPeople.push(employeeId);
         employee.tasksAssigned.push(taskId);
-        customer.tasksAssigned.push(taskId);
+        // customer.tasksAssigned.push(taskId);
 
         // Add the task to the employee's and customer's task lists
         employee.tasks.push(taskId);
@@ -311,7 +311,8 @@ exports.getMessagesByTask = async (req, res) => {
         }
         // console.log(task.customer.toString(), task.employee?.toString(), req.user.id.toString());
         // Ensure the user is part of the task
-        if (![task.customer._id.toString(), task.employee._id.toString()].includes(req.user.id.toString())) {
+        console.log(task)
+        if (![task.customer.id.toString(), task.employee.id.toString()].includes(req.user.id.toString())) {
             return res.status(403).json({ error: "You are not authorized to view messages for this task" });
         }
 
