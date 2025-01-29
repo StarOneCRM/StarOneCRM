@@ -90,7 +90,11 @@ const UserProfile = ({ token, setUserMethod, logout, theme }) => {
         </AppBar>
 
         {/* Main Content */}
-        <Container sx={{ my: 4 }}>
+        <Container 
+        // style={{ marginTop:0, paddingBottom:0 }}
+        // sx={{ my: 4 }}
+        // sx={{ mt: 0, mb: 0 }}
+        >
           <Routes>
             <Route path="/chat" element={<ChatPage logout={logout} token={token} setUserMethod={setUserMethod} />} />
             {/* <Route path="/" element={<StudentList logout={logout} token={token} setUserMethod={setUserMethod} />} />
