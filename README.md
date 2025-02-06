@@ -255,37 +255,37 @@ Added the ability for an **Admin** to assign a **Customer** to an **Employee** a
 
 <details>
 <summary>Day 48 (08-02-25)</summary>
-Restricted **Customers** and **Employees** to view only their own profiles. Introduced an access control mechanism ensuring they cannot access or modify others’ profiles.
+ **Holiday**
 </details>
 
 <details>
 <summary>Day 49 (09-02-25)</summary>
-Developed a **chat functionality** for assigned tasks. Customers and Employees can communicate only with their assigned individual to discuss tasks.
+ **Holiday**
 </details>
 
 <details>
 <summary>Day 50 (10-02-25)</summary>
-Implemented real-time chat functionality for assigned tasks. Messages are stored in the backend, and users receive real-time updates.
+  Restricted **Customers** and **Employees** to view only their own profiles. Introduced an access control mechanism ensuring they cannot access or modify others’ profiles.
 </details>
 
 <details>
 <summary>Day 51 (11-02-25)</summary>
-Created an **Admin Panel UI** for task assignment and chat monitoring. Developed a backend system to enable admins to assign and track tasks efficiently.
+  Developed a **chat functionality** for assigned tasks. Customers and Employees can communicate only with their assigned individual to discuss tasks.
 </details>
 
 <details>
 <summary>Day 52 (12-02-25)</summary>
-Tested the full system, including user roles, task creation, verification, assignment, and chat. Fixed bugs related to user access restrictions and task assignment.
+  Implemented real-time chat functionality for assigned tasks. Messages are stored in the backend, and users receive real-time updates.
 </details>
-
-This includes all the new tasks you mentioned while keeping the structure consistent with your previous logs. Let me know if you want any modifications! 🚀
 
 <details>
 <summary>Day 53 (13-02-25)</summary>
+  Created an **Admin Panel UI** for task assignment and chat monitoring. Developed a backend system to enable admins to assign and track tasks efficiently.
 </details>
 
 <details>
 <summary>Day 54 (14-02-25)</summary>
+  Tested the full system, including user roles, task creation, verification, assignment, and chat. Fixed bugs related to user access restrictions and task assignment.
 </details>
 
 <details>
