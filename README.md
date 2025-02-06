@@ -5,12 +5,12 @@
 
 <details>
 <summary>Day 1 (23-12-24)</summary>
-Met the employees and got to know the team leads and their respective tasks. There wasn’t much work for me on the first day. I familiarized myself with the projects they were working on and discussed my strengths with the team. They assessed which team or project I might be suitable for. I was assigned a task to implement API CRUD operations for a student management system.
+Met the employees and got to know the team leads and their respective tasks. There wasn’t much work for me on the first day. I familiarized myself with the projects they were working on and discussed my strengths with the team. They assessed which team or project I might be suitable for. I was assigned a task to implement API CRUD operations for a CRM.
 </details>
 
 <details>
 <summary>Day 2 (24-12-24)</summary>
-Worked on the Student CRUD task. Added API calls to `/crud/` for creating a student, deleting a student, updating student data, and reading a list of students with all their details.
+Worked on the CRM CRUD task. Added API calls to `/crud/` for creating a user, deleting a user, updating user data, and reading a list of users with all their details.
 </details>
 
 <details>
@@ -25,7 +25,7 @@ Hosted the frontend and backend separately on Azure using Azure Function App and
 
 <details>
 <summary>Day 5 (27-12-24)</summary>
-Integrated the student list data into a `react-data-table-component`. Added functionality for searching and sorting the data by name, role, age, and email. Updated the UI for the student data table using the selected color palette.
+Integrated the user list data into a `react-data-table-component`. Added functionality for searching and sorting the data by name, role, age, and email. Updated the UI for the user data table using the selected color palette.
 </details>
 
 <details>
@@ -40,7 +40,7 @@ Integrated the student list data into a `react-data-table-component`. Added func
 
 <details>
 <summary>Day 8 (30-12-24)</summary>
-Hosted the application with the new UI and populated it with 4,400 dummy student records generated through API calls using a JavaScript script executed with Node.js. Tested the sorting and searching functionalities.
+Hosted the application with the new UI and populated it with 4,400 dummy user records generated through API calls using a JavaScript script executed with Node.js. Tested the sorting and searching functionalities.
 </details>
 
 <details>
@@ -105,7 +105,7 @@ Created a data flow diagram for authentication and show it to team lead.
 
 <details>
 <summary>Day 19 (10-01-25)</summary>
- Added variables `isFormFilled`, `isFormValidated`, and `Token` to validate student accounts. Implemented functionality to ensure only admins can validate and allow students to update their accounts. Tested on Azure and demonstrated to the team lead.
+ Added variables `isFormFilled`, `isFormValidated`, and `Token` to validate user accounts. Implemented functionality to ensure only admins can validate and allow users to update their accounts. Tested on Azure and demonstrated to the team lead.
 </details>
 
 <details>
@@ -175,7 +175,7 @@ Added frontend UI feedback for invalid OTPs and incorrect email formats using re
 
 <details>
 <summary>Day 33 (24-01-25)</summary>
-mproved admin routes to allow bulk validation of student accounts. Tested by simulating high-traffic scenarios on Azure.
+mproved admin routes to allow bulk validation of user accounts. Tested by simulating high-traffic scenarios on Azure.
 </details>
 
 <details>
@@ -190,7 +190,7 @@ mproved admin routes to allow bulk validation of student accounts. Tested by sim
 
 <details>
 <summary>Day 36 (27-01-25)</summary>
-Fixed issues with the student update functionality. Verified changes and tested compatibility with backend validation logic.
+Fixed issues with the user update functionality. Verified changes and tested compatibility with backend validation logic.
 </details>
 
 <details>
@@ -235,41 +235,50 @@ Conducted a final round of testing and documentation for the login, validation, 
 
 <details>
 <summary>Day 44 (04-02-25)</summary>
+Created three types of users: **Admin, Customer, and Employee**. Implemented role-based access control to ensure users could only access specific functionalities based on their roles.
 </details>
 
 <details>
 <summary>Day 45 (05-02-25)</summary>
+Developed a task creation system where a **Customer** can create a task request. Integrated the feature with the backend API and ensured data validation.  
 </details>
 
 <details>
 <summary>Day 46 (06-02-25)</summary>
+Implemented task verification functionality. An **Admin** can review and verify a task created by a **Customer** before assigning it further.  
 </details>
 
 <details>
 <summary>Day 47 (07-02-25)</summary>
+Added the ability for an **Admin** to assign a **Customer** to an **Employee** after verification. Implemented role-based API calls to restrict actions based on user type.
 </details>
 
 <details>
 <summary>Day 48 (08-02-25)</summary>
-**Holiday**
+Restricted **Customers** and **Employees** to view only their own profiles. Introduced an access control mechanism ensuring they cannot access or modify others’ profiles.
 </details>
 
 <details>
 <summary>Day 49 (09-02-25)</summary>
-**Holiday**
+Developed a **chat functionality** for assigned tasks. Customers and Employees can communicate only with their assigned individual to discuss tasks.
 </details>
 
 <details>
 <summary>Day 50 (10-02-25)</summary>
+Implemented real-time chat functionality for assigned tasks. Messages are stored in the backend, and users receive real-time updates.
 </details>
 
 <details>
 <summary>Day 51 (11-02-25)</summary>
+Created an **Admin Panel UI** for task assignment and chat monitoring. Developed a backend system to enable admins to assign and track tasks efficiently.
 </details>
 
 <details>
 <summary>Day 52 (12-02-25)</summary>
+Tested the full system, including user roles, task creation, verification, assignment, and chat. Fixed bugs related to user access restrictions and task assignment.
 </details>
+
+This includes all the new tasks you mentioned while keeping the structure consistent with your previous logs. Let me know if you want any modifications! 🚀
 
 <details>
 <summary>Day 53 (13-02-25)</summary>
