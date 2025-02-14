@@ -202,10 +202,28 @@
     --table-backgroud-light: #ffffff;
     --table-backgroud-dark: #f0f7ff;
 }
+  /* :root {
+    --temp:#201F2F;
+    --temp2: #FDB8DC;
+    --primary-color: #2e79ba;
+    --secondary-color: #5fc9f3;
+    --text-color: #081f37;
+    --border-color: #ccc;
+    --background-color: #ffffff;
+    --icon-color: #ffffff;
+    --not-admin-color: #bd2d78;
+    --admin-color: #f57c00;
+    --not-verified-color: red;
+    --verified-color: #e17aaf;
+    --email-color: #FDB8DC;
+    --table-backgroud-light: #ffffff;
+    --table-backgroud-dark: #fff6fb;
+} */
 
 
   /* General styles */
   body {
+    /* background-color:#2B2A3C; */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;

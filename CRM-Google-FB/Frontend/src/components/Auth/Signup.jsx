@@ -450,7 +450,7 @@ function Signup() {
 
         return (
                 <Container 
-                        maxWidth="lg" 
+                        maxWidth="md" 
                         sx={{ 
                                 display: "flex", 
                                 justifyContent: "center", 

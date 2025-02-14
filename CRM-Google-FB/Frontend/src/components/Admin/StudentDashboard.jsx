@@ -1,6 +1,19 @@
 import React from "react";
-import { HashRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom";
-import { AppBar, Toolbar, Typography, IconButton, Box, Container } from "@mui/material";
+import {
+  HashRouter as Router,
+  Route,
+  Routes,
+  Link,
+  Navigate,
+} from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Box,
+  Container,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ListIcon from "@mui/icons-material/List";
@@ -24,9 +37,7 @@ const Footer = () => (
       mt: "auto",
     }}
   >
-    <Typography variant="body2">
-      © {new Date().getFullYear()} CRM.
-    </Typography>
+    <Typography variant="body2">© {new Date().getFullYear()} CRM.</Typography>
   </Box>
 );
 
@@ -44,7 +55,33 @@ const StudentDashboard = ({ token, setUserMethod, logout, theme }) => {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              CRM
+              <span
+                style={{
+                  color: "#FFFFFF",
+                }}
+              >
+                Star
+              </span>
+              <span
+                style={{
+                  color: "#FDB8DC",
+                  fontStyle: "italic",
+                  textShadow: "0.2px 0.3px 0px #FFFFFF",
+                }}
+              >
+                One
+              </span>{" "}
+              <span
+                style={{
+                  background: "#FDB8DC",
+                  color: "#201F2F",
+                  borderRadius: "50px",
+                  paddingRight: "19px",
+                  paddingLeft: "15px",
+                }}
+              >
+                CRM
+              </span>
             </Typography>
             <IconButton
               color="inherit"
@@ -92,13 +129,77 @@ const StudentDashboard = ({ token, setUserMethod, logout, theme }) => {
         {/* Main Content */}
         <Container sx={{ my: 4 }}>
           <Routes>
-            <Route path="/chat" element={<ChatPage logout={logout} token={token} setUserMethod={setUserMethod} />} />
-            <Route path="/" element={<StudentList logout={logout} token={token} setUserMethod={setUserMethod} />} />
-            <Route path="/add" element={<AddStudent logout={logout} token={token} setUserMethod={setUserMethod} />} />
-            <Route path="/update/:id" element={<UpdateStudent logout={logout} token={token} setUserMethod={setUserMethod} />} />
-            <Route path="/profile" element={<Profile logout={logout} token={token} setUserMethod={setUserMethod} />} />
-            <Route path="/assign" element={<AssignUserToEmployee logout={logout} token={token} setUserMethod={setUserMethod} />} />
-            <Route path="*" element={<Navigate to="/" logout={logout} token={token} setUserMethod={setUserMethod} />} />
+            <Route
+              path="/chat"
+              element={
+                <ChatPage
+                  logout={logout}
+                  token={token}
+                  setUserMethod={setUserMethod}
+                />
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <StudentList
+                  logout={logout}
+                  token={token}
+                  setUserMethod={setUserMethod}
+                />
+              }
+            />
+            <Route
+              path="/add"
+              element={
+                <AddStudent
+                  logout={logout}
+                  token={token}
+                  setUserMethod={setUserMethod}
+                />
+              }
+            />
+            <Route
+              path="/update/:id"
+              element={
+                <UpdateStudent
+                  logout={logout}
+                  token={token}
+                  setUserMethod={setUserMethod}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  logout={logout}
+                  token={token}
+                  setUserMethod={setUserMethod}
+                />
+              }
+            />
+            <Route
+              path="/assign"
+              element={
+                <AssignUserToEmployee
+                  logout={logout}
+                  token={token}
+                  setUserMethod={setUserMethod}
+                />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <Navigate
+                  to="/"
+                  logout={logout}
+                  token={token}
+                  setUserMethod={setUserMethod}
+                />
+              }
+            />
           </Routes>
         </Container>
 

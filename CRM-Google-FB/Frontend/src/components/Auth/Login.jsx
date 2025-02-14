@@ -15,7 +15,7 @@
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     const success = await handleLogin({ email, password }); // Pass both email and password
-    
+
 //     if (success) {
 //       // Navigate to a new page after successful login
 //       navigate('/fill-form');
@@ -90,16 +90,16 @@
 //           Login
 //         </Button>
 //       </form>
-      
-//       <GoogleLogin />     
-      
-//       <Typography 
-//         variant="body2" 
+
+//       <GoogleLogin />
+
+//       <Typography
+//         variant="body2"
 //         style={{ textAlign: 'center', marginTop: '0px' }}
 //       >
-//         Don't have an account? 
-//         <Link 
-//           onClick={() => navigate('/signup')} 
+//         Don't have an account?
+//         <Link
+//           onClick={() => navigate('/signup')}
 //           style={{ cursor: 'pointer', color: '#1976d2', textDecoration: 'none' }}
 //         >
 //           {" Sign Up"}
@@ -110,62 +110,6 @@
 // }
 
 // export default Login;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState } from "react";
 // import {
@@ -301,52 +245,6 @@
 
 // export default Login;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState } from "react";
 import {
   Button,
@@ -364,9 +262,9 @@ import LockIcon from "@mui/icons-material/Lock";
 import { useNavigate } from "react-router-dom";
 import GoogleLogin from "./GoogleLogin";
 import "react-toastify/dist/ReactToastify.css";
-import side2 from '../../logos/side2.png';
-import bg3 from '../../logos/bg3.png';
-import bg2 from '../../logos/bg2.png';
+import side2 from "../../logos/side2.png";
+import bg3 from "../../logos/bg3.png";
+import bg2 from "../../logos/bg2.png";
 
 function Login({ handleLogin }) {
   const [email, setEmail] = useState("");
@@ -380,20 +278,21 @@ function Login({ handleLogin }) {
   };
 
   return (
-    <Container 
-    maxWidth="lg" 
-    sx={{ 
-      display: "flex", 
-      justifyContent: "center", 
-      alignItems: "center", 
-      minHeight: "100vh", 
-      // backgroundImage: `url(${bg2})`, 
-      backgroundColor: "#FFFFFF",
-      // backgroundSize:"", 
-      // backgroundSize: "cover", 
-      // backgroundPosition: "center", 
-      minWidth: "100%", 
-    }}>
+    <Container
+      maxWidth="md"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        // backgroundImage: `url(${bg2})`,
+        backgroundColor: "#FFFFFF",
+        // backgroundSize:"",
+        // backgroundSize: "cover",
+        // backgroundPosition: "center",
+        minWidth: "100%",
+      }}
+    >
       <Paper
         elevation={4}
         sx={{
@@ -409,7 +308,7 @@ function Login({ handleLogin }) {
           sx={{
             display: { xs: "none", sm: "flex" },
             flex: 1,
-            // backgroundImage: `url(${bg3})`, 
+            // backgroundImage: `url(${bg3})`,
             backgroundColor: "#201F2F",
             // backgroundSize: "cover",
             // backgroundPosition: "center",
@@ -420,35 +319,86 @@ function Login({ handleLogin }) {
             padding: 4,
           }}
         >
-          <Typography variant="h3" fontWeight="bold" gutterBottom textAlign={"center"}
+          <Typography
+            variant="h3"
+            fontWeight="bold"
+            gutterBottom
+            textAlign={"center"}
             sx={{
               // fontFamily: "Anton",
               fontWeight: 600,
-              color:"#FFFFFF"
+              color: "#FFFFFF",
               // textShadow: "3px 5px 0px #425889",
-                // fontStyle: "normal",
+              // fontStyle: "normal",
+            }}
+          >
+            Star
+            <span
+              style={{
+                color: "#FDB8DC",
+                fontStyle: "italic",
+                textShadow: "2px 3px 0px #FFFFFF",
               }}
-              >
-              Star<span style={{color:"#FDB8DC", fontStyle:"italic", textShadow:"2px 3px 0px #FFFFFF" }}>One</span> <span style={{background:"#FDB8DC",color:"#201F2F", borderRadius:"50px", paddingRight:"19px", paddingLeft:"15px" }}>CRM</span>
-              </Typography>
-              <Typography variant="h6" textAlign="center"
-                    sx={{
-                          // fontFamily: "Anton",
-                          fontWeight: 600,
-                          // fontStyle: "normal",
-                          // textShadow: "1px 2px 0px #425889",
-                        }}
+            >
+              One
+            </span>{" "}
+            <span
+              style={{
+                background: "#FDB8DC",
+                color: "#201F2F",
+                borderRadius: "50px",
+                paddingRight: "19px",
+                paddingLeft: "15px",
+              }}
+            >
+              CRM
+            </span>
+          </Typography>
+          <Typography
+            variant="h6"
+            textAlign="center"
+            sx={{
+              // fontFamily: "Anton",
+              fontWeight: 600,
+              // fontStyle: "normal",
+              // textShadow: "1px 2px 0px #425889",
+            }}
           >
             {"Unlock endless possibilities to connect to you customers."}
-            
           </Typography>
-          <Typography  variant="h6" textAlign="center" marginTop={"20px"}sx={{
-                          // fontFamily: "Anton",
-                          fontWeight: 600,
-                          // fontStyle: "normal",
-                          // textShadow: "1px 2px 0px #425889",
-                        }}>
-          <span style={{borderRadius:"10px",color:"#201F2F", fontStyle:"", backgroundColor:"#FDB8DC", paddingRight:"10px", padding:"10px", marginTop:"20px" }}>Join us <span style={{color:"#201F2F", fontStyle:"italic", textDecoration:"underline" }}>today!</span></span>
+          <Typography
+            variant="h6"
+            textAlign="center"
+            marginTop={"20px"}
+            sx={{
+              // fontFamily: "Anton",
+              fontWeight: 600,
+              // fontStyle: "normal",
+              // textShadow: "1px 2px 0px #425889",
+            }}
+          >
+            <span
+              style={{
+                borderRadius: "10px",
+                color: "#201F2F",
+                fontStyle: "",
+                backgroundColor: "#FDB8DC",
+                paddingRight: "10px",
+                padding: "10px",
+                marginTop: "20px",
+              }}
+            >
+              Join us{" "}
+              <span
+                style={{
+                  color: "#201F2F",
+                  fontStyle: "italic",
+                  textDecoration: "underline",
+                }}
+              >
+                today!
+              </span>
+            </span>
           </Typography>
         </Box>
 
@@ -466,7 +416,11 @@ function Login({ handleLogin }) {
           <Typography variant="h4" fontWeight="bold" gutterBottom>
             Login
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%", maxWidth: 400 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ width: "100%", maxWidth: 400 }}
+          >
             <TextField
               fullWidth
               variant="outlined"
@@ -501,16 +455,26 @@ function Login({ handleLogin }) {
                 ),
               }}
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ mt: 2 }}
+            >
               Login
             </Button>
           </Box>
           <GoogleLogin />
           <Typography variant="body2" sx={{ mt: 2 }}>
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <Link
               onClick={() => navigate("/signup")}
-              sx={{ cursor: "pointer", color: "#1976d2", textDecoration: "none" }}
+              sx={{
+                cursor: "pointer",
+                color: "#1976d2",
+                textDecoration: "none",
+              }}
             >
               Sign Up
             </Link>
