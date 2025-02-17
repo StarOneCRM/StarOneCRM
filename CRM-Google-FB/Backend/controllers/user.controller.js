@@ -15,7 +15,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/facebook/callback",
+      callbackURL: "https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/auth/facebook/callback",
       profileFields: ["id", "displayName", "emails"],
       passReqToCallback: true,
     },
@@ -47,7 +47,7 @@ exports.facebookLogin = passport.authenticate("facebook", {
 exports.facebookCallback = (req, res, next) => {
   passport.authenticate("facebook", { session: false }, async (err, user) => {
     if (err || !user) {
-      return res.redirect("http://localhost:5173/auth-failed");
+      return res.redirect("https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net//auth-failed");
     }
 
     try {
@@ -56,13 +56,13 @@ exports.facebookCallback = (req, res, next) => {
       // Send token to frontend
       res.send(`
         <script>
-          window.opener.postMessage({ token: "${token}" }, "http://localhost:5173");
+          window.opener.postMessage({ token: "${token}" }, "https://polite-field-09918cc00.4.azurestaticapps.net");
           window.close();
         </script>
       `);
     } catch (error) {
       console.error("Facebook Callback Error:", error);
-      res.redirect("http://localhost:5173/auth-failed");
+      res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
     }
   })(req, res, next);
 };
@@ -110,7 +110,7 @@ exports.googleLogin = passport.authenticate("google", {
 exports.googleCallback = (req, res, next) => {
   passport.authenticate("google", { session: false }, async (err, user) => {
     if (err || !user) {
-      return res.redirect("http://localhost:5173/auth-failed");
+      return res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
     }
 
     try {
@@ -119,13 +119,13 @@ exports.googleCallback = (req, res, next) => {
       // Send token to frontend
       res.send(`
         <script>
-          window.opener.postMessage({ token: "${token}" }, "http://localhost:5173");
+          window.opener.postMessage({ token: "${token}" }, "https://polite-field-09918cc00.4.azurestaticapps.net");
           window.close();
         </script>
       `);
     } catch (error) {
       console.error("Google Callback Error:", error);
-      res.redirect("http://localhost:5173/auth-failed");
+      res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
     }
   })(req, res, next);
 };
