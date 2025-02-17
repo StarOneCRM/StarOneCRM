@@ -298,11 +298,11 @@ const GoogleLogin = () => {
 
   const handleOAuthLogin = (providerId) => {
     setLoadingProvider(providerId);
-    const authUrl = `http://localhost:5000/auth/${providerId}?prompt=select_account`;
+    const authUrl = `https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/auth/${providerId}?prompt=select_account`;
     const newWindow = window.open(authUrl, "_blank", "width=500,height=600");
 
     const handleMessage = (event) => {
-      if (event.origin !== "http://localhost:5000") return;
+      if (event.origin !== "https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net") return;
       const { token } = event.data;
       if (token) {
         localStorage.setItem("token", token);
