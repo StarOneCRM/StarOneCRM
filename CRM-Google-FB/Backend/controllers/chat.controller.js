@@ -2,98 +2,6 @@ const Message = require("../models/message.model");
 const User = require("../models/user.model").User;
 const Task = require("../models/task.model");
 
-// exports.sendMessage = async (req, res) => {
-//     try {
-//         const { receiverId, content, taskId } = req.body;
-
-//         // Validate sender, receiver, and content
-//         if (!req.user._id || !receiverId || !content) {
-//             return res.status(400).json({ error: "Invalid message data" });
-//         }
-
-//         // Check if the sender and receiver exist
-//         const sender = await User.findById(req.user._id);
-//         const receiver = await User.findById(receiverId);
-
-//         if (!sender || !receiver) {
-//             return res.status(404).json({ error: "Sender or Receiver not found" });
-//         }
-
-//         // Create and save the message
-//         const message = new Message({
-//             sender: req.user._id,
-//             receiver: receiverId,
-//             task: taskId || null, // Associate with task if provided
-//             content,
-//         });
-
-//         await message.save();
-
-//         res.status(201).json({ success: true, message: "Message sent", data: message });
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
-// exports.getMessages = async (req, res) => {
-//     try {
-//         const { userId } = req.params; // ID of the person the current user is chatting with
-
-//         // Validate if the user exists
-//         const chattingWith = await User.findById(userId);
-//         if (!chattingWith) {
-//             return res.status(404).json({ error: "User not found" });
-//         }
-
-//         // Fetch messages involving the current user and the other user
-//         const messages = await Message.find({
-//             $or: [
-//                 { sender: req.user._id, receiver: userId },
-//                 { sender: userId, receiver: req.user._id },
-//             ],
-//         })
-//             .sort({ timestamp: 1 }) // Sort by ascending order of timestamp
-//             .populate("sender", "name email role") // Populate sender details
-//             .populate("receiver", "name email role") // Populate receiver details
-//             .populate("task", "title description") // Populate task details
-//             .exec();
-
-//         // Extract unique tasks from messages
-//         const tasks = messages
-//             .filter(message => message.task)
-//             .map(message => message.task)
-//             .filter((task, index, self) => self.findIndex(t => t._id.toString() === task._id.toString()) === index);
-
-//         res.status(200).json({ success: true, messages, tasks });
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
-// exports.getAssignedPeople = async (req, res) => {
-//     try {
-//         // Fetch the logged-in user
-//         const user = await User.findById(req.user.id).populate("tasksAssigned", "_id").exec();
-
-//         if (!user) {
-//             return res.status(404).json({ error: "User not found" });
-//         }
-
-//         // Fetch full task details for each assigned task ID
-//         const tasksAssignedFullData = await Task.find({
-//             _id: { $in: user.tasksAssigned.map(task => task._id) },
-//         })
-//             .populate("customer", "name email") // Populate customer details
-//             .populate("employee", "name email") // Populate employee details
-//             .exec();
-
-//         res.status(200).json({ success: true, tasksAssigned: tasksAssignedFullData });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
 exports.getAssignedPeople = async (req, res) => {
     try {
         // Fetch the logged-in user
@@ -341,6 +249,98 @@ exports.getAssignedTasks = async (req, res) => {
         }
 
         res.status(200).json({ success: true, tasksAssigned: user.tasksAssigned });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Controllers Implementation
+// const Task = require("../models/task.model");
+// const Message = require("../models/message.model");
+// const User = require("../models/user.model").User;
+
+exports.createTask = async (req, res) => {
+    try {
+        const { title, description, customerId } = req.body;
+        const newTask = new Task({ title, description, customer: customerId });
+        await newTask.save();
+        res.status(201).json({ success: true, task: newTask });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.updateTask = async (req, res) => {
+    try {
+        const { taskId } = req.params;
+        const updatedTask = await Task.findByIdAndUpdate(taskId, req.body, { new: true });
+        console.log(updatedTask);
+        res.status(200).json({ success: true, task: updatedTask });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.deleteTask = async (req, res) => {
+    try {
+        const { taskId } = req.params;
+        await Task.findByIdAndDelete(taskId);
+        res.status(200).json({ success: true, message: "Task deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.getTaskById = async (req, res) => {
+    try {
+        const { taskId } = req.params;
+        const task = await Task.findById(taskId).populate("customer employee messages");
+        if (!task) return res.status(404).json({ error: "Task not found" });
+        res.status(200).json({ success: true, task });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.sendMessage = async (req, res) => {
+    try {
+        const { content, taskId } = req.body;
+        const senderId = req.user.id;
+        const message = new Message({ sender: senderId, task: taskId, content });
+        await message.save();
+        await Task.findByIdAndUpdate(taskId, { $push: { messages: message._id } });
+        res.status(201).json({ success: true, message });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.getMessagesByTask = async (req, res) => {
+    try {
+        const { taskId } = req.params;
+        const messages = await Message.find({ task: taskId }).populate("sender", "name email");
+        res.status(200).json({ success: true, messages });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

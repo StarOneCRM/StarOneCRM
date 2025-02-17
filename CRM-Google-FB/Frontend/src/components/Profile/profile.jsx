@@ -420,8 +420,17 @@ const Profile = ({ logout, setUserMethod, token }) => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Card>
+    <Container maxWidth="sm" sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+    style={{
+      padding: '30px',
+      margin: '20px auto',
+      maxWidth: '500px',
+      textAlign: 'center',
+    }}>
+      <Card sx={{
+        // display: 'flex', 
+        // flexDirection: 'column'
+        }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>
             {isEditing ? "Edit Profile" : "Profile Details"}
@@ -469,7 +478,7 @@ const Profile = ({ logout, setUserMethod, token }) => {
               <Button onClick={() => setIsEditing(true)} variant="contained" color="primary" fullWidth>
                 Edit Profile
               </Button>
-              <Button onClick={handleDelete} variant="outlined" color="secondary" fullWidth style={{ marginTop: 10 }}>
+              <Button onClick={handleDelete} variant="contained" color="primary" fullWidth style={{ marginTop: 10 }}>
                 Delete Profile
               </Button>
               <Button onClick={logout} variant="contained" color="primary" fullWidth style={{ marginTop: 10 }}>
