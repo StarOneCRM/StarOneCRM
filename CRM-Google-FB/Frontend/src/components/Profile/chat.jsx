@@ -3517,6 +3517,1842 @@
 
 
 
+// import React, { useState, useEffect, useRef } from "react";
+// import axiosInstance from "../../utils/axios";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import { Button, Box, Collapse, List, ListItem, Typography, TextField } from "@mui/material";
+
+// const ChatPage = () => {
+//     const [role, setRole] = useState("");
+//     const [taskslist, setTaskslist] = useState([]);
+//     const [selectedTaskId, setSelectedTaskId] = useState(null);
+//     const [messages, setMessages] = useState([]);
+//     const [newMessage, setNewMessage] = useState("");
+//     const [openTasks, setOpenTasks] = useState(true);
+//     const token = localStorage.getItem("token");
+//     const navigate = useNavigate();
+//     const messageEndRef = useRef(null);
+//     const userEmail = JSON.parse(localStorage.getItem("user")).email;
+//     const fetchProfile = async () => {
+//         try {
+//             const response = await axiosInstance.get("/profile");
+//             setRole(response.data.data.role);
+//         } catch (error) {
+//             console.error("Error fetching profile:", error);
+//             navigate("/login");
+//         }
+//     };
+
+//     const fetchAssignedTasks = async () => {
+//         try {
+//             const response = await axiosInstance.get("/chat/assigned-tasks/", {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setTaskslist(response.data.tasksAssigned);
+//             toast.success("Tasks fetched successfully");
+//         } catch (error) {
+//             console.error("Error fetching assigned tasks:", error);
+//             toast.error("Failed to fetch tasks");
+//             navigate("/"); 
+//         }
+//     };
+
+//     const fetchMessagesForTask = async (taskId) => {
+//         try {
+//             const response = await axiosInstance.get(`/chat/task/${taskId}/messages`, {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setMessages(response.data.messages);
+//             setSelectedTaskId(taskId);
+//         } catch (error) {
+//             console.error("Error fetching messages:", error);
+//             toast.error("Failed to fetch messages for the task");
+//         }
+//     };
+
+//     const sendMessage = async () => {
+//         if (!newMessage.trim()) return;
+
+//         try {
+//             const response = await axiosInstance.post(
+//                 `/chat/send`,
+//                 { taskId: selectedTaskId, content: newMessage },
+//                 {
+//                     headers: { Authorization: `Bearer ${token}` },
+//                 }
+//             );
+//             setMessages([...messages, response.data.data]);
+//             setNewMessage("");
+//         } catch (error) {
+//             console.error("Error sending message:", error);
+//             toast.error("Failed to send message");
+//         }
+//     };
+
+//     const handleKeyPress = (e) => {
+//         if (e.key === "Enter") {
+//             sendMessage();
+//         }
+//     };
+
+//     useEffect(() => {
+//         if (messageEndRef.current) {
+//             messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+//         }
+//     }, []);
+
+//     useEffect(() => {
+//         const initialize = async () => {
+//             await fetchProfile();
+//             await fetchAssignedTasks();
+//         };
+//         initialize();
+//     }, []);
+
+//     useEffect(() => {
+//         if (selectedTaskId) {
+//             const interval = setInterval(() => {
+//                 fetchMessagesForTask(selectedTaskId);
+//             }, 5000);
+//             return () => clearInterval(interval);
+//         }
+//     }, [selectedTaskId]);
+
+//     return (
+//         <Box
+//             display="flex"
+//             flexDirection={{ xs: "column", sm: "row" }} 
+//             sx={{ mt: 2, mb: 2 }}
+//             height="100%"
+//             bgcolor="#f4f6f8"
+//         >
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "25%" }, 
+//                     bgcolor: "white",
+//                     padding: 2,
+//                     overflowY: "auto",
+//                     marginBottom: { xs: 2, sm: 0 }, 
+//                 }}
+//             >
+//                 <Typography variant="h6" fontWeight="bold" marginBottom={2}>
+//                     Assigned Tasks
+//                 </Typography>
+//                 <Button
+//                     onClick={() => setOpenTasks(!openTasks)}
+//                     variant="outlined"
+//                     fullWidth
+//                     sx={{ marginBottom: 2 }}
+//                 >
+//                     {openTasks ? "Hide Tasks" : "Show Tasks"}
+//                 </Button>
+//                 <Collapse in={openTasks}>
+//                     <List>
+//                         {taskslist.length > 0 ? (
+//                             taskslist.map((task) => (
+//                                 <ListItem
+//                                     key={task.id}
+//                                     sx={{
+//                                         padding: 1.5,
+//                                         borderRadius: 1,
+//                                         cursor: "pointer",
+//                                         backgroundColor:
+//                                             selectedTaskId === task._id
+//                                                 ? "#1976d2"
+//                                                 : "transparent",
+//                                         color:
+//                                             selectedTaskId === task._id
+//                                                 ? "white"
+//                                                 : "inherit",
+//                                         "&:hover": {
+//                                             backgroundColor: "#e3f2fd",
+//                                         },
+//                                     }}
+//                                     onClick={() => fetchMessagesForTask(task._id)}
+//                                 >
+//                                     <Typography variant="body1" fontWeight="bold">
+//                                         {task.description}
+//                                     </Typography>
+//                                 </ListItem>
+//                             ))
+//                         ) : (
+//                             <Typography variant="body2">No tasks assigned</Typography>
+//                         )}
+//                     </List>
+//                 </Collapse>
+//             </Box>
+
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "75%" }, 
+//                     display: "flex",
+//                     flexDirection: "column",
+//                     bgcolor: "#f5f5f5",
+//                 }}
+//             >
+//                 {selectedTaskId ? (
+//                     <>
+//                         <Box
+//                             sx={{
+//                                 bgcolor: "white",
+//                                 display: "flex",
+//                                 justifyContent: "space-between",
+//                                 alignItems: "center",
+//                             }}
+//                         >
+//                             <Typography variant="h6" fontWeight="bold">
+//                                 Task Messages
+//                             </Typography>
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 flexGrow: 1,
+//                                 overflowY: "auto",
+//                                 bgcolor: "#ffffff",
+//                                 paddingBottom: 0,
+//                                 maxHeight: "calc(100vh - 150px)",
+//                             }}
+//                         >
+//                             {messages.length > 0 ? (
+//                                 messages
+//                                     .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+//                                     .map((msg, index) => (
+//                                         <Box
+//                                             key={index}
+//                                             sx={{
+//                                                 display: "flex",
+//                                                 justifyContent:
+//                                                     msg.sender.email === userEmail
+//                                                         ? "flex-end"
+//                                                         : "flex-start",
+//                                                 marginBottom: 2,
+//                                             }}
+//                                         >
+//                                             <Box
+//                                                 sx={{
+//                                                     minWidth: 40,
+//                                                     // display: "flex",
+//                                                     // alignItems: "center",
+//                                                     // textAlign: "center",
+//                                                     padding: 2,
+//                                                     borderRadius: 2,
+//                                                     maxWidth: "60%",
+//                                                     textAlign: msg.sender.email === userEmail
+//                                                             ? "left"
+//                                                             : "left",
+//                                                     bgcolor:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "#1976d2"
+//                                                             : "#e3f2fd",
+//                                                     color:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "white"
+//                                                             : "black",
+//                                                     position: "relative", // Add positioning for timestamp
+//                                                 }}
+//                                             >
+//                                                 {msg.content}
+                                                
+//                                                 <Typography 
+//                                                     variant="caption"
+//                                                     sx={{
+//                                                         position: "absolute", 
+//                                                         bottom: -20, 
+//                                                         right: 0, 
+//                                                         fontSize: "0.75rem", 
+//                                                         color: "gray"
+//                                                     }}
+//                                                 >
+//                                                     {new Date(msg.createdAt).toLocaleTimeString()}
+//                                                 </Typography>
+//                                             </Box>
+//                                         </Box>
+//                                     ))
+//                             ) : (
+//                                 <Typography variant="body2" color="textSecondary">
+//                                     No messages yet
+//                                 </Typography>
+//                             )}
+//                             <div ref={messageEndRef} />
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 display: "flex",
+//                                 alignItems: "center",
+//                                 bgcolor: "white",
+//                             }}
+//                         >
+//                             <TextField
+//                                 fullWidth
+//                                 value={newMessage}
+//                                 onChange={(e) => setNewMessage(e.target.value)}
+//                                 onKeyDown={handleKeyPress}
+//                                 placeholder="Type a message..."
+//                                 variant="outlined"
+//                                 size="small"
+//                                 sx={{
+//                                     borderRadius: 2,
+//                                     "& .MuiOutlinedInput-root": {
+//                                         borderRadius: 2,
+//                                     },
+//                                     fontSize: "0.875rem", // Smaller text size
+//                                 }}
+//                             />
+//                             <Button
+//                                 onClick={sendMessage}
+//                                 variant="contained"
+//                                 color="primary"
+//                                 sx={{
+//                                     padding: "6px 16px",
+//                                     borderRadius: 2,
+//                                     fontSize: "0.875rem", // Smaller text size
+//                                 }}
+//                             >
+//                                 Send
+//                             </Button>
+//                         </Box>
+//                     </>
+//                 ) : (
+//                     <Box
+//                         sx={{
+//                             display: "flex",
+//                             justifyContent: "center",
+//                             alignItems: "center",
+//                             height: "100%",
+//                         }}
+//                     >
+//                         <Typography variant="h5" color="textSecondary">
+//                             Select a task to view messages
+//                         </Typography>
+//                     </Box>
+//                 )}
+//             </Box>
+//         </Box>
+//     );
+// };
+
+// export default ChatPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from "react";
+// import axiosInstance from "../../utils/axios";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import { Button, Box, Collapse, List, ListItem, Typography, TextField } from "@mui/material";
+
+// const ChatPage = () => {
+//     const [role, setRole] = useState("");
+//     const [taskslist, setTaskslist] = useState([]);
+//     const [selectedTaskId, setSelectedTaskId] = useState(null);
+//     const [messages, setMessages] = useState([]);
+//     const [newMessage, setNewMessage] = useState("");
+//     const [openTasks, setOpenTasks] = useState(true);
+//     const token = localStorage.getItem("token");
+//     const navigate = useNavigate();
+//     const messageEndRef = useRef(null);
+//     const userEmail = JSON.parse(localStorage.getItem("user")).email;
+//     const fetchProfile = async () => {
+//         try {
+//             const response = await axiosInstance.get("/profile");
+//             setRole(response.data.data.role);
+//         } catch (error) {
+//             console.error("Error fetching profile:", error);
+//             navigate("/login");
+//         }
+//     };
+
+//     const fetchAssignedTasks = async () => {
+//         try {
+//             const response = await axiosInstance.get("/chat/assigned-tasks/", {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setTaskslist(response.data.tasksAssigned);
+//             toast.success("Tasks fetched successfully");
+//         } catch (error) {
+//             console.error("Error fetching assigned tasks:", error);
+//             toast.error("Failed to fetch tasks");
+//             navigate("/"); 
+//         }
+//     };
+
+//     const fetchMessagesForTask = async (taskId) => {
+//         try {
+//             const response = await axiosInstance.get(`/chat/task/${taskId}/messages`, {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setMessages(response.data.messages);
+//             setSelectedTaskId(taskId);
+//         } catch (error) {
+//             console.error("Error fetching messages:", error);
+//             toast.error("Failed to fetch messages for the task");
+//         }
+//     };
+
+//     const sendMessage = async () => {
+//         if (!newMessage.trim()) return;
+
+//         try {
+//             const response = await axiosInstance.post(
+//                 `/chat/send`,
+//                 { taskId: selectedTaskId, content: newMessage },
+//                 {
+//                     headers: { Authorization: `Bearer ${token}` },
+//                 }
+//             );
+//             setMessages([...messages, response.data.data]);
+//             setNewMessage("");
+//         } catch (error) {
+//             console.error("Error sending message:", error);
+//             toast.error("Failed to send message");
+//         }
+//     };
+
+//     const handleKeyPress = (e) => {
+//         if (e.key === "Enter") {
+//             sendMessage();
+//         }
+//     };
+
+//     useEffect(() => {
+//         if (messageEndRef.current) {
+//             messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+//         }
+//     }, []);
+
+//     useEffect(() => {
+//         const initialize = async () => {
+//             await fetchProfile();
+//             await fetchAssignedTasks();
+//         };
+//         initialize();
+//     }, []);
+
+//     useEffect(() => {
+//         if (selectedTaskId) {
+//             const interval = setInterval(() => {
+//                 fetchMessagesForTask(selectedTaskId);
+//             }, 5000);
+//             return () => clearInterval(interval);
+//         }
+//     }, [selectedTaskId]);
+
+//     return (
+//         <Box
+//             display="flex"
+//             flexDirection={{ xs: "column", sm: "row" }} 
+//             sx={{ mt: 2, mb: 2 }}
+//             height="100%"
+//             bgcolor="#f4f6f8"
+//         >
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "25%" }, 
+//                     bgcolor: "white",
+//                     padding: 2,
+//                     overflowY: "auto",
+//                     marginBottom: { xs: 2, sm: 0 }, 
+//                 }}
+//             >
+//                 <Typography variant="h6" fontWeight="bold" marginBottom={2}>
+//                     Assigned Tasks
+//                 </Typography>
+//                 <Button
+//                     onClick={() => setOpenTasks(!openTasks)}
+//                     variant="outlined"
+//                     fullWidth
+//                     sx={{ marginBottom: 2 }}
+//                 >
+//                     {openTasks ? "Hide Tasks" : "Show Tasks"}
+//                 </Button>
+//                 <Collapse in={openTasks}>
+//                     <List>
+//                         {taskslist.length > 0 ? (
+//                             taskslist.map((task) => (
+//                                 <ListItem
+//                                     key={task.id}
+//                                     sx={{
+//                                         padding: 1.5,
+//                                         borderRadius: 1,
+//                                         cursor: "pointer",
+//                                         backgroundColor:
+//                                             selectedTaskId === task._id
+//                                                 ? "#1976d2"
+//                                                 : "transparent",
+//                                         color:
+//                                             selectedTaskId === task._id
+//                                                 ? "white"
+//                                                 : "inherit",
+//                                         "&:hover": {
+//                                             backgroundColor: "#e3f2fd",
+//                                         },
+//                                     }}
+//                                     onClick={() => fetchMessagesForTask(task._id)}
+//                                 >
+//                                     <Typography variant="body1" fontWeight="bold">
+//                                         {task.description}
+//                                     </Typography>
+//                                 </ListItem>
+//                             ))
+//                         ) : (
+//                             <Typography variant="body2">No tasks assigned</Typography>
+//                         )}
+//                     </List>
+//                 </Collapse>
+//             </Box>
+
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "75%" }, 
+//                     display: "flex",
+//                     flexDirection: "column",
+//                     bgcolor: "#f5f5f5",
+//                 }}
+//             >
+//                 {selectedTaskId ? (
+//                     <>
+//                         <Box
+//                             sx={{
+//                                 bgcolor: "white",
+//                                 display: "flex",
+//                                 justifyContent: "space-between",
+//                                 alignItems: "center",
+//                             }}
+//                         >
+//                             <Typography variant="h6" fontWeight="bold">
+//                                 Task Messages
+//                             </Typography>
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 flexGrow: 1,
+//                                 overflowY: "auto",
+//                                 bgcolor: "#ffffff",
+//                                 paddingBottom: 0,
+//                                 maxHeight: "calc(100vh - 150px)",
+//                             }}
+//                         >
+//                             {messages.length > 0 ? (
+//                                 messages
+//                                     .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+//                                     .map((msg, index) => (
+//                                         <Box
+//                                             key={index}
+//                                             sx={{
+//                                                 display: "flex",
+//                                                 justifyContent:
+//                                                     msg.sender.email === userEmail
+//                                                         ? "flex-end"
+//                                                         : "flex-start",
+//                                                 marginBottom: 2,
+//                                             }}
+//                                         >
+//                                             <Box
+//                                                 sx={{
+//                                                     minWidth: 40,
+//                                                     // display: "flex",
+//                                                     // alignItems: "center",
+//                                                     // textAlign: "center",
+//                                                     padding: 2,
+//                                                     borderRadius: 2,
+//                                                     maxWidth: "60%",
+//                                                     textAlign: msg.sender.email === userEmail
+//                                                             ? "left"
+//                                                             : "left",
+//                                                     bgcolor:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "#1976d2"
+//                                                             : "#e3f2fd",
+//                                                     color:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "white"
+//                                                             : "black",
+//                                                     position: "relative", // Add positioning for timestamp
+//                                                 }}
+//                                             >
+//                                                 {msg.content}
+                                                
+//                                                 <Typography 
+//                                                     variant="caption"
+//                                                     sx={{
+//                                                         position: "absolute", 
+//                                                         bottom: -20, 
+//                                                         right: 0, 
+//                                                         fontSize: "0.75rem", 
+//                                                         color: "gray"
+//                                                     }}
+//                                                 >
+//                                                     {new Date(msg.createdAt).toLocaleTimeString()}
+//                                                 </Typography>
+//                                             </Box>
+//                                         </Box>
+//                                     ))
+//                             ) : (
+//                                 <Typography variant="body2" color="textSecondary">
+//                                     No messages yet
+//                                 </Typography>
+//                             )}
+//                             <div ref={messageEndRef} />
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 display: "flex",
+//                                 alignItems: "center",
+//                                 bgcolor: "white",
+//                             }}
+//                         >
+//                             <TextField
+//                                 fullWidth
+//                                 value={newMessage}
+//                                 onChange={(e) => setNewMessage(e.target.value)}
+//                                 onKeyDown={handleKeyPress}
+//                                 placeholder="Type a message..."
+//                                 variant="outlined"
+//                                 size="small"
+//                                 sx={{
+//                                     borderRadius: 2,
+//                                     "& .MuiOutlinedInput-root": {
+//                                         borderRadius: 2,
+//                                     },
+//                                     fontSize: "0.875rem", // Smaller text size
+//                                 }}
+//                             />
+//                             <Button
+//                                 onClick={sendMessage}
+//                                 variant="contained"
+//                                 color="primary"
+//                                 sx={{
+//                                     padding: "6px 16px",
+//                                     borderRadius: 2,
+//                                     fontSize: "0.875rem", // Smaller text size
+//                                 }}
+//                             >
+//                                 Send
+//                             </Button>
+//                         </Box>
+//                     </>
+//                 ) : (
+//                     <Box
+//                         sx={{
+//                             display: "flex",
+//                             justifyContent: "center",
+//                             alignItems: "center",
+//                             height: "100%",
+//                         }}
+//                     >
+//                         <Typography variant="h5" color="textSecondary">
+//                             Select a task to view messages
+//                         </Typography>
+//                     </Box>
+//                 )}
+//             </Box>
+//         </Box>
+//     );
+// };
+
+// export default ChatPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from "react";
+// import axiosInstance from "../../utils/axios";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import { Button, Box, Collapse, List, ListItem, Typography, TextField } from "@mui/material";
+
+// const ChatPage = () => {
+//     const [role, setRole] = useState("");
+//     const [taskslist, setTaskslist] = useState([]);
+//     const [selectedTaskId, setSelectedTaskId] = useState(null);
+//     const [messages, setMessages] = useState([]);
+//     const [newMessage, setNewMessage] = useState("");
+//     const [openTasks, setOpenTasks] = useState(true);
+//     const token = localStorage.getItem("token");
+//     const navigate = useNavigate();
+//     const messageEndRef = useRef(null);
+//     const userEmail = JSON.parse(localStorage.getItem("user")).email;
+//     const fetchProfile = async () => {
+//         try {
+//             const response = await axiosInstance.get("/profile");
+//             setRole(response.data.data.role);
+//         } catch (error) {
+//             console.error("Error fetching profile:", error);
+//             navigate("/login");
+//         }
+//     };
+
+//     const fetchAssignedTasks = async () => {
+//         try {
+//             const response = await axiosInstance.get("/chat/assigned-tasks/", {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setTaskslist(response.data.tasksAssigned);
+//             toast.success("Tasks fetched successfully");
+//         } catch (error) {
+//             console.error("Error fetching assigned tasks:", error);
+//             toast.error("Failed to fetch tasks");
+//             navigate("/"); 
+//         }
+//     };
+
+//     const fetchMessagesForTask = async (taskId) => {
+//         try {
+//             const response = await axiosInstance.get(`/chat/task/${taskId}/messages`, {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setMessages(response.data.messages);
+//             setSelectedTaskId(taskId);
+//         } catch (error) {
+//             console.error("Error fetching messages:", error);
+//             toast.error("Failed to fetch messages for the task");
+//         }
+//     };
+
+//     const sendMessage = async () => {
+//         if (!newMessage.trim()) return;
+
+//         try {
+//             const response = await axiosInstance.post(
+//                 `/chat/send`,
+//                 { taskId: selectedTaskId, content: newMessage },
+//                 {
+//                     headers: { Authorization: `Bearer ${token}` },
+//                 }
+//             );
+//             setMessages([...messages, response.data.data]);
+//             setNewMessage("");
+//         } catch (error) {
+//             console.error("Error sending message:", error);
+//             toast.error("Failed to send message");
+//         }
+//     };
+
+//     const handleKeyPress = (e) => {
+//         if (e.key === "Enter") {
+//             sendMessage();
+//         }
+//     };
+
+//     useEffect(() => {
+//         if (messageEndRef.current) {
+//             messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+//         }
+//     }, []);
+
+//     useEffect(() => {
+//         const initialize = async () => {
+//             await fetchProfile();
+//             await fetchAssignedTasks();
+//         };
+//         initialize();
+//     }, []);
+
+//     useEffect(() => {
+//         if (selectedTaskId) {
+//             const interval = setInterval(() => {
+//                 fetchMessagesForTask(selectedTaskId);
+//             }, 5000);
+//             return () => clearInterval(interval);
+//         }
+//     }, [selectedTaskId]);
+
+//     return (
+//         <Box
+//             display="flex"
+//             flexDirection={{ xs: "column", sm: "row" }} 
+//             sx={{ mt: 2, mb: 2 }}
+//             height="100%"
+//             bgcolor="#f4f6f8"
+//         >
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "25%" }, 
+//                     bgcolor: "white",
+//                     padding: 2,
+//                     overflowY: "auto",
+//                     marginBottom: { xs: 2, sm: 0 }, 
+//                 }}
+//             >
+//                 <Typography variant="h6" fontWeight="bold" marginBottom={2}>
+//                     Assigned Tasks
+//                 </Typography>
+//                 <Button
+//                     onClick={() => setOpenTasks(!openTasks)}
+//                     variant="outlined"
+//                     fullWidth
+//                     sx={{ marginBottom: 2 }}
+//                 >
+//                     {openTasks ? "Hide Tasks" : "Show Tasks"}
+//                 </Button>
+//                 <Collapse in={openTasks}>
+//                     <List>
+//                         {taskslist.length > 0 ? (
+//                             taskslist.map((task) => (
+//                                 <ListItem
+//                                     key={task.id}
+//                                     sx={{
+//                                         padding: 1.5,
+//                                         borderRadius: 1,
+//                                         cursor: "pointer",
+//                                         backgroundColor:
+//                                             selectedTaskId === task._id
+//                                                 ? "#1976d2"
+//                                                 : "transparent",
+//                                         color:
+//                                             selectedTaskId === task._id
+//                                                 ? "white"
+//                                                 : "inherit",
+//                                         "&:hover": {
+//                                             backgroundColor: "#1976d2",
+//                                         },
+//                                     }}
+//                                     onClick={() => fetchMessagesForTask(task._id)}
+//                                 >
+//                                     <Typography variant="body1" fontWeight="bold">
+//                                         {task.description}
+//                                     </Typography>
+//                                 </ListItem>
+//                             ))
+//                         ) : (
+//                             <Typography variant="body2">No tasks assigned</Typography>
+//                         )}
+//                     </List>
+//                 </Collapse>
+//             </Box>
+
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "75%" }, 
+//                     display: "flex",
+//                     flexDirection: "column",
+//                     bgcolor: "#f5f5f5",
+//                 }}
+//             >
+//                 {selectedTaskId ? (
+//                     <>
+//                         <Box
+//                             sx={{
+//                                 bgcolor: "white",
+//                                 display: "flex",
+//                                 justifyContent: "space-between",
+//                                 alignItems: "center",
+//                             }}
+//                         >
+//                             <Typography variant="h6" fontWeight="bold">
+//                                 Task Messages
+//                             </Typography>
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 flexGrow: 1,
+//                                 overflowY: "auto",
+//                                 bgcolor: "#ffffff",
+//                                 paddingBottom: 0,
+//                                 maxHeight: "calc(100vh - 150px)",
+//                             }}
+//                         >
+//                             {messages.length > 0 ? (
+//                                 messages
+//                                     .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+//                                     .map((msg, index) => (
+//                                         <Box
+//                                             key={index}
+//                                             sx={{
+//                                                 display: "flex",
+//                                                 justifyContent:
+//                                                     msg.sender.email === userEmail
+//                                                         ? "flex-end"
+//                                                         : "flex-start",
+//                                                 marginBottom: 2,
+//                                             }}
+//                                         >
+//                                             <Box
+//                                                 sx={{
+//                                                     minWidth: 40,
+//                                                     // display: "flex",
+//                                                     // alignItems: "center",
+//                                                     // textAlign: "center",
+//                                                     padding: 2,
+//                                                     borderRadius: 2,
+//                                                     maxWidth: "60%",
+//                                                     textAlign: msg.sender.email === userEmail
+//                                                             ? "left"
+//                                                             : "left",
+//                                                     bgcolor:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "#1976d2"
+//                                                             : "#e3f2fd",
+//                                                     color:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "white"
+//                                                             : "black",
+//                                                     position: "relative", // Add positioning for timestamp
+//                                                 }}
+//                                             >
+//                                                 {msg.content}
+                                                
+//                                                 <Typography 
+//                                                     variant="caption"
+//                                                     sx={{
+//                                                         position: "absolute", 
+//                                                         bottom: -20, 
+//                                                         right: 0, 
+//                                                         fontSize: "0.75rem", 
+//                                                         color: "gray"
+//                                                     }}
+//                                                 >
+//                                                     {new Date(msg.createdAt).toLocaleTimeString()}
+//                                                 </Typography>
+//                                             </Box>
+//                                         </Box>
+//                                     ))
+//                             ) : (
+//                                 <Typography variant="body2" color="textSecondary">
+//                                     No messages yet
+//                                 </Typography>
+//                             )}
+//                             <div ref={messageEndRef} />
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 display: "flex",
+//                                 alignItems: "center",
+//                                 bgcolor: "white",
+//                             }}
+//                         >
+//                             <TextField
+//                                 fullWidth
+//                                 value={newMessage}
+//                                 onChange={(e) => setNewMessage(e.target.value)}
+//                                 onKeyDown={handleKeyPress}
+//                                 placeholder="Type a message..."
+//                                 variant="outlined"
+//                                 size="small"
+//                                 sx={{
+//                                     borderRadius: 2,
+//                                     "& .MuiOutlinedInput-root": {
+//                                         borderRadius: 2,
+//                                     },
+//                                     fontSize: "0.875rem", // Smaller text size
+//                                 }}
+//                             />
+//                             <Button
+//                                 onClick={sendMessage}
+//                                 variant="contained"
+//                                 color="primary"
+//                                 sx={{
+//                                     padding: "6px 16px",
+//                                     borderRadius: 2,
+//                                     fontSize: "0.875rem", // Smaller text size
+//                                 }}
+//                             >
+//                                 Send
+//                             </Button>
+//                         </Box>
+//                     </>
+//                 ) : (
+//                     <Box
+//                         sx={{
+//                             display: "flex",
+//                             justifyContent: "center",
+//                             alignItems: "center",
+//                             height: "100%",
+//                         }}
+//                     >
+//                         <Typography variant="h5" color="textSecondary">
+//                             Select a task to view messages
+//                         </Typography>
+//                     </Box>
+//                 )}
+//             </Box>
+//         </Box>
+//     );
+// };
+
+// export default ChatPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from "react";
+// import axiosInstance from "../../utils/axios";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import {
+//     Button,
+//     Box,
+//     Collapse,
+//     List,
+//     ListItem,
+//     Typography,
+//     TextField,
+//     Avatar,
+// } from "@mui/material";
+
+// const ChatPage = () => {
+//     const [role, setRole] = useState("");
+//     const [taskslist, setTaskslist] = useState([]);
+//     const [selectedTaskId, setSelectedTaskId] = useState(null);
+//     const [messages, setMessages] = useState([]);
+//     const [newMessage, setNewMessage] = useState("");
+//     const [openTasks, setOpenTasks] = useState(true);
+//     const token = localStorage.getItem("token");
+//     const navigate = useNavigate();
+//     const messageEndRef = useRef(null);
+//     const userEmail = JSON.parse(localStorage.getItem("user")).email;
+
+//     const fetchProfile = async () => {
+//         try {
+//             const response = await axiosInstance.get("/profile");
+//             setRole(response.data.data.role);
+//         } catch (error) {
+//             console.error("Error fetching profile:", error);
+//             navigate("/login");
+//         }
+//     };
+
+//     const fetchAssignedTasks = async () => {
+//         try {
+//             const response = await axiosInstance.get("/chat/assigned-tasks/", {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setTaskslist(response.data.tasksAssigned);
+//             toast.success("Tasks fetched successfully");
+//         } catch (error) {
+//             console.error("Error fetching assigned tasks:", error);
+//             toast.error("Failed to fetch tasks");
+//             navigate("/"); 
+//         }
+//     };
+
+//     const fetchMessagesForTask = async (taskId) => {
+//         try {
+//             const response = await axiosInstance.get(`/chat/task/${taskId}/messages`, {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setMessages(response.data.messages);
+//             setSelectedTaskId(taskId);
+//         } catch (error) {
+//             console.error("Error fetching messages:", error);
+//             toast.error("Failed to fetch messages for the task");
+//         }
+//     };
+
+//     const sendMessage = async () => {
+//         if (!newMessage.trim()) return;
+
+//         try {
+//             const response = await axiosInstance.post(
+//                 `/chat/send`,
+//                 { taskId: selectedTaskId, content: newMessage },
+//                 {
+//                     headers: { Authorization: `Bearer ${token}` },
+//                 }
+//             );
+//             setMessages([...messages, response.data.data]);
+//             setNewMessage("");
+//         } catch (error) {
+//             console.error("Error sending message:", error);
+//             toast.error("Failed to send message");
+//         }
+//     };
+
+//     const handleKeyPress = (e) => {
+//         if (e.key === "Enter") {
+//             sendMessage();
+//         }
+//     };
+
+//     useEffect(() => {
+//         if (messageEndRef.current) {
+//             messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+//         }
+//     }, []);
+
+//     useEffect(() => {
+//         const initialize = async () => {
+//             await fetchProfile();
+//             await fetchAssignedTasks();
+//         };
+//         initialize();
+//     }, []);
+
+//     useEffect(() => {
+//         if (selectedTaskId) {
+//             const interval = setInterval(() => {
+//                 fetchMessagesForTask(selectedTaskId);
+//             }, 5000);
+//             return () => clearInterval(interval);
+//         }
+//     }, [selectedTaskId]);
+
+//     return (
+//         <Box
+//             display="flex"
+//             flexDirection={{ xs: "column", sm: "row" }} 
+//             sx={{ mt: 2, mb: 2 }}
+//             height="100vh"
+//             bgcolor="#f0f4f8"
+//         >
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "30%" }, 
+//                     bgcolor: "#ffffff",
+//                     padding: 2,
+//                     overflowY: "auto",
+//                     marginBottom: { xs: 2, sm: 0 }, 
+//                     boxShadow: 2, // Add subtle shadow
+//                     borderRadius: 2,
+//                 }}
+//             >
+//                 <Typography variant="h5" fontWeight="bold" color="#3f51b5" marginBottom={2}>
+//                     Your Tasks
+//                 </Typography>
+//                 <Button
+//                     onClick={() => setOpenTasks(!openTasks)}
+//                     variant="contained"
+//                     fullWidth
+//                     color="primary"
+//                     sx={{ marginBottom: 2, fontWeight: 'bold' }}
+//                 >
+//                     {openTasks ? "Hide Tasks" : "Show Tasks"}
+//                 </Button>
+//                 <Collapse in={openTasks}>
+//                     <List>
+//                         {taskslist.length > 0 ? (
+//                             taskslist.map((task) => (
+//                                 <ListItem
+//                                     key={task.id}
+//                                     sx={{
+//                                         padding: 1.5,
+//                                         borderRadius: 1,
+//                                         cursor: "pointer",
+//                                         backgroundColor:
+//                                             selectedTaskId === task._id
+//                                                 ? "#3f51b5"
+//                                                 : "#f5f5f5",
+//                                         color:
+//                                             selectedTaskId === task._id
+//                                                 ? "white"
+//                                                 : "#000000",
+//                                         "&:hover": {
+//                                             backgroundColor: "#3f51b5",
+//                                         },
+//                                     }}
+//                                     onClick={() => fetchMessagesForTask(task._id)}
+//                                 >
+//                                     <Typography variant="body1" fontWeight="bold">
+//                                         {task.description}
+//                                     </Typography>
+//                                 </ListItem>
+//                             ))
+//                         ) : (
+//                             <Typography variant="body2">No tasks assigned</Typography>
+//                         )}
+//                     </List>
+//                 </Collapse>
+//             </Box>
+
+//             <Box
+//                 sx={{
+//                     width: { xs: "100%", sm: "70%" }, 
+//                     display: "flex",
+//                     flexDirection: "column",
+//                     bgcolor: "#e3f2fd",
+//                     borderRadius: 2,
+//                     boxShadow: 2,
+//                     padding: 2,
+//                 }}
+//             >
+//                 {selectedTaskId ? (
+//                     <>
+//                         <Box
+//                             sx={{
+//                                 bgcolor: "#ffffff",
+//                                 display: "flex",
+//                                 justifyContent: "space-between",
+//                                 alignItems: "center",
+//                                 padding: 1,
+//                                 borderRadius: 1,
+//                             }}
+//                         >
+//                             <Typography variant="h6" fontWeight="bold">
+//                                 Task Messages
+//                             </Typography>
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 flexGrow: 1,
+//                                 overflowY: "auto",
+//                                 bgcolor: "#ffffff",
+//                                 padding: 2,
+//                                 maxHeight: "calc(100vh - 250px)",
+//                             }}
+//                         >
+//                             {messages.length > 0 ? (
+//                                 messages
+//                                     .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+//                                     .map((msg, index) => (
+//                                         <Box
+//                                             key={index}
+//                                             sx={{
+//                                                 display: "flex",
+//                                                 justifyContent:
+//                                                     msg.sender.email === userEmail
+//                                                         ? "flex-end"
+//                                                         : "flex-start",
+//                                                 marginBottom: 2,
+//                                             }}
+//                                         >
+//                                             <Box
+//                                                 sx={{
+//                                                     display: "flex",
+//                                                     alignItems: "center",
+//                                                     padding: 1.5,
+//                                                     borderRadius: 2,
+//                                                     maxWidth: "60%",
+//                                                     textAlign: msg.sender.email === userEmail
+//                                                             ? "right"
+//                                                             : "left",
+//                                                     bgcolor:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "#3f51b5"
+//                                                             : "#ffffff",
+//                                                     color:
+//                                                         msg.sender.email === userEmail
+//                                                             ? "white"
+//                                                             : "#000000",
+//                                                     boxShadow: 1,
+//                                                 }}
+//                                             >
+//                                                 <Avatar
+//                                                     alt={msg.sender.name}
+//                                                     src={msg.sender.avatar || "/default-avatar.png"}
+//                                                     sx={{ width: 30, height: 30, marginRight: 1 }}
+//                                                 />
+//                                                 {msg.content}
+//                                                 <Typography
+//                                                     variant="caption"
+//                                                     sx={{
+//                                                         marginTop: 0.5,
+//                                                         fontSize: "0.75rem",
+//                                                         color: "gray",
+//                                                     }}
+//                                                 >
+//                                                     {new Date(msg.createdAt).toLocaleTimeString()}
+//                                                 </Typography>
+//                                             </Box>
+//                                         </Box>
+//                                     ))
+//                             ) : (
+//                                 <Typography variant="body2" color="textSecondary">
+//                                     No messages yet
+//                                 </Typography>
+//                             )}
+//                             <div ref={messageEndRef} />
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 display: "flex",
+//                                 alignItems: "center",
+//                                 bgcolor: "#ffffff",
+//                                 padding: 1,
+//                             }}
+//                         >
+//                             <TextField
+//                                 fullWidth
+//                                 value={newMessage}
+//                                 onChange={(e) => setNewMessage(e.target.value)}
+//                                 onKeyDown={handleKeyPress}
+//                                 placeholder="Type a message..."
+//                                 variant="outlined"
+//                                 size="small"
+//                                 sx={{
+//                                     borderRadius: 2,
+//                                     "& .MuiOutlinedInput-root": {
+//                                         borderRadius: 2,
+//                                     },
+//                                 }}
+//                             />
+//                             <Button
+//                                 onClick={sendMessage}
+//                                 variant="contained"
+//                                 color="primary"
+//                                 sx={{
+//                                     padding: "6px 16px",
+//                                     marginLeft: 1,
+//                                     borderRadius: 2,
+//                                 }}
+//                             >
+//                                 Send
+//                             </Button>
+//                         </Box>
+//                     </>
+//                 ) : (
+//                     <Box
+//                         sx={{
+//                             display: "flex",
+//                             justifyContent: "center",
+//                             alignItems: "center",
+//                             height: "100%",
+//                         }}
+//                     >
+//                         <Typography variant="h5" color="textSecondary">
+//                             Select a task to view messages
+//                         </Typography>
+//                     </Box>
+//                 )}
+//             </Box>
+//         </Box>
+//     );
+// };
+
+// export default ChatPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from "react";
+// import axiosInstance from "../../utils/axios";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import { Button, Box, Collapse, List, ListItem, Typography, ListItemButton, ListItemText , TextField, IconButton, Divider, CssBaseline, Toolbar, AppBar as MuiAppBar, Drawer as MuiDrawer } from "@mui/material";
+// import { styled, useTheme } from '@mui/material/styles';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+// const drawerWidth = 240;
+
+// const openedMixin = (theme) => ({
+//     width: drawerWidth,
+//     transition: theme.transitions.create('width', {
+//         easing: theme.transitions.easing.sharp,
+//         duration: theme.transitions.duration.enteringScreen,
+//     }),
+//     overflowX: 'hidden',
+// });
+
+// const closedMixin = (theme) => ({
+//     transition: theme.transitions.create('width', {
+//         easing: theme.transitions.easing.sharp,
+//         duration: theme.transitions.duration.leavingScreen,
+//     }),
+//     overflowX: 'hidden',
+//     width: `calc(${theme.spacing(7)} + 1px)`,
+//     [theme.breakpoints.up('sm')]: {
+//         width: `calc(${theme.spacing(8)} + 1px)`,
+//     },
+// });
+
+// const DrawerHeader = styled('div')(({ theme }) => ({
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'flex-end',
+//     padding: theme.spacing(0, 1),
+//     ...theme.mixins.toolbar,
+// }));
+
+// const AppBar = styled(MuiAppBar, {
+//     shouldForwardProp: (prop) => prop !== 'open',
+// })(({ theme, open }) => ({
+//     zIndex: theme.zIndex.drawer + 1,
+//     transition: theme.transitions.create(['width', 'margin'], {
+//         easing: theme.transitions.easing.sharp,
+//         duration: theme.transitions.duration.leavingScreen,
+//     }),
+//     ...(open && {
+//         marginLeft: drawerWidth,
+//         width: `calc(100% - ${drawerWidth}px)`,
+//         transition: theme.transitions.create(['width', 'margin'], {
+//             easing: theme.transitions.easing.sharp,
+//             duration: theme.transitions.duration.enteringScreen,
+//         }),
+//     }),
+// }));
+
+// const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+//     ({ theme, open }) => ({
+//         width: drawerWidth,
+//         flexShrink: 0,
+//         whiteSpace: 'nowrap',
+//         boxSizing: 'border-box',
+//         ...(open && {
+//             ...openedMixin(theme),
+//             '& .MuiDrawer-paper': openedMixin(theme),
+//         }),
+//         ...(!open && {
+//             ...closedMixin(theme),
+//             '& .MuiDrawer-paper': closedMixin(theme),
+//         }),
+//     }),
+// );
+
+// const ChatPage = () => {
+//     const [role, setRole] = useState("");
+//     const [taskslist, setTaskslist] = useState([]);
+//     const [selectedTaskId, setSelectedTaskId] = useState(null);
+//     const [messages, setMessages] = useState([]);
+//     const [newMessage, setNewMessage] = useState("");
+//     const [openTasks, setOpenTasks] = useState(true);
+//     const token = localStorage.getItem("token");
+//     const navigate = useNavigate();
+//     const messageEndRef = useRef(null);
+//     const userEmail = JSON.parse(localStorage.getItem("user")).email;
+//     const theme = useTheme();
+//     const [open, setOpen] = useState(false);
+
+//     const handleDrawerOpen = () => {
+//         setOpen(!open);
+//     };
+
+//     // const handleDrawerClose = () => {
+//     //     setOpen(false);
+//     // };
+
+//     const fetchProfile = async () => {
+//         try {
+//             const response = await axiosInstance.get("/profile");
+//             setRole(response.data.data.role);
+//         } catch (error) {
+//             console.error("Error fetching profile:", error);
+//             navigate("/login");
+//         }
+//     };
+
+//     const fetchAssignedTasks = async () => {
+//         try {
+//             const response = await axiosInstance.get("/chat/assigned-tasks/", {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setTaskslist(response.data.tasksAssigned);
+//             toast.success("Tasks fetched successfully");
+//         } catch (error) {
+//             console.error("Error fetching assigned tasks:", error);
+//             toast.error("Failed to fetch tasks");
+//             navigate("/");
+//         }
+//     };
+
+//     const fetchMessagesForTask = async (taskId) => {
+//         try {
+//             const response = await axiosInstance.get(`/chat/task/${taskId}/messages`, {
+//                 headers: { Authorization: `Bearer ${token}` },
+//             });
+//             setMessages(response.data.messages);
+//             setSelectedTaskId(taskId);
+//         } catch (error) {
+//             console.error("Error fetching messages:", error);
+//             toast.error("Failed to fetch messages for the task");
+//         }
+//     };
+
+//     const sendMessage = async () => {
+//         if (!newMessage.trim()) return;
+
+//         try {
+//             const response = await axiosInstance.post(
+//                 `/chat/send`,
+//                 { taskId: selectedTaskId, content: newMessage },
+//                 {
+//                     headers: { Authorization: `Bearer ${token}` },
+//                 }
+//             );
+//             setMessages([...messages, response.data.data]);
+//             setNewMessage("");
+//         } catch (error) {
+//             console.error("Error sending message:", error);
+//             toast.error("Failed to send message");
+//         }
+//     };
+
+//     const handleKeyPress = (e) => {
+//         if (e.key === "Enter") {
+//             sendMessage();
+//         }
+//     };
+
+//     useEffect(() => {
+//         if (messageEndRef.current) {
+//             messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+//         }
+//     }, [messages]);
+
+//     useEffect(() => {
+//         const initialize = async () => {
+//             await fetchProfile();
+//             await fetchAssignedTasks();
+//         };
+//         initialize();
+//     }, []);
+
+//     useEffect(() => {
+//         if (selectedTaskId) {
+//             const interval = setInterval(() => {
+//                 fetchMessagesForTask(selectedTaskId);
+//             }, 5000);
+//             return () => clearInterval(interval);
+//         }
+//     }, [selectedTaskId]);
+
+//     return (
+//         <Box sx={{ display: 'flex' }}>
+//             <CssBaseline />
+//             {/* <AppBar position="absolute" open={open} mt={2}>
+//                 <Toolbar>
+//                     <IconButton
+//                         color="inherit"
+//                         aria-label="open drawer"
+//                         onClick={handleDrawerOpen}
+//                         edge="start"
+//                         sx={{ marginRight: 5, ...(open && { display: 'none' }) }}
+//                     >
+//                         <MenuIcon />
+//                     </IconButton>
+//                     <Typography variant="h6" noWrap component="div">
+//                         Chat Application
+//                     </Typography>
+//                 </Toolbar>
+//             </AppBar> */}
+//             <Drawer variant="permanent" open={open} style={{marginTop:"100px !important"}}>
+//                 <DrawerHeader style={{marginTop:"100px !important"}}>
+//                     <IconButton onClick={handleDrawerOpen}>
+//                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+//                     </IconButton>
+//                 </DrawerHeader>
+//                 <Divider />
+//                 <List>
+//                     {taskslist.length > 0 ? (
+//                         taskslist.map((task) => (
+//                             <ListItem key={task._id} disablePadding sx={{ display: 'block' }}>
+//                                 <ListItemButton
+//                                     sx={{
+//                                         minHeight: 48,
+//                                         justifyContent: open ? 'initial' : 'center',
+//                                         px: 2.5,
+//                                     }}
+//                                     onClick={() => fetchMessagesForTask(task._id)}
+//                                 >
+//                                     <ListItemText
+//                                         primary={task.description}
+//                                         sx={{ opacity: open ? 1 : 0 }}
+//                                     />
+//                                 </ListItemButton>
+//                             </ListItem>
+//                         ))
+//                     ) : (
+//                         <Typography variant="body2">No tasks assigned</Typography>
+//                     )}
+//                 </List>
+//             </Drawer>
+//             <Box component="main" >
+//                 <DrawerHeader />
+//                 {selectedTaskId ? (
+//                     <>
+//                         <Box
+//                             sx={{
+//                                 bgcolor: "white",
+//                                 display: "flex",
+//                                 justifyContent: "space-between",
+//                                 alignItems: "center",
+//                             }}
+//                         >
+//                             <Typography variant="h6" fontWeight="bold">
+//                                 Task Messages
+//                             </Typography>
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 flexGrow: 1,
+//                                 overflowY: "auto",
+//                                 bgcolor: "#ffffff",
+//                                 paddingBottom: 0,
+//                                 maxHeight: "calc(100vh - 150px)",
+//                             }}
+//                         >
+//                             {messages.length > 0 ? (
+//                                 messages
+//                                     .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+//                                     .map((msg, index) => (
+//                                         <Box
+//                                             key={index}
+//                                             sx={{
+//                                                 display: "flex",
+//                                                 justifyContent:
+//                                                     msg.sender.email === userEmail
+//                                                         ? "flex-end"
+//                                                         : "flex-start",
+//                                                 marginBottom: 2,
+//                                             }}
+//                                         >
+//                                             <Box
+//                                                 sx={{
+//                                                     minWidth: 40,
+//                                                     padding: 2,
+//                                                     borderRadius: 2,
+//                                                     maxWidth: "60%",
+//                                                     textAlign: msg.sender.email === userEmail ? "left" : "left",
+//                                                     bgcolor:
+//                                                         msg.sender.email === userEmail ? "#1976d2" : "#e3f2fd",
+//                                                     color:
+//                                                         msg.sender.email === userEmail ? "white" : "black",
+//                                                     position: "relative",
+//                                                 }}
+//                                             >
+//                                                 {msg.content}
+
+//                                                 <Typography
+//                                                     variant="caption"
+//                                                     sx={{
+//                                                         position: "absolute",
+//                                                         bottom: -20,
+//                                                         right: 0,
+//                                                         fontSize: "0.75rem",
+//                                                         color: "gray",
+//                                                     }}
+//                                                 >
+//                                                     {new Date(msg.createdAt).toLocaleTimeString()}
+//                                                 </Typography>
+//                                             </Box>
+//                                         </Box>
+//                                     ))
+//                             ) : (
+//                                 <Typography variant="body2" color="textSecondary">
+//                                     No messages yet
+//                                 </Typography>
+//                             )}
+//                             <div ref={messageEndRef} />
+//                         </Box>
+
+//                         <Box
+//                             sx={{
+//                                 display: "flex",
+//                                 alignItems: "center",
+//                                 bgcolor: "white",
+//                             }}
+//                         >
+//                             <TextField
+//                                 fullWidth
+//                                 value={newMessage}
+//                                 onChange={(e) => setNewMessage(e.target.value)}
+//                                 onKeyDown={handleKeyPress}
+//                                 placeholder="Type a message..."
+//                                 variant="outlined"
+//                                 size="small"
+//                                 sx={{
+//                                     borderRadius: 2,
+//                                     "& .MuiOutlinedInput-root": {
+//                                         borderRadius: 2,
+//                                     },
+//                                     fontSize: "0.875rem",
+//                                 }}
+//                             />
+//                             <Button
+//                                 onClick={sendMessage}
+//                                 variant="contained"
+//                                 color="primary"
+//                                 sx={{
+//                                     padding: "6px 16px",
+//                                     borderRadius: 2,
+//                                     fontSize: "0.875rem",
+//                                 }}
+//                             >
+//                                 Send
+//                             </Button>
+//                         </Box>
+//                     </>
+//                 ) : (
+//                     <Box
+//                         sx={{
+//                             display: "flex",
+//                             justifyContent: "center",
+//                             alignItems: "center",
+//                             height: "100%",
+//                         }}
+//                     >
+//                         <Typography variant="h5" color="textSecondary">
+//                             Select a task to view messages
+//                         </Typography>
+//                     </Box>
+//                 )}
+//             </Box>
+//         </Box>
+//     );
+// };
+
+// export default ChatPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect, useRef } from "react";
 import axiosInstance from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
@@ -3666,7 +5502,7 @@ const ChatPage = () => {
                                                 ? "white"
                                                 : "inherit",
                                         "&:hover": {
-                                            backgroundColor: "#e3f2fd",
+                                            backgroundColor: "#1976d2",
                                         },
                                     }}
                                     onClick={() => fetchMessagesForTask(task._id)}
@@ -3835,3 +5671,4 @@ const ChatPage = () => {
 };
 
 export default ChatPage;
+

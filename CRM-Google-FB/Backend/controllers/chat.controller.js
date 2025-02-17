@@ -323,25 +323,25 @@ exports.getTaskById = async (req, res) => {
     }
 };
 
-exports.sendMessage = async (req, res) => {
-    try {
-        const { content, taskId } = req.body;
-        const senderId = req.user.id;
-        const message = new Message({ sender: senderId, task: taskId, content });
-        await message.save();
-        await Task.findByIdAndUpdate(taskId, { $push: { messages: message._id } });
-        res.status(201).json({ success: true, message });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
+// exports.sendMessage = async (req, res) => {
+//     try {
+//         const { content, taskId } = req.body;
+//         const senderId = req.user.id;
+//         const message = new Message({ sender: senderId, task: taskId, content });
+//         await message.save();
+//         await Task.findByIdAndUpdate(taskId, { $push: { messages: message._id } });
+//         res.status(201).json({ success: true, message });
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// };
 
-exports.getMessagesByTask = async (req, res) => {
-    try {
-        const { taskId } = req.params;
-        const messages = await Message.find({ task: taskId }).populate("sender", "name email");
-        res.status(200).json({ success: true, messages });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
+// exports.getMessagesByTask = async (req, res) => {
+//     try {
+//         const { taskId } = req.params;
+//         const messages = await Message.find({ task: taskId }).populate("sender", "name email");
+//         res.status(200).json({ success: true, messages });
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// };

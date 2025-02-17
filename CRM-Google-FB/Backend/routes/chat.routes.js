@@ -36,7 +36,7 @@ const {
     createTask,
     updateTask,
     deleteTask,
-    getTaskById
+    getTaskById,
 } = require("../controllers/chat.controller");
 const { verifyJWT, isAdmin } = require("../utils/middleware");
 
@@ -54,7 +54,8 @@ router.post("/assign", verifyJWT, isAdmin, assignCustomerToEmployee);
 router.post("/unassign", verifyJWT, isAdmin, unassignCustomerFromEmployee);
 
 // Message routes
-router.post("/messages", verifyJWT, sendMessage);
-router.get("/task/:taskId/messages", verifyJWT, getMessagesByTask);
+
+router.post("/send", verifyJWT, sendMessage); // Send a message
+router.get("/task/:taskId/messages", verifyJWT, getMessagesByTask); // Get messag
 
 module.exports = router;
