@@ -11,7 +11,7 @@ import Profile from './components/Profile/profile';
 import UserProfile from './components/Profile/UserProfile';
 import theme from './utils/theme';
 import { ThemeProvider } from '@mui/material/styles';
-
+import { useEffect } from "react";
 const AppRoutes = () => {
     const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
 
