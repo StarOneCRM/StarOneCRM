@@ -47,7 +47,7 @@ exports.facebookLogin = passport.authenticate("facebook", {
 exports.facebookCallback = (req, res, next) => {
   passport.authenticate("facebook", { session: false }, async (err, user) => {
     if (err || !user) {
-      return res.redirect("https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net//auth-failed");
+      return res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
     }
 
     try {
