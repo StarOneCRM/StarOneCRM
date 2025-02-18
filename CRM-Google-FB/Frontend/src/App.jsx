@@ -10,11 +10,15 @@ import UpdateStudent from './components/Admin/UpdateStudent';
 import Profile from './components/Profile/profile';
 import UserProfile from './components/Profile/UserProfile';
 import theme from './utils/theme';
+
+// ----
 import { ThemeProvider } from '@mui/material/styles';
 import { useEffect } from "react";
+// ----
+
 const AppRoutes = () => {
     const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
-
+// -------
     const { setToken } = useGlobalContext();
     // const location = useLocation();
     const navigate = useNavigate();
@@ -29,7 +33,7 @@ const AppRoutes = () => {
             navigate("/"); // Redirect to the home/dashboard
         }
     }, [location, navigate, setToken]);
-
+// --------
     if (!token) {
         return (
             <Routes>

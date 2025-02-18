@@ -69,17 +69,17 @@ exports.facebookLogin = passport.authenticate("facebook", {
 exports.facebookCallback = (req, res, next) => {
   passport.authenticate("facebook", { session: false }, async (err, user) => {
     if (err || !user) {
-      return res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
+      return res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/#/auth-failed");
     }
 
     try {
       const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
       // Redirect user to frontend with the token
-      res.redirect(`https://polite-field-09918cc00.4.azurestaticapps.net/login-success?token=${token}`);
+      res.redirect(`https://polite-field-09918cc00.4.azurestaticapps.net/#/login-success?token=${token}`);
     } catch (error) {
       console.error("Facebook Callback Error:", error);
-      res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
+      res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/#/auth-failed");
     }
   })(req, res, next);
 };
