@@ -44,6 +44,28 @@ exports.facebookLogin = passport.authenticate("facebook", {
 });
 
 // Facebook Auth Callback
+// exports.facebookCallback = (req, res, next) => {
+//   passport.authenticate("facebook", { session: false }, async (err, user) => {
+//     if (err || !user) {
+//       return res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
+//     }
+
+//     try {
+//       const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+//       // Send token to frontend
+//       res.send(`
+//         <script>
+//           window.opener.postMessage({ token: "${token}" }, "https://polite-field-09918cc00.4.azurestaticapps.net");
+//           window.close();
+//         </script>
+//       `);
+//     } catch (error) {
+//       console.error("Facebook Callback Error:", error);
+//       res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");
+//     }
+//   })(req, res, next);
+// };
 exports.facebookCallback = (req, res, next) => {
   passport.authenticate("facebook", { session: false }, async (err, user) => {
     if (err || !user) {
@@ -53,13 +75,8 @@ exports.facebookCallback = (req, res, next) => {
     try {
       const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-      // Send token to frontend
-      res.send(`
-        <script>
-          window.opener.postMessage({ token: "${token}" }, "https://polite-field-09918cc00.4.azurestaticapps.net");
-          window.close();
-        </script>
-      `);
+      // Redirect user to frontend with the token
+      res.redirect(`https://polite-field-09918cc00.4.azurestaticapps.net/login-success?token=${token}`);
     } catch (error) {
       console.error("Facebook Callback Error:", error);
       res.redirect("https://polite-field-09918cc00.4.azurestaticapps.net/auth-failed");

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
@@ -11,9 +11,24 @@ import Profile from './components/Profile/profile';
 import UserProfile from './components/Profile/UserProfile';
 import theme from './utils/theme';
 import { ThemeProvider } from '@mui/material/styles';
-
+import { useEffect } from "react";
 const AppRoutes = () => {
     const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
+
+    const { setToken } = useGlobalContext();
+    // const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const token = params.get("token");
+
+        if (token) {
+            localStorage.setItem("token", token); // Store token
+            setToken(token); // Update global state
+            navigate("/"); // Redirect to the home/dashboard
+        }
+    }, [location, navigate, setToken]);
 
     if (!token) {
         return (
