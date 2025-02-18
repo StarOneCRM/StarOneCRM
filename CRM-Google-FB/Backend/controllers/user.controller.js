@@ -53,10 +53,10 @@ exports.facebookCallback = (req, res, next) => {
     try {
       const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-      // Send token to frontend window.opener.postMessage({ token: "${token}" }, "https://polite-field-09918cc00.4.azurestaticapps.net");
+      // Send token to frontend
       res.send(`
         <script>
-          res.redirect(https://polite-field-09918cc00.4.azurestaticapps.net/login-success?token=${token});
+          window.opener.postMessage({ token: "${token}" }, "https://polite-field-09918cc00.4.azurestaticapps.net");
           window.close();
         </script>
       `);
