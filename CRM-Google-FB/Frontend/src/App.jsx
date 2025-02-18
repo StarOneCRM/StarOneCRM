@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
@@ -16,7 +16,7 @@ const AppRoutes = () => {
     const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
 
     const { setToken } = useGlobalContext();
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
