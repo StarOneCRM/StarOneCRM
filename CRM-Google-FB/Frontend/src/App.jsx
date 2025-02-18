@@ -15,6 +15,21 @@ import { ThemeProvider } from '@mui/material/styles';
 const AppRoutes = () => {
     const { token, user, setUserMethod, logout, handleLogin, handleSignup } = useGlobalContext();
 
+    const { setToken } = useGlobalContext();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const token = params.get("token");
+
+        if (token) {
+            localStorage.setItem("token", token); // Store token
+            setToken(token); // Update global state
+            navigate("/"); // Redirect to the home/dashboard
+        }
+    }, [location, navigate, setToken]);
+
     if (!token) {
         return (
             <Routes>
