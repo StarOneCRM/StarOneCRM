@@ -334,7 +334,7 @@ const { OTP } = require("../models/otp.model");
 const { sendEmail } = require("../utils/email");
 const jwt = require("jsonwebtoken");
 const Task = require("../models/task.model");
-
+require('dotenv').config();
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
