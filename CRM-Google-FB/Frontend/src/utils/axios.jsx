@@ -1,12 +1,12 @@
 // src/utils/axios.js
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
+
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api',
+  baseURL: 'http://localhost:5000/api',
+  // baseURL: 'https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api',
   // withCredentials: true,
-  // timeout: 5000, // Timeout for requests
+//   timeout: 5000, // Timeout for requests
 });
 
 // Add request interceptor to add Authorization header
