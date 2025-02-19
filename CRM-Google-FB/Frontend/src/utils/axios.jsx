@@ -3,10 +3,9 @@ import axios from 'axios';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  // baseURL: 'http://localhost:5000/api',
-  baseURL: 'https://internship-fta5hkg7e8eaecf7.westindia-01.azurewebsites.net/api',
+  baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api',
   // withCredentials: true,
-//   timeout: 5000, // Timeout for requests
+  // timeout: 5000, // Timeout for requests
 });
 
 // Add request interceptor to add Authorization header
